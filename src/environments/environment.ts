@@ -8,8 +8,8 @@ export const environment = {
   auth: {
     clientID: 'WhSzGqyXoczFWt1GOXaTbV7kevavhfIh',
     domain,
-    redirectUri: 'http://localhost:3000/callback',
-    returnTo: 'http://localhost:3000',
+    redirectUri: 'http://localhost:4200/callback',
+    returnTo: 'http://localhost:4200',
     scope: 'openid profile email',
     audience: `https://${domain}/userinfo`,
     responseType: 'token id_token',
