@@ -3,7 +3,7 @@ const domain = 'jordi-lopez.eu.auth0.com';
 
 export const environment = {
   production: true,
-  appName: jsonPackage.name,
+  appName: 'La teva carta ' + new Date().getFullYear(),
   version:  jsonPackage.version,
   auth: {
     clientID: 'WhSzGqyXoczFWt1GOXaTbV7kevavhfIh',
