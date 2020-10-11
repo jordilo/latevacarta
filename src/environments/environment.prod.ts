@@ -1,15 +1,15 @@
 import * as jsonPackage from './../../package.json';
-const domain = 'YOUR-AUT0-DOMAIN.auth0.com';
+const domain = 'jordi-lopez.eu.auth0.com';
 
 export const environment = {
   production: true,
   appName: jsonPackage.name,
   version:  jsonPackage.version,
   auth: {
-    clientID: 'YOUR-AUT0-CLIENTID',
+    clientID: 'WhSzGqyXoczFWt1GOXaTbV7kevavhfIh',
     domain,
-    redirectUri: 'YOUR-APP-URL/callback',
-    returnTo: 'YOUR-APP-URL',
+    redirectUri: 'https://admin.latevacarta.click/callback',
+    returnTo: 'https://admin.latevacarta.click',
     scope: 'openid profile email',
     audience: `https://${domain}/userinfo`,
     responseType: 'token',

@@ -1,12 +1,12 @@
 import * as jsonPackage from './../../package.json';
-const domain = 'YOUR-AUT0-DOMAIN.auth0.com';
+const domain = 'jordi-lopez.eu.auth0.com';
 
 export const environment = {
   production: false,
   appName: jsonPackage.name,
   version: 'dev.' + jsonPackage.version,
   auth: {
-    clientID: 'YOUR-AUT0-CLIENTID',
+    clientID: 'WhSzGqyXoczFWt1GOXaTbV7kevavhfIh',
     domain,
     redirectUri: 'http://localhost:3000/callback',
     returnTo: 'http://localhost:3000',
