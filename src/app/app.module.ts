@@ -7,6 +7,8 @@ import { AuthModule } from '../auth/auth.module';
 import { MainComponent } from './main/main.component';
 import { ProfileComponent } from './profile/profile.component';
 import { environment } from '../environments/environment';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { environment } from '../environments/environment';
     AuthModule.forRoot(environment.auth),
     BrowserModule,
     AppRoutingModule,
+    GraphQLModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

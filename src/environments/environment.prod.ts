@@ -12,6 +12,6 @@ export const environment = {
     returnTo: 'https://admin.latevacarta.click',
     scope: 'openid profile email',
     audience: `https://${domain}/userinfo`,
-    responseType: 'token',
+    responseType: 'token id_token',
   }
 };

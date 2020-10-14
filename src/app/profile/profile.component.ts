@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import { AuthUser } from '../../auth/auth';
-import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { AccountService } from '../api/account.service';
+import { take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -10,10 +10,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['profile.component.css']
 })
 export class ProfileComponent {
+  public user$: Observable<any>;
+  constructor(private auth: AuthService, private accountService: AccountService) {
 
-  public user$: Observable<AuthUser>;
-  constructor(private auth: AuthService) {
-
-    this.user$ = this.auth.user$.pipe(filter((user) => user !== null));
+    this.user$ = this.accountService.getAccount().pipe(tap(console.log), take(1));
   }
 }

@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "latevacarta"
+  "defaultProject": "latevacarta",
+  "cli": {
+    "analytics": "9b22e324-b14b-443a-9537-4eb2cb99b932"
+  }
 }
