@@ -14,6 +14,7 @@ export class AuthSigninComponent implements OnInit {
   public loginForm: FormGroup;
   public error: string;
   public readonly passwordResetPath = AuthRoutes.PASSWORD_RESET;
+  public readonly signupPath = AuthRoutes.SIGNUP;
   public get isEmailEmpty(): boolean {
     const emailCtrl = this.loginForm.get('username');
     return emailCtrl.errors !== null && emailCtrl.errors.required !== undefined && emailCtrl.dirty;
