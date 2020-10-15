@@ -13,6 +13,6 @@ export class ProfileComponent {
   public user$: Observable<any>;
   constructor(private auth: AuthService, private accountService: AccountService) {
 
-    this.user$ = this.accountService.getAccount().pipe(tap(console.log), take(1));
+    this.user$ = this.accountService.getAccount();
   }
 }

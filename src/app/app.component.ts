@@ -1,7 +1,8 @@
+import { AccountService } from './api/account.service';
 import { Component } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { environment } from '../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AuthUser } from 'src/auth/auth';
 import { filter } from 'rxjs/operators';
 @Component({
@@ -21,7 +22,7 @@ export class AppComponent {
   }
   public user$: Observable<AuthUser>;
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private accountService: AccountService) {
     this.user$ = this.auth.user$.pipe(filter((user) => user !== null));
   }
 

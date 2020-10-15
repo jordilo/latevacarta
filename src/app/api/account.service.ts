@@ -26,8 +26,8 @@ export class AccountService {
   constructor(private apollo: Apollo) { }
 
   public getAccount() {
-    return this.apollo.query<any>({
+    return this.apollo.watchQuery<any>({
       query: GET_ACCOUNT_QUERY,
-    }).pipe(map((response) => response.data.account[0]));
+    }).valueChanges.pipe(map((response) => response.data.account[0]));
   }
 }
