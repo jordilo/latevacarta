@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../../auth/auth.service';
 import { Observable } from 'rxjs';
-import { AccountService } from '../api/account.service';
+import { AccountService } from '../../api/account.service';
 import { take, tap } from 'rxjs/operators';
 
 @Component({

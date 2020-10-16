@@ -1,4 +1,4 @@
-import { BusinessService } from './../api/business.service';
+import { BusinessService } from './../../api/business.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -13,15 +13,15 @@ export class AddBusinessComponent implements OnInit {
 
   public ngOnInit(): void {
     this.busninessForm = this.fb.group({
-      name: ['My bar', Validators.required],
-      type: ['BAR', Validators.required],
+      name: ['', Validators.required],
+      type: ['', Validators.required],
       address: this.fb.group({
-        address: ['Alguersuari i pacuael', Validators.required],
-        city: ['Sabadell', Validators.required],
+        address: ['', Validators.required],
+        city: ['', Validators.required],
         country: [1],
-        lat: ['41.3'],
-        lng: ['3.1'],
-        postal_code: ['08203'],
+        lat: ['0'],
+        lng: ['0'],
+        postal_code: ['', Validators.required],
         state: ['Barcelona']
       })
     });

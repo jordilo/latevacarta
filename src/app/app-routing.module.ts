@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { AddBusinessComponent } from './add-business/add-business.component';
-import { BusinessComponent } from './business/business.component';
-import { MainComponent } from './main/main.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { ProfileComponent } from './profile/profile.component';
+import { AddBusinessComponent } from './views/add-business/add-business.component';
+import { BusinessComponent } from './views/business/business.component';
+import { MainComponent } from './views/main/main.component';
+import { NotFoundComponent } from './views/not-found/not-found.component';
+import { ProfileComponent } from './views/profile/profile.component';
 
 
 const routes: Routes = [
