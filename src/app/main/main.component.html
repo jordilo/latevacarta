@@ -1,9 +1,12 @@
 <h1>Hello main!</h1>
-<a *ngIf="isLogged;else login"
-   routerLink="/profile"
+<a routerLink="/profile"
    routerLinkActive="active">See profile</a>
-<ng-template #login>
-  <a [routerLink]="[signinPath]">Signin</a>
-  or
-  <a [routerLink]="[signupPath]">Signup</a>
-</ng-template>
+<div class="col-md-4">
+  <div *ngIf="business$ | async as business ">
+    <div>
+      <h1>Bussiness ({{business.length}})</h1>
+      <a [routerLink]="['business/add']">+</a>
+    </div>
+    <div class="row">
+    </div>
+  </div>

@@ -1,19 +1,22 @@
-import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BusinessService } from './../api/business.service';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { AuthRoutes } from '../../auth/auth.routes';
+import { Business } from '../api/business';
 
 @Component({
   selector: 'app-main',
   templateUrl: 'main.component.html',
   styleUrls: ['main.component.css']
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
 
-  public readonly signinPath = AuthRoutes.SIGNIN;
-  public readonly signupPath = AuthRoutes.SIGNUP;
-  public get isLogged() {
-    return this.auth.isLoggedIn;
+  public business$: Observable<Business[]>;
+  constructor(private businessService: BusinessService) {
   }
-  constructor(private auth: AuthService) {
+
+  public ngOnInit() {
+    this.business$ = this.businessService.getBusiness();
   }
 }
