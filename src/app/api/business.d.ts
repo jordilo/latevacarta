@@ -4,6 +4,7 @@ export interface Business {
   name: string;
   slug: string;
   state: string;
+  type: 'BAR' | 'PUB' | 'RES';
 }
 
 export interface Address {

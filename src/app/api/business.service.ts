@@ -27,21 +27,9 @@ query GetFullBusiness {
 `;
 
 const INSERT_BUSINESS = gql`
-mutation InsertBusiness($accountId : uuid!) {
+mutation InsertBusiness($business : business_insert_input!) {
   insert_business_one(
-    object: {
-      name: "manolito",
-      slug: "d",
-      type: "BAR",
-      address: {
-        data: {
-          address: "fghfg",
-          city: "ffff pere",
-          country: 1, lat: "2",
-          lng: "4",
-          postal_code: 5,
-          state: "BCN"}},
-      account_id: $accountId}) {
+    object: $business) {
     id
     address {
       id
@@ -64,11 +52,19 @@ export class BusinessService {
     }).pipe(map((response) => response.data.business));
   }
   public addBusiness(business: Business): Observable<any> {
+    const businnesGQL = {
+      name: business.name,
+      type: business.type,
+      account_id: localStorage.getItem(ACCOUNT_ID_KEY),
+      address: {
+        data: business.address
+      }
+    };
     return this.apollo.mutate<any>({
       // query: BUSINESS_FULL_QUERY
       mutation: INSERT_BUSINESS,
       variables: {
-        accountId: localStorage.getItem(ACCOUNT_ID_KEY)
+        business: businnesGQL
       }
     });
   }
