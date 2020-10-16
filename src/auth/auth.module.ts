@@ -1,3 +1,4 @@
+import { NotAuthGuard } from './not-auth.guard';
 import { AuthHttpInterceptorService } from './auth.http.interceptor';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -22,20 +23,29 @@ const routes: Routes = [
   },
   {
     path: AuthRoutes.SIGNIN,
-    component: AuthSigninComponent
+    component: AuthSigninComponent,
+    canActivate: [
+      NotAuthGuard
+    ]
   },
   {
     path: AuthRoutes.PASSWORD_RESET,
-    component: AuthPasswordResetComponent
+    component: AuthPasswordResetComponent,
+    canActivate: [
+      NotAuthGuard
+    ]
   },
   {
     path: AuthRoutes.SIGNUP,
-    component: AuthSignupComponent
+    component: AuthSignupComponent,
+    canActivate: [
+      NotAuthGuard
+    ]
   }
 ];
 
 @NgModule({
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, NotAuthGuard],
   declarations: [CallbackComponent, AuthSigninComponent, AuthSignupComponent, AuthPasswordResetComponent],
   imports: [CommonModule, ReactiveFormsModule, CommonModule, RouterModule.forRoot(routes)],
 })
