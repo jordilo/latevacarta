@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { AddBusinessComponent } from './views/add-business/add-business.component';
+import { BusinessDetailComponent } from './views/business-detail/business-detail.component';
 import { BusinessComponent } from './views/business/business.component';
 import { MainComponent } from './views/main/main.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'add',
         component: AddBusinessComponent
+      },
+      {
+        path: ':id',
+        component: BusinessDetailComponent
       }
     ]
   },

@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { AddBusinessComponent } from './views/add-business/add-business.component';
 import { BusinessComponent } from './views/business/business.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
+import { BusinessDetailComponent } from './views/business-detail/business-detail.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
     MainComponent,
     AddBusinessComponent,
     BusinessComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    BusinessDetailComponent
   ],
   imports: [
     AuthModule.forRoot(environment.auth),

@@ -25,6 +25,26 @@ query GetFullBusiness {
   }
 }
 `;
+const BUSINESS_ID_QUERY = gql`
+query GetBusinessById ($id: uuid!) {
+  business_by_pk(id: $id){
+    id
+    address {
+      address
+      city
+      country
+      id
+      lat
+      lng
+      postal_code
+      state
+    }
+    name
+    slug
+    type
+  }
+}
+`;
 
 const INSERT_BUSINESS = gql`
 mutation InsertBusiness($business : business_insert_input!) {
@@ -46,10 +66,15 @@ export class BusinessService {
   constructor(private apollo: Apollo) { }
 
   public getBusiness(): Observable<Business[]> {
-
     return this.apollo.subscribe<{ business: Business[] }>({
       query: BUSINESS_FULL_QUERY
     }).pipe(map((response) => response.data.business));
+  }
+  public getBusinessById(id: string): Observable<Business> {
+    return this.apollo.subscribe<{ business_by_pk: Business }>({
+      query: BUSINESS_ID_QUERY,
+      variables: { id }
+    }).pipe(map((response) => response.data.business_by_pk));
   }
   public addBusiness(business: Business): Observable<any> {
     const businnesGQL = {

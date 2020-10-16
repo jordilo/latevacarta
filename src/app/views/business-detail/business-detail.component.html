@@ -1,0 +1,6 @@
+<pre *ngIf="business$ | async as business; else loading">
+  {{business | json}}
+</pre>
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>
