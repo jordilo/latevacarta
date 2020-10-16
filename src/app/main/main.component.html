@@ -6,6 +6,9 @@
     <div>
       <h1>Bussiness ({{business.length}})</h1>
       <a [routerLink]="['business/add']">+</a>
+      <div *ngFor="let b of business">
+        {{b.name}} - {{b.address.postal_code}}
+      </div>
     </div>
     <div class="row">
     </div>

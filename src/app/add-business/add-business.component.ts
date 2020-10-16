@@ -1,3 +1,4 @@
+import { BusinessService } from './../api/business.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -7,9 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-business.component.css']
 })
 export class AddBusinessComponent implements OnInit {
-
   public busninessForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private businessService: BusinessService) { }
 
   public ngOnInit(): void {
     this.busninessForm = this.fb.group({
@@ -25,10 +25,12 @@ export class AddBusinessComponent implements OnInit {
         state: ['Barcelona']
       })
     });
+
   }
 
   public sendForm() {
-
+    this.businessService.addBusiness(this.busninessForm.value)
+      .subscribe();
   }
 
 }

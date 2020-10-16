@@ -27,15 +27,27 @@ query GetFullBusiness {
 `;
 
 const INSERT_BUSINESS = gql`
-mutation MyMutation {
-  insert_business_one(object: {name: "SBD", slug: "d", type: "BAR", address: {data: {address: "dd", city: "ddd", country: 1, lat: "2", lng: "4", postal_code: 5, state: "BCN"}}, account_id: "56fe42a3-dce4-451a-8ac1-b05699f8718c"}, on_conflict: {update_columns: address_id, constraint: business_id_key}) {
+mutation InsertBusiness($accountId : uuid!) {
+  insert_business_one(
+    object: {
+      name: "manolito",
+      slug: "d",
+      type: "BAR",
+      address: {
+        data: {
+          address: "fghfg",
+          city: "ffff pere",
+          country: 1, lat: "2",
+          lng: "4",
+          postal_code: 5,
+          state: "BCN"}},
+      account_id: $accountId}) {
     id
     address {
       id
     }
   }
 }
-
 `;
 
 @Injectable({
@@ -46,9 +58,10 @@ export class BusinessService {
   constructor(private apollo: Apollo) { }
 
   public getBusiness(): Observable<Business[]> {
-    return this.apollo.watchQuery<{ business: Business[] }>({
+
+    return this.apollo.subscribe<{ business: Business[] }>({
       query: BUSINESS_FULL_QUERY
-    }).valueChanges.pipe(map((response) => response.data.business));
+    }).pipe(map((response) => response.data.business));
   }
   public addBusiness(business: Business): Observable<any> {
     return this.apollo.mutate<any>({

@@ -4,6 +4,7 @@ import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
 import { ApolloLink } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
+import { ACCOUNT_ID_KEY } from './constants';
 
 const uri = 'https://latevacarta.herokuapp.com/v1/graphql'; // <-- add the URL of the GraphQL server here
 // const uri = 'http://api.latevacarta.click/v1/graphql'; // <-- add the URL of the GraphQL server here
@@ -16,9 +17,11 @@ export function provideApollo(httpLink: HttpLink) {
   }));
   // Get the authentication token from local storage if it exists
   const token = localStorage.getItem('token');
+  const acountId = localStorage.getItem(ACCOUNT_ID_KEY);
   const auth = setContext((operation, context) => ({
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
+      'X-Hasura-account-id': acountId
     },
   }));
 
