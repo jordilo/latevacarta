@@ -1,6 +1,7 @@
-<pre *ngIf="business$ | async as business; else loading">
-  {{business | json}}
-</pre>
+<div *ngIf="business$ | async as business; else loading">
+  <pre>{{business | json}}</pre>
+  <a [routerLink]="['edit']">Edit</a>
+</div>
 <ng-template #loading>
   <app-loader></app-loader>
 </ng-template>

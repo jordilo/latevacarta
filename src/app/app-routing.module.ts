@@ -1,3 +1,4 @@
+import { BusinessEditionComponent } from './views/business-edition/business-edition.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/auth/auth.guard';
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: ':id',
         component: BusinessDetailComponent
+      },
+      {
+        path: ':id/edit',
+        component: BusinessEditionComponent
       }
     ]
   },

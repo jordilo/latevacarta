@@ -1,3 +1,4 @@
+import { Type } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
@@ -23,8 +24,7 @@ query GetFullBusiness {
     slug
     type
   }
-}
-`;
+}`;
 const BUSINESS_ID_QUERY = gql`
 query GetBusinessById ($id: uuid!) {
   business_by_pk(id: $id){
@@ -43,8 +43,7 @@ query GetBusinessById ($id: uuid!) {
     slug
     type
   }
-}
-`;
+}`;
 
 const INSERT_BUSINESS = gql`
 mutation InsertBusiness($business : business_insert_input!) {
@@ -55,8 +54,14 @@ mutation InsertBusiness($business : business_insert_input!) {
       id
     }
   }
-}
-`;
+}`;
+
+const EDIT_BUSINESS = gql`
+mutation UpdateBusiness($id: uuid!, $name: String! ,$type: String!) {
+  update_business_by_pk(pk_columns: {id: $id}, _set: {name: $name , type: $type}) {
+    id
+  }
+}`;
 
 @Injectable({
   providedIn: 'root'
@@ -76,7 +81,7 @@ export class BusinessService {
       variables: { id }
     }).pipe(map((response) => response.data.business_by_pk));
   }
-  public addBusiness(business: Business): Observable<any> {
+  public create(business: Business): Observable<any> {
     const businnesGQL = {
       name: business.name,
       type: business.type,
@@ -90,6 +95,17 @@ export class BusinessService {
       mutation: INSERT_BUSINESS,
       variables: {
         business: businnesGQL
+      }
+    });
+  }
+
+  public edit(business: Business) {
+    return this.apollo.mutate<Business>({
+      mutation: EDIT_BUSINESS,
+      variables: {
+        id: business.id,
+        name: business.name,
+        type: business.type
       }
     });
   }

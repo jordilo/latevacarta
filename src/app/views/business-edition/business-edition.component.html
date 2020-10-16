@@ -1,0 +1,6 @@
+<app-business-form *ngIf="business$ | async as business ;else loading"
+                   (submitForm)="editBusiness($event, business.id)"
+                   [business]="business"></app-business-form>
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

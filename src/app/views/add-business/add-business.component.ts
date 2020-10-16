@@ -1,6 +1,7 @@
 import { BusinessService } from './../../api/business.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Address, Business } from 'src/app/api/business';
 
 @Component({
   selector: 'app-add-business',
@@ -8,28 +9,23 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-business.component.css']
 })
 export class AddBusinessComponent implements OnInit {
-  public busninessForm: FormGroup;
+
+  public defaultBusiness: Business;
   constructor(private fb: FormBuilder, private businessService: BusinessService) { }
 
   public ngOnInit(): void {
-    this.busninessForm = this.fb.group({
-      name: ['', Validators.required],
-      type: ['', Validators.required],
-      address: this.fb.group({
-        address: ['', Validators.required],
-        city: ['', Validators.required],
-        country: [1],
-        lat: ['0'],
-        lng: ['0'],
-        postal_code: ['', Validators.required],
-        state: ['Barcelona']
-      })
-    });
+    this.defaultBusiness = {
+      name: '',
+      type: 'BAR',
+      address: {
+        country: 1
+      } as Address
+    } as Business;
 
   }
 
-  public sendForm() {
-    this.businessService.addBusiness(this.busninessForm.value)
+  public sendForm(business: Business) {
+    this.businessService.create(business)
       .subscribe();
   }
 
