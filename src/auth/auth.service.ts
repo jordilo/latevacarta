@@ -140,6 +140,7 @@ export class AuthService {
   public logout() {
     localStorage.removeItem(EXPIRES_AT_KEY);
     localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(TOKEN_ID);
     // Log out of Auth0 session
     // Ensure that returnTo URL is specified in Auth0
     // Application settings for Allowed Logout URLs
