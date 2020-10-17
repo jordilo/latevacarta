@@ -20,6 +20,9 @@ import { BusinessEditionComponent } from './views/business-edition/business-edit
 import { BusinessListComponent } from './views/business-list/business-list.component';
 import { CatalogComponent } from './views/catalog/catalog.component';
 import { BusinessIsolationComponent } from './views/business-isolation/business-isolation.component';
+import { CatalogSummaryComponent } from './views/catalog-summary/catalog-summary.component';
+import { CatalogCategoriesComponent } from './views/catalog-categories/catalog-categories.component';
+import { CatalogProductsComponent } from './views/catalog-products/catalog-products.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { BusinessIsolationComponent } from './views/business-isolation/business-
     BusinessEditionComponent,
     BusinessListComponent,
     CatalogComponent,
-    BusinessIsolationComponent
+    BusinessIsolationComponent,
+    CatalogSummaryComponent,
+    CatalogCategoriesComponent,
+    CatalogProductsComponent
   ],
   imports: [
     AuthModule.forRoot(environment.auth),

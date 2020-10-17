@@ -11,6 +11,9 @@ import { ProfileComponent } from './views/profile/profile.component';
 import { BusinessListComponent } from './views/business-list/business-list.component';
 import { CatalogComponent } from './views/catalog/catalog.component';
 import { BusinessIsolationComponent } from './views/business-isolation/business-isolation.component';
+import { CatalogSummaryComponent } from './views/catalog-summary/catalog-summary.component';
+import { CatalogProductsComponent } from './views/catalog-products/catalog-products.component';
+import { CatalogCategoriesComponent } from './views/catalog-categories/catalog-categories.component';
 
 
 const routes: Routes = [
@@ -51,7 +54,21 @@ const routes: Routes = [
           },
           {
             path: 'catalog',
-            component: CatalogComponent
+            component: CatalogComponent,
+            children: [
+              {
+                path: '',
+                component: CatalogSummaryComponent
+              },
+              {
+                path: 'categories',
+                component: CatalogCategoriesComponent
+              },
+              {
+                path: 'products',
+                component: CatalogProductsComponent
+              },
+            ]
           }
         ]
       },
