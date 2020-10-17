@@ -17,6 +17,6 @@ export class MainComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.business$ = this.businessService.getBusiness();
+    this.business$ = this.businessService.getAll();
   }
 }

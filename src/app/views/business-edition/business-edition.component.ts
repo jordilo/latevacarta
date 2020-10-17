@@ -17,7 +17,7 @@ export class BusinessEditionComponent implements OnInit {
 
   public ngOnInit(): void {
     this.business$ = this.router.params
-      .pipe(switchMap(({ id }) => this.businessService.getBusinessById(id)));
+      .pipe(switchMap(({ id }) => this.businessService.getById(id)));
   }
 
   public editBusiness(business: Business, id: string) {

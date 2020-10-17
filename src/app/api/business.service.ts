@@ -70,12 +70,12 @@ export class BusinessService {
 
   constructor(private apollo: Apollo) { }
 
-  public getBusiness(): Observable<Business[]> {
+  public getAll(): Observable<Business[]> {
     return this.apollo.subscribe<{ business: Business[] }>({
       query: BUSINESS_FULL_QUERY
     }).pipe(map((response) => response.data.business));
   }
-  public getBusinessById(id: string): Observable<Business> {
+  public getById(id: string): Observable<Business> {
     return this.apollo.subscribe<{ business_by_pk: Business }>({
       query: BUSINESS_ID_QUERY,
       variables: { id }
