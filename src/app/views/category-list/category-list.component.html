@@ -1,0 +1,21 @@
+<table class="table"
+       *ngIf="categories$ | async as categories; else loading">
+    <tr *ngIf="categories.length">
+        <th><a [routerLink]="['create']">+</a></th>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr *ngFor="let category of categories">
+        <td colspan="2"><a [routerLink]="[category.id]">{{category.name}}</a></td>
+        <td><a [routerLink]="[category.id, 'edit']">Edit</a></td>
+        <td><a (click)="removeCategory(category.id)"
+               href="#">Delete</a></td>
+    </tr>
+    <tr *ngIf="!categories.length">
+        <td>There are any category <a [routerLink]="['create']">create your first one</a></td>
+    </tr>
+</table>
+<ng-template #loading>
+    <app-loader></app-loader>
+</ng-template>

@@ -1,0 +1,7 @@
+<app-category-form (submitForm)="saveCategory($event)"
+                   *ngIf="categories$ | async as categories ; else loading"
+                   [categories]="categories"
+                   [category]="defaultCategory"></app-category-form>
+<ng-template #loading>
+    <app-loader></app-loader>
+</ng-template>

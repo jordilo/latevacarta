@@ -14,6 +14,9 @@ import { BusinessIsolationComponent } from './views/business-isolation/business-
 import { CatalogSummaryComponent } from './views/catalog-summary/catalog-summary.component';
 import { CatalogProductsComponent } from './views/catalog-products/catalog-products.component';
 import { CatalogCategoriesComponent } from './views/catalog-categories/catalog-categories.component';
+import { CategoryListComponent } from './views/category-list/category-list.component';
+import { CategoryEditionComponent } from './views/category-edition/category-edition.component';
+import { CategoryCreationComponent } from './views/category-creation/category-creation.component';
 
 
 const routes: Routes = [
@@ -62,7 +65,21 @@ const routes: Routes = [
               },
               {
                 path: 'categories',
-                component: CatalogCategoriesComponent
+                component: CatalogCategoriesComponent,
+                children: [
+                  {
+                    path: '',
+                    component: CategoryListComponent
+                  },
+                  {
+                    path: 'create',
+                    component: CategoryCreationComponent
+                  },
+                  {
+                    path: ':id/edit',
+                    component: CategoryEditionComponent
+                  }
+                ]
               },
               {
                 path: 'products',

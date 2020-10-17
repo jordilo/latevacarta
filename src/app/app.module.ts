@@ -23,6 +23,9 @@ import { BusinessIsolationComponent } from './views/business-isolation/business-
 import { CatalogSummaryComponent } from './views/catalog-summary/catalog-summary.component';
 import { CatalogCategoriesComponent } from './views/catalog-categories/catalog-categories.component';
 import { CatalogProductsComponent } from './views/catalog-products/catalog-products.component';
+import { CategoryListComponent } from './views/category-list/category-list.component';
+import { CategoryEditionComponent } from './views/category-edition/category-edition.component';
+import { CategoryCreationComponent } from './views/category-creation/category-creation.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { CatalogProductsComponent } from './views/catalog-products/catalog-produ
     BusinessIsolationComponent,
     CatalogSummaryComponent,
     CatalogCategoriesComponent,
-    CatalogProductsComponent
+    CatalogProductsComponent,
+    CategoryListComponent,
+    CategoryEditionComponent,
+    CategoryCreationComponent
   ],
   imports: [
     AuthModule.forRoot(environment.auth),
