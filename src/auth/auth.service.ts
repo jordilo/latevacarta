@@ -99,7 +99,7 @@ export class AuthService {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken) {
         window.location.hash = '';
-        this.getUserInfo(authResult);
+        this.getUserInfo(authResult, true);
       } else if (err) {
         console.error(`Error: ${err.error}`);
       }
@@ -109,17 +109,19 @@ export class AuthService {
   private renewSession() {
     this.auth0.checkSession({}, (err, authResult) => {
       if (authResult) {
-        this.getUserInfo(authResult);
+        this.getUserInfo(authResult, false);
       }
     });
   }
 
-  private getUserInfo(authResult) {
+  private getUserInfo(authResult, redirect: boolean) {
     // Use access token to retrieve user's profile and set session
     this.auth0.client.userInfo(authResult.accessToken, (err, profile) => {
       if (profile) {
         this.setSession(authResult, profile);
-        this.router.navigate(['/']);
+        if (redirect) {
+          this.router.navigate(['/']);
+        }
       }
     });
   }
