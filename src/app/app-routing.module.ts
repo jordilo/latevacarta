@@ -2,7 +2,7 @@ import { BusinessEditionComponent } from './views/business-edition/business-edit
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { AddBusinessComponent } from './views/add-business/add-business.component';
+import { BusinessCreationComponent } from './views/business-creation/business-creation.component';
 import { BusinessDetailComponent } from './views/business-detail/business-detail.component';
 import { BusinessComponent } from './views/business/business.component';
 import { MainComponent } from './views/main/main.component';
@@ -36,8 +36,8 @@ const routes: Routes = [
         component: BusinessListComponent
       },
       {
-        path: 'add',
-        component: AddBusinessComponent
+        path: 'create',
+        component: BusinessCreationComponent
       },
       {
         path: ':id',

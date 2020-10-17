@@ -12,7 +12,7 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from './components/components.module';
 import { CommonModule } from '@angular/common';
-import { AddBusinessComponent } from './views/add-business/add-business.component';
+import { BusinessCreationComponent } from './views/business-creation/business-creation.component';
 import { BusinessComponent } from './views/business/business.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { BusinessDetailComponent } from './views/business-detail/business-detail.component';
@@ -30,7 +30,7 @@ import { CatalogProductsComponent } from './views/catalog-products/catalog-produ
     HeaderComponent,
     ProfileComponent,
     MainComponent,
-    AddBusinessComponent,
+    BusinessCreationComponent,
     BusinessComponent,
     NotFoundComponent,
     BusinessDetailComponent,

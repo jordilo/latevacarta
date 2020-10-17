@@ -1,7 +1,7 @@
 <table class="table"
        *ngIf="business$ | async as businesses; else loading">
     <tr>
-        <th><a [routerLink]="['add']">+</a></th>
+        <th><a [routerLink]="['create']">+</a></th>
         <th>Name</th>
         <th>Type</th>
         <th>Catalog</th>

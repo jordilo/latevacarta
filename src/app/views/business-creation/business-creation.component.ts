@@ -1,14 +1,14 @@
-import { BusinessService } from './../../api/business.service';
+import { BusinessService } from '../../api/business.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IAddress, IBusiness } from 'src/app/api/business';
 
 @Component({
-  selector: 'app-add-business',
-  templateUrl: './add-business.component.html',
-  styleUrls: ['./add-business.component.css']
+  selector: 'app-business-creation',
+  templateUrl: './business-creation.component.html',
+  styleUrls: ['./business-creation.component.css']
 })
-export class AddBusinessComponent implements OnInit {
+export class BusinessCreationComponent implements OnInit {
 
   public defaultBusiness: IBusiness;
   constructor(private fb: FormBuilder, private businessService: BusinessService) { }
