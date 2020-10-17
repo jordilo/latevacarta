@@ -103,7 +103,6 @@ export class AuthService {
       } else if (err) {
         console.error(`Error: ${err.error}`);
       }
-      this.router.navigate(['/']);
     });
   }
 
@@ -120,6 +119,7 @@ export class AuthService {
     this.auth0.client.userInfo(authResult.accessToken, (err, profile) => {
       if (profile) {
         this.setSession(authResult, profile);
+        this.router.navigate(['/']);
       }
     });
   }
