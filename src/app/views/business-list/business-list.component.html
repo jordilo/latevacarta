@@ -1,6 +1,6 @@
 <table class="table"
        *ngIf="business$ | async as businesses; else loading">
-    <tr>
+    <tr *ngIf="businesses.length">
         <th><a [routerLink]="['create']">+</a></th>
         <th>Name</th>
         <th>Type</th>
@@ -15,6 +15,9 @@
         <td><a [routerLink]="[business.id, 'edit']">Edit</a></td>
         <td><a (click)="removeBusiness(business.id)"
                href="#">Delete</a></td>
+    </tr>
+    <tr *ngIf="!businesses.length">
+        <td>There are any business <a [routerLink]="['create']">create your first one</a></td>
     </tr>
 </table>
 <ng-template #loading>
