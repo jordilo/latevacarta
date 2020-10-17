@@ -19,9 +19,11 @@ export class BusinessFormComponent implements OnInit {
 
   public ngOnInit(): void {
     this.busninessForm = this.fb.group({
+      id: [this.business.id],
       name: [this.business.name, Validators.required],
       type: [this.business.type, Validators.required],
       address: this.fb.group({
+        id: [this.business?.address.id],
         address: [this.business?.address.address, Validators.required],
         city: [this.business?.address.city, Validators.required],
         country: [this.business?.address.country],

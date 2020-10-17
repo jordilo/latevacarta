@@ -1,3 +1,4 @@
+import { AddressService } from './../../api/address.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { merge, Observable } from 'rxjs';
@@ -13,15 +14,20 @@ import { BusinessService } from 'src/app/api/business.service';
 export class BusinessEditionComponent implements OnInit {
 
   public business$: Observable<Business>;
-  constructor(private router: ActivatedRoute, private businessService: BusinessService) { }
+  constructor(
+    private router: ActivatedRoute,
+    private businessService: BusinessService,
+    private addressService: AddressService) { }
 
   public ngOnInit(): void {
     this.business$ = this.router.params
       .pipe(switchMap(({ id }) => this.businessService.getById(id)));
   }
 
-  public editBusiness(business: Business, id: string) {
-    business.id = id;
-    merge(this.businessService.edit(business)).subscribe();
+  public editBusiness(business: Business) {
+    merge(
+      this.businessService.edit(business),
+      this.addressService.updateAddress(business.address)
+    ).subscribe();
   }
 }
