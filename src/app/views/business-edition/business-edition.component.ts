@@ -2,7 +2,7 @@ import { AddressService } from './../../api/address.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin, Observable } from 'rxjs';
-import { switchMap, } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { IBusiness } from 'src/app/api/business';
 import { BusinessService } from 'src/app/api/business.service';
 
@@ -21,7 +21,7 @@ export class BusinessEditionComponent implements OnInit {
     private addressService: AddressService) { }
 
   public ngOnInit(): void {
-    this.business$ = this.activeRouter.params
+    this.business$ = this.activeRouter.parent.params
       .pipe(switchMap(({ id }) => this.businessService.getById(id)));
   }
 
