@@ -18,6 +18,8 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
 import { BusinessDetailComponent } from './views/business-detail/business-detail.component';
 import { BusinessEditionComponent } from './views/business-edition/business-edition.component';
 import { BusinessListComponent } from './views/business-list/business-list.component';
+import { CatalogComponent } from './views/catalog/catalog.component';
+import { BusinessIsolationComponent } from './views/business-isolation/business-isolation.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { BusinessListComponent } from './views/business-list/business-list.compo
     NotFoundComponent,
     BusinessDetailComponent,
     BusinessEditionComponent,
-    BusinessListComponent
+    BusinessListComponent,
+    CatalogComponent,
+    BusinessIsolationComponent
   ],
   imports: [
     AuthModule.forRoot(environment.auth),

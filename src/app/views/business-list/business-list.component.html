@@ -4,16 +4,17 @@
         <th><a [routerLink]="['add']">+</a></th>
         <th>Name</th>
         <th>Type</th>
-        <th>Details</th>
+        <th>Catalog</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
     <tr *ngFor="let business of businesses">
-        <td colspan="2">{{business.name}}</td>
+        <td colspan="2"><a [routerLink]="[business.id]">{{business.name}}</a></td>
         <td>{{business.type}}</td>
-        <td><a [routerLink]="[business.id]">See</a></td>
+        <td><a [routerLink]="[business.id,'catalog']">See</a></td>
         <td><a [routerLink]="[business.id, 'edit']">Edit</a></td>
-        <td><a (click)="removeBusiness(business.id)"href="#">Delete</a></td>
+        <td><a (click)="removeBusiness(business.id)"
+               href="#">Delete</a></td>
     </tr>
 </table>
 <ng-template #loading>

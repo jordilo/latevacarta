@@ -28,7 +28,6 @@ export class AppComponent {
       this.auth.user$.pipe(
         filter((user) => user !== null),
         switchMap(() => this.accountService.getAccount()),
-        tap(console.log),
         tap((userFromDb) => localStorage.setItem(ACCOUNT_ID_KEY, userFromDb.id))
       );
   }

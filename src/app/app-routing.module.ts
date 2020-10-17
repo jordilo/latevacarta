@@ -9,6 +9,8 @@ import { MainComponent } from './views/main/main.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { BusinessListComponent } from './views/business-list/business-list.component';
+import { CatalogComponent } from './views/catalog/catalog.component';
+import { BusinessIsolationComponent } from './views/business-isolation/business-isolation.component';
 
 
 const routes: Routes = [
@@ -36,12 +38,23 @@ const routes: Routes = [
       },
       {
         path: ':id',
-        component: BusinessDetailComponent
+        component: BusinessIsolationComponent,
+        children: [
+          {
+            path: '',
+            component: BusinessDetailComponent,
+            pathMatch: 'full'
+          },
+          {
+            path: 'edit',
+            component: BusinessEditionComponent
+          },
+          {
+            path: 'catalog',
+            component: CatalogComponent
+          }
+        ]
       },
-      {
-        path: ':id/edit',
-        component: BusinessEditionComponent
-      }
     ]
   },
   {
