@@ -19,6 +19,7 @@
                 formControlName="parent_id">
             <option value="">No parent</option>
             <option *ngFor="let cat of categories"
+                    [disabled]="cat.id === categoryForm.value.id"
                     [value]="cat.id">{{cat.name}}</option>
         </select>
     </div>

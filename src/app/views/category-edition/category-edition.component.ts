@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ICategory } from 'src/app/api/catalog';
 import { CatalogService } from 'src/app/api/catalog.service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, merge, forkJoin, zip } from 'rxjs';
-import { switchMap, tap, take, map } from 'rxjs/operators';
+import { Observable, combineLatest } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-category-edition',
@@ -17,11 +17,12 @@ export class CategoryEditionComponent implements OnInit {
   constructor(private catalogService: CatalogService, private activeRouter: ActivatedRoute) { }
 
   public ngOnInit(): void {
-    const categoryObs =
-      this.activeRouter.params.pipe(switchMap(({ id }) => this.catalogService.getById(id)));
+    this.editionData$ =
+      this.activeRouter.params
+        .pipe(
+          mergeMap(({ id }) => combineLatest([this.catalogService.getById(id), this.catalogService.getCategories()]))
+        );
 
-    this.editionData$ = forkJoin([categoryObs, this.catalogService.getCategories()])
-      .pipe(tap(console.log), map((d => d)));
   }
 
   public saveCategory(category: ICategory) {
