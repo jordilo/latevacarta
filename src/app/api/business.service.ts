@@ -4,7 +4,7 @@ import { Apollo } from 'apollo-angular';
 import { Business } from './business';
 import { Observable } from 'rxjs';
 import { ACCOUNT_ID_KEY } from '../constants';
-import { BUSINESS_FULL_QUERY, BUSINESS_ID_QUERY, INSERT_BUSINESS, EDIT_BUSINESS } from './business.queries';
+import { BUSINESS_FULL_QUERY, BUSINESS_ID_QUERY, INSERT_BUSINESS, EDIT_BUSINESS, DELETE_BUSINESS } from './business.queries';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +49,15 @@ export class BusinessService {
         id: business.id,
         name: business.name,
         type: business.type
+      }
+    });
+  }
+
+  public remove(businessId: string) {
+    return this.apollo.mutate<Business>({
+      mutation: DELETE_BUSINESS,
+      variables: {
+        id: businessId
       }
     });
   }

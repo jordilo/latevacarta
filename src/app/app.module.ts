@@ -17,6 +17,7 @@ import { BusinessComponent } from './views/business/business.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { BusinessDetailComponent } from './views/business-detail/business-detail.component';
 import { BusinessEditionComponent } from './views/business-edition/business-edition.component';
+import { BusinessListComponent } from './views/business-list/business-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BusinessEditionComponent } from './views/business-edition/business-edit
     BusinessComponent,
     NotFoundComponent,
     BusinessDetailComponent,
-    BusinessEditionComponent
+    BusinessEditionComponent,
+    BusinessListComponent
   ],
   imports: [
     AuthModule.forRoot(environment.auth),

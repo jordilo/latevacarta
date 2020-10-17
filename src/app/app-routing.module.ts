@@ -8,6 +8,7 @@ import { BusinessComponent } from './views/business/business.component';
 import { MainComponent } from './views/main/main.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { ProfileComponent } from './views/profile/profile.component';
+import { BusinessListComponent } from './views/business-list/business-list.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
       AuthGuard
     ],
     children: [
+      {
+        path: '',
+        component: BusinessListComponent
+      },
       {
         path: 'add',
         component: AddBusinessComponent

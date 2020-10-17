@@ -15,5 +15,4 @@ mutation EditAddress(
       _set: {address: $address, city: $city, country: $country, lat: $lat, lng: $lng, postal_code: $postal_code, state: $state}) {
     id
   }
-}
-`;
+}`;

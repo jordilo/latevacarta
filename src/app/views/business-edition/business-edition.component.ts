@@ -1,7 +1,7 @@
 import { AddressService } from './../../api/address.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { merge, Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { forkJoin, Observable } from 'rxjs';
 import { switchMap, } from 'rxjs/operators';
 import { Business } from 'src/app/api/business';
 import { BusinessService } from 'src/app/api/business.service';
@@ -15,19 +15,21 @@ export class BusinessEditionComponent implements OnInit {
 
   public business$: Observable<Business>;
   constructor(
-    private router: ActivatedRoute,
+    private activeRouter: ActivatedRoute,
+    private router: Router,
     private businessService: BusinessService,
     private addressService: AddressService) { }
 
   public ngOnInit(): void {
-    this.business$ = this.router.params
+    this.business$ = this.activeRouter.params
       .pipe(switchMap(({ id }) => this.businessService.getById(id)));
   }
 
   public editBusiness(business: Business) {
-    merge(
+    forkJoin([
       this.businessService.edit(business),
       this.addressService.updateAddress(business.address)
-    ).subscribe();
+    ]
+    ).subscribe(() => this.router.navigate(['/business']));
   }
 }

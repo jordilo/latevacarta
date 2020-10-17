@@ -56,3 +56,11 @@ mutation UpdateBusiness($id: uuid!, $name: String! ,$type: String!) {
     id
   }
 }`;
+
+
+export const DELETE_BUSINESS = gql`
+mutation EditAddress($id: uuid!) {
+    delete_business_by_pk(id: $id) {
+        id
+    }
+}`;
