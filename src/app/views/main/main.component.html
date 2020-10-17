@@ -1,15 +1,31 @@
-<h1>Hello main!</h1>
-<a routerLink="/profile"
-   routerLinkActive="active">See profile</a>
-<div class="col-md-4">
-  <div *ngIf="business$ | async as business ">
-    <div>
-      <h1>Bussiness ({{business.length}})</h1>
-      <a [routerLink]="['business/add']">+</a>
-      <div *ngFor="let b of business">
-        <a [routerLink]="['/business/' , b.id]"> {{b.name}}</a>
+<div class="row">
+
+  <div class="card col-md-4 mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Account</h5>
+      <div *ngIf="account$ | async as account ; else loadingProfile">
+        <p class="card-text">Hello <b>{{account.name}}</b></p>
+        <a routerLink="profile">Go </a>
       </div>
-    </div>
-    <div class="row">
+      <ng-template #loadingProfile>
+        <app-loader></app-loader>
+      </ng-template>
     </div>
   </div>
+
+  <div class="card col-md-4 mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Business</h5>
+      <div *ngIf="business$ | async as business; else loadingBusiness ">
+        <p class="card-text">Your available business <small>(x{{business.length}})</small></p>
+        <a routerLink="business">
+          Go
+        </a>
+
+      </div>
+      <ng-template #loadingBusiness>
+        <app-loader></app-loader>
+      </ng-template>
+    </div>
+  </div>
+</div>
