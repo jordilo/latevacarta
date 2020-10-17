@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin, Observable } from 'rxjs';
 import { switchMap, } from 'rxjs/operators';
-import { Business } from 'src/app/api/business';
+import { IBusiness } from 'src/app/api/business';
 import { BusinessService } from 'src/app/api/business.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { BusinessService } from 'src/app/api/business.service';
 })
 export class BusinessEditionComponent implements OnInit {
 
-  public business$: Observable<Business>;
+  public business$: Observable<IBusiness>;
   constructor(
     private activeRouter: ActivatedRoute,
     private router: Router,
@@ -25,7 +25,7 @@ export class BusinessEditionComponent implements OnInit {
       .pipe(switchMap(({ id }) => this.businessService.getById(id)));
   }
 
-  public editBusiness(business: Business) {
+  public editBusiness(business: IBusiness) {
     forkJoin([
       this.businessService.edit(business),
       this.addressService.updateAddress(business.address)

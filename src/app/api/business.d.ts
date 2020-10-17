@@ -1,13 +1,13 @@
-export interface Business {
+export interface IBusiness {
   id: string;
-  address: Address;
+  address: IAddress;
   name: string;
   slug: string;
   state: string;
   type: 'BAR' | 'PUB' | 'RES';
 }
 
-export interface Address {
+export interface IAddress {
   address: string;
   city: string;
   country: number;

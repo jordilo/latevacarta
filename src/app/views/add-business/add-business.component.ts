@@ -1,7 +1,7 @@
 import { BusinessService } from './../../api/business.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Address, Business } from 'src/app/api/business';
+import { IAddress, IBusiness } from 'src/app/api/business';
 
 @Component({
   selector: 'app-add-business',
@@ -10,7 +10,7 @@ import { Address, Business } from 'src/app/api/business';
 })
 export class AddBusinessComponent implements OnInit {
 
-  public defaultBusiness: Business;
+  public defaultBusiness: IBusiness;
   constructor(private fb: FormBuilder, private businessService: BusinessService) { }
 
   public ngOnInit(): void {
@@ -19,12 +19,12 @@ export class AddBusinessComponent implements OnInit {
       type: 'BAR',
       address: {
         country: 1
-      } as Address
-    } as Business;
+      } as IAddress
+    } as IBusiness;
 
   }
 
-  public sendForm(business: Business) {
+  public sendForm(business: IBusiness) {
     this.businessService.create(business)
       .subscribe();
   }

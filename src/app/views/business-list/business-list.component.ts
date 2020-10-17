@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BusinessService } from '../../api/business.service';
-import { Business } from 'src/app/api/business';
+import { IBusiness } from 'src/app/api/business';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class BusinessListComponent implements OnInit {
 
-  public business$: Observable<Business[]>;
+  public business$: Observable<IBusiness[]>;
   constructor(private businessService: BusinessService) {
   }
 

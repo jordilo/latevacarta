@@ -1,7 +1,7 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { Business } from './business';
+import { IBusiness } from './business';
 import { Observable } from 'rxjs';
 import { ACCOUNT_ID_KEY } from '../constants';
 import { BUSINESS_FULL_QUERY, BUSINESS_ID_QUERY, INSERT_BUSINESS, EDIT_BUSINESS, DELETE_BUSINESS } from './business.queries';
@@ -13,18 +13,18 @@ export class BusinessService {
 
   constructor(private apollo: Apollo) { }
 
-  public getAll(): Observable<Business[]> {
-    return this.apollo.subscribe<{ business: Business[] }>({
+  public getAll(): Observable<IBusiness[]> {
+    return this.apollo.subscribe<{ business: IBusiness[] }>({
       query: BUSINESS_FULL_QUERY
     }).pipe(map((response) => response.data.business));
   }
-  public getById(id: string): Observable<Business> {
-    return this.apollo.subscribe<{ business_by_pk: Business }>({
+  public getById(id: string): Observable<IBusiness> {
+    return this.apollo.subscribe<{ business_by_pk: IBusiness }>({
       query: BUSINESS_ID_QUERY,
       variables: { id }
     }).pipe(map((response) => response.data.business_by_pk));
   }
-  public create(business: Business): Observable<any> {
+  public create(business: IBusiness): Observable<any> {
     const businnesGQL = {
       name: business.name,
       type: business.type,
@@ -42,8 +42,8 @@ export class BusinessService {
     });
   }
 
-  public edit(business: Business) {
-    return this.apollo.mutate<Business>({
+  public edit(business: IBusiness) {
+    return this.apollo.mutate<IBusiness>({
       mutation: EDIT_BUSINESS,
       variables: {
         id: business.id,
@@ -54,7 +54,7 @@ export class BusinessService {
   }
 
   public remove(businessId: string) {
-    return this.apollo.mutate<Business>({
+    return this.apollo.mutate<IBusiness>({
       mutation: DELETE_BUSINESS,
       variables: {
         id: businessId

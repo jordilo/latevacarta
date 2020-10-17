@@ -1,4 +1,4 @@
-import { Account } from './api/account.d';
+import { IAccount } from './api/account.d';
 import { Component, EventEmitter, Output, Input, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 
 export class HeaderComponent implements OnInit {
   @Input() public title: string;
-  @Input() public user: Account;
+  @Input() public user: IAccount;
   @Input() public isUserLogged: boolean;
   @Output() public logoutHandler: EventEmitter<any> = new EventEmitter();
   @Output() public loginHandler: EventEmitter<any> = new EventEmitter();

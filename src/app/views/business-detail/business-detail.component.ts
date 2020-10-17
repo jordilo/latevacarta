@@ -1,7 +1,7 @@
 import { BusinessService } from './../../api/business.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Business } from 'src/app/api/business';
+import { IBusiness } from 'src/app/api/business';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class BusinessDetailComponent implements OnInit {
 
-  public business$: Observable<Business>;
+  public business$: Observable<IBusiness>;
   constructor(private router: ActivatedRoute, private businessService: BusinessService) { }
 
   public ngOnInit(): void {

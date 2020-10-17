@@ -1,8 +1,9 @@
 import { Observable } from 'rxjs';
 import { BusinessService } from './../../api/business.service';
 import { Component, OnInit } from '@angular/core';
-import { Business } from '../../api/business';
+import { IBusiness } from '../../api/business';
 import { AccountService } from '../../api/account.service';
+import { IAccount } from 'src/app/api/account';
 
 @Component({
   selector: 'app-main',
@@ -11,8 +12,8 @@ import { AccountService } from '../../api/account.service';
 })
 export class MainComponent implements OnInit {
 
-  public business$: Observable<Business[]>;
-  public account$: Observable<Account>;
+  public business$: Observable<IBusiness[]>;
+  public account$: Observable<IAccount>;
   constructor(
     private accountService: AccountService,
     private businessService: BusinessService) {

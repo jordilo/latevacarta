@@ -2,10 +2,10 @@ import { AccountService } from './api/account.service';
 import { Component } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { environment } from '../environments/environment';
-import { Observable, Subject } from 'rxjs';
-import { AuthUser } from 'src/auth/auth';
-import { filter, share, tap, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { filter, tap, switchMap } from 'rxjs/operators';
 import { ACCOUNT_ID_KEY } from './constants';
+import { IAccount } from './api/account.d';
 @Component({
   selector: 'app-root',
   styleUrls: ['./app.component.scss'],
@@ -21,20 +21,16 @@ export class AppComponent {
   public get isUserLogged(): boolean {
     return this.auth.isLoggedIn;
   }
-  public user$: Observable<AuthUser>;
+  public user$: Observable<IAccount>;
 
   constructor(private auth: AuthService, private accountService: AccountService) {
-    const usersObservable = this.auth.user$.pipe(filter((user) => user !== null))
-      .pipe(share());
-
-    this.user$ = usersObservable;
-
-    usersObservable.pipe(
-      switchMap(() =>
-        this.accountService.getAccount()
-          .pipe(tap((userFromDb) => localStorage.setItem(ACCOUNT_ID_KEY, userFromDb.id)))
-      )
-    ).subscribe();
+    this.user$ =
+      this.auth.user$.pipe(
+        filter((user) => user !== null),
+        switchMap(() => this.accountService.getAccount()),
+        tap(console.log),
+        tap((userFromDb) => localStorage.setItem(ACCOUNT_ID_KEY, userFromDb.id))
+      );
   }
 
   public logoutHandler() {

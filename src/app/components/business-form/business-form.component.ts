@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Business } from 'src/app/api/business';
+import { IBusiness } from 'src/app/api/business';
 import { BusinessService } from 'src/app/api/business.service';
 
 @Component({
@@ -10,8 +10,8 @@ import { BusinessService } from 'src/app/api/business.service';
 })
 export class BusinessFormComponent implements OnInit {
 
-  @Input() public business: Business;
-  @Output() public submitForm = new EventEmitter<Business>();
+  @Input() public business: IBusiness;
+  @Output() public submitForm = new EventEmitter<IBusiness>();
 
 
   public busninessForm: FormGroup;

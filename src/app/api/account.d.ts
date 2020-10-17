@@ -1,4 +1,4 @@
-export interface Account {
+export interface IAccount {
   birthday: string;
   creation: string;
   email: string;
