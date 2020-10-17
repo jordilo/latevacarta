@@ -1,23 +1,8 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
+import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
-
-const GET_ACCOUNT_QUERY = gql`
-query GetAccount {
-  account {
-    birthday
-    creation
-    email
-    id
-    lastname
-    last_seen
-    thumbnail
-    username
-    name
-  }
-}
-`;
+import { GET_ACCOUNT_QUERY } from './account.queries';
 
 @Injectable({
   providedIn: 'root'
