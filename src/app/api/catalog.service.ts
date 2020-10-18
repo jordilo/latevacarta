@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { GET_ALL_CATEGORIES, INSERT_CATEGORY, GET_CATEGORY } from './catalog.queries';
-import { map } from 'rxjs/operators';
+import { GET_ALL_CATEGORIES, INSERT_CATEGORY, GET_CATEGORY, UPDATE_CATEGORY, REMOVE_CATEGORY } from './catalog.queries';
+import { map, take } from 'rxjs/operators';
 import { ICategory } from './catalog';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class CatalogService {
       query: GET_ALL_CATEGORIES
     }).valueChanges.pipe(map(({ data }) => data.category));
   }
-  public getById(categoryId: string) {
+  public getCategoryById(categoryId: string) {
     return this.apollo.watchQuery<{ category_by_pk: ICategory }>({
       query: GET_CATEGORY,
       variables: {
@@ -33,6 +33,25 @@ export class CatalogService {
         category
       }
     });
+  }
 
+  public editCategory(category: ICategory) {
+    return this.apollo.mutate({
+      mutation: UPDATE_CATEGORY,
+      variables: {
+        id: category.id,
+        name: category.name,
+        parent_id: category.parent_id
+      }
+    }).pipe(take(1));
+  }
+
+  public removeCategory(categoryId: string) {
+    return this.apollo.mutate({
+      mutation: REMOVE_CATEGORY,
+      variables: {
+        id: categoryId
+      }
+    });
   }
 }

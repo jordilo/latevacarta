@@ -24,3 +24,18 @@ mutation InsertCategory($category : category_insert_input!) {
      id
   }
 }`;
+
+export const UPDATE_CATEGORY = gql`
+mutation UPDATE_CATEGORY($id: uuid!, $name: String!, $parent_id: String!) {
+  update_category_by_pk(pk_columns: {id: $id}, _set: {name: $name, parent_id: $parent_id}) {
+    id
+    name
+  }
+}`;
+
+export const REMOVE_CATEGORY = gql`
+mutation RemoveCategory($id: uuid!) {
+  delete_category_by_pk(id: $id){
+    id
+  }
+}`;

@@ -18,6 +18,9 @@ export class CategoryListComponent implements OnInit {
     this.categories$ = this.catalogService.getCategories();
   }
   public removeCategory(categoryId: string) {
-
+    const areYoure = confirm('Are your sure ?');
+    if (areYoure) {
+      this.catalogService.removeCategory(categoryId).subscribe();
+    }
   }
 }

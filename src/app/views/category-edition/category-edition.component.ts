@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ICategory } from 'src/app/api/catalog';
 import { CatalogService } from 'src/app/api/catalog.service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, combineLatest } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { Observable, combineLatest, NEVER } from 'rxjs';
+import { mergeMap, tap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-category-edition',
@@ -20,13 +20,13 @@ export class CategoryEditionComponent implements OnInit {
     this.editionData$ =
       this.activeRouter.params
         .pipe(
-          mergeMap(({ id }) => combineLatest([this.catalogService.getById(id), this.catalogService.getCategories()]))
+          mergeMap(({ id }) => combineLatest([this.catalogService.getCategoryById(id), this.catalogService.getCategories()]))
         );
 
   }
 
   public saveCategory(category: ICategory) {
-    console.log(category);
+    this.catalogService.editCategory(category).subscribe();
   }
 
 }

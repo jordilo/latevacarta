@@ -9,8 +9,8 @@
     <tr *ngFor="let category of categories">
         <td colspan="2"><a [routerLink]="[category.id]">{{category.name}}</a></td>
         <td><a [routerLink]="[category.id, 'edit']">Edit</a></td>
-        <td><a (click)="removeCategory(category.id)"
-               href="#">Delete</a></td>
+        <td><a routerLink="."
+               (click)="removeCategory(category.id)">Delete</a></td>
     </tr>
     <tr *ngIf="!categories.length">
         <td>There are any category <a [routerLink]="['create']">create your first one</a></td>
