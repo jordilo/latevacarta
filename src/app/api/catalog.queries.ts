@@ -110,3 +110,22 @@ mutation RemoveProduct($id: uuid!) {
 }`;
 
 //#endregion
+
+//#region Catalog
+export const GET_CATALOG = gql`
+query GetCatalogByBusiness($businessId: uuid!) {
+    category(where: { business_id: { _eq: $businessId } }) {
+        id
+        name
+        products {
+            id
+            name
+            description
+            price
+            __typename
+        }
+        __typename
+    }
+} `;
+
+//#endregion

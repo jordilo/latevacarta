@@ -1,1 +1,20 @@
-<p>catalog-summary works!</p>
+<div *ngIf="catalog$ | async as catalog; else loading">
+    <ul class="list-group"
+        *ngFor="let category of catalog">
+        <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-dark">
+            <a [routerLink]="['categories', category.id , 'edit']">
+                <b>{{category.name}}</b>
+            </a>
+        </li>
+        <li *ngFor="let product of category.products"
+            class="list-group-item d-flex justify-content-between align-items-center">
+            <a [routerLink]="['products', product.id , 'edit']">
+                {{product.name}}
+            </a>
+            <span class="badge badge-primary badge-pill">{{product.price}} €</span>
+        </li>
+    </ul>
+</div>
+<ng-template #loading>
+    <app-loader></app-loader>
+</ng-template>

@@ -11,7 +11,7 @@ import {
 } from './catalog.queries';
 import { map, take } from 'rxjs/operators';
 import { ICategory, IProduct } from './catalog';
-import { INSERT_PRODUCT, UPDATE_PRODUCT, REMOVE_PRODUCT } from './catalog.queries';
+import { INSERT_PRODUCT, UPDATE_PRODUCT, REMOVE_PRODUCT, GET_CATALOG } from './catalog.queries';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,15 @@ import { INSERT_PRODUCT, UPDATE_PRODUCT, REMOVE_PRODUCT } from './catalog.querie
 export class CatalogService {
 
   constructor(private apollo: Apollo) { }
+
+  public getCatalog(businessId: string) {
+    return this.apollo.watchQuery<{ category: ICategory[] }>({
+      query: GET_CATALOG,
+      variables: {
+        businessId
+      }
+    }).valueChanges.pipe(map(({ data }) => data.category));
+  }
 
   public getCategories() {
     return this.apollo.watchQuery<{ category: ICategory[] }>({

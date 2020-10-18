@@ -1,6 +1,23 @@
-<ul class="list-inline">
-    <li><a routerLink="." routerLinkActive="'active'">Resume</a></li>
-    <li><a routerLink="categories" routerLinkActive="'active'">Categories</a></li>
-    <li><a routerLink="products" routerLinkActive="'active'">Products</a></li>
-</ul>
-<router-outlet></router-outlet>
+<div class="row">
+    <div class="col-md-3">
+        <ul class="list-group">
+            <li routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}"
+                class="list-group-item d-flex justify-content-between align-items-center">
+                <a routerLink="."
+                   routerLinkActive="active-anchor"
+                   [routerLinkActiveOptions]="{exact:true}">Resume</a></li>
+            <li routerLinkActive="active"
+                class="list-group-item d-flex justify-content-between align-items-center">
+                <a routerLink="categories"
+                   routerLinkActive="active-anchor">Categories</a></li>
+            <li routerLinkActive="active"
+                class="list-group-item d-flex justify-content-between align-items-center">
+                <a routerLink="products"
+                   routerLinkActive="active-anchor">Products</a></li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <router-outlet></router-outlet>
+    </div>
+</div>
