@@ -20,7 +20,12 @@ export class CategoryEditionComponent implements OnInit {
     this.editionData$ =
       this.activeRouter.params
         .pipe(
-          mergeMap(({ id }) => combineLatest([this.catalogService.getCategoryById(id), this.catalogService.getCategories()]))
+          mergeMap(({ categoryId }) =>
+            combineLatest([
+              this.catalogService.getCategoryById(categoryId),
+              this.catalogService.getCategories()
+            ])
+          )
         );
 
   }

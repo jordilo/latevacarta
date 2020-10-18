@@ -1,0 +1,7 @@
+<app-product-form *ngIf="editionData$ | async as data ; else loading"
+                   [categories]="data[1]"
+                   [product]="data[0]"
+                   (submitForm)="saveProduct($event)"></app-product-form>
+<ng-template #loading>
+    <app-loader></app-loader>
+</ng-template>

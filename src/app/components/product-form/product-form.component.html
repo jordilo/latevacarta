@@ -1,0 +1,43 @@
+<form class="col-md-6"
+      [formGroup]="productForm"
+      (ngSubmit)="sendForm()">
+
+    <div class="form-group text-right">
+        <button class="btn btn-primary"
+                [disabled]="productForm.invalid"
+                type="submit">Save</button>
+    </div>
+    <div class="form-group">
+        <label>Name</label>
+        <input class="form-control"
+               formControlName="name" />
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input class="form-control"
+               formControlName="description" />
+    </div>
+    <div class="form-group">
+        <label>Price</label>
+        <input class="form-control"
+               type="number"
+               formControlName="price" />
+    </div>
+    <div class="form-group">
+        <label>Display</label>
+        <input class="form-control"
+               type="checkbox"
+               formControlName="is_active" />
+    </div>
+    <div class="form-group"
+         [hidden]="!categories || !categories.length">
+        <label>Type</label>
+        <select class="form-control"
+                formControlName="category_id">
+            <option *ngFor="let cat of categories"
+                    [disabled]="cat.id === productForm.value.category_id"
+                    [value]="cat.id">{{cat.name}}</option>
+        </select>
+    </div>
+    <pre>{{productForm.value |json}}</pre>
+</form>

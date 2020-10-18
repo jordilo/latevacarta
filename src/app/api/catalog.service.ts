@@ -1,8 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { GET_ALL_CATEGORIES, INSERT_CATEGORY, GET_CATEGORY, UPDATE_CATEGORY, REMOVE_CATEGORY } from './catalog.queries';
+import {
+  GET_ALL_CATEGORIES,
+  INSERT_CATEGORY,
+  GET_CATEGORY,
+  UPDATE_CATEGORY,
+  REMOVE_CATEGORY,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_BY_ID
+} from './catalog.queries';
 import { map, take } from 'rxjs/operators';
-import { ICategory } from './catalog';
+import { ICategory, IProduct } from './catalog';
+import { INSERT_PRODUCT, UPDATE_PRODUCT, REMOVE_PRODUCT } from './catalog.queries';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +60,54 @@ export class CatalogService {
       mutation: REMOVE_CATEGORY,
       variables: {
         id: categoryId
+      }
+    });
+  }
+
+  public getProducts() {
+    return this.apollo.watchQuery<{ product: IProduct[] }>({
+      query: GET_ALL_PRODUCTS
+    }).valueChanges.pipe(map(({ data }) => data.product));
+  }
+  public getProductById(productId: string) {
+    return this.apollo.watchQuery<{ product_by_pk: IProduct }>({
+      query: GET_PRODUCT_BY_ID,
+      variables: {
+        id: productId
+      }
+    }).valueChanges.pipe(map(({ data }) => data.product_by_pk));
+  }
+
+  public insertProduct(product: IProduct) {
+    delete product.id;
+    product.feature_image = 'null';
+    return this.apollo.mutate<IProduct>({
+      mutation: INSERT_PRODUCT,
+      variables: {
+        product
+      }
+    });
+  }
+  public editProduct(product: IProduct) {
+    return this.apollo.mutate<IProduct>({
+      mutation: UPDATE_PRODUCT,
+      variables: {
+        id: product.id,
+        category_id: product.category_id,
+        description: product.description,
+        is_active: product.is_active,
+        name: product.name,
+        feature_image: product.feature_image,
+        price: product.price
+      }
+    });
+  }
+
+  public removeProduct(productId: string) {
+    return this.apollo.mutate<IProduct>({
+      mutation: REMOVE_PRODUCT,
+      variables: {
+        id: productId
       }
     });
   }

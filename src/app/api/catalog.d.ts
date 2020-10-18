@@ -4,3 +4,14 @@ export interface ICategory {
     name: string;
     business_id: string;
 }
+
+export interface IProduct {
+    category: ICategory;
+    category_id: string;
+    description: string;
+    feature_image: string;
+    id: string;
+    is_active: boolean;
+    name: string;
+    price: number;
+}

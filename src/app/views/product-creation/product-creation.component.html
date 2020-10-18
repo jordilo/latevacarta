@@ -1,0 +1,7 @@
+<app-product-form (submitForm)="saveProduct($event)"
+                  *ngIf="categories$ | async as categories ; else loading"
+                  [categories]="categories"
+                  [product]="defaultProduct"></app-product-form>
+<ng-template #loading>
+    <app-loader></app-loader>
+</ng-template>

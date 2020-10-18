@@ -17,6 +17,9 @@ import { CatalogCategoriesComponent } from './views/catalog-categories/catalog-c
 import { CategoryListComponent } from './views/category-list/category-list.component';
 import { CategoryEditionComponent } from './views/category-edition/category-edition.component';
 import { CategoryCreationComponent } from './views/category-creation/category-creation.component';
+import { ProductListComponent } from './views/product-list/product-list.component';
+import { ProductCreationComponent } from './views/product-creation/product-creation.component';
+import { ProductEditionComponent } from './views/product-edition/product-edition.component';
 
 
 const routes: Routes = [
@@ -76,14 +79,28 @@ const routes: Routes = [
                     component: CategoryCreationComponent
                   },
                   {
-                    path: ':id/edit',
+                    path: ':categoryId/edit',
                     component: CategoryEditionComponent
                   }
                 ]
               },
               {
                 path: 'products',
-                component: CatalogProductsComponent
+                component: CatalogProductsComponent,
+                children: [
+                  {
+                    path: '',
+                    component: ProductListComponent
+                  },
+                  {
+                    path: 'create',
+                    component: ProductCreationComponent
+                  },
+                  {
+                    path: ':productId/edit',
+                    component: ProductEditionComponent
+                  }
+                ]
               },
             ]
           }

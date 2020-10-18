@@ -26,6 +26,9 @@ import { CatalogProductsComponent } from './views/catalog-products/catalog-produ
 import { CategoryListComponent } from './views/category-list/category-list.component';
 import { CategoryEditionComponent } from './views/category-edition/category-edition.component';
 import { CategoryCreationComponent } from './views/category-creation/category-creation.component';
+import { ProductEditionComponent } from './views/product-edition/product-edition.component';
+import { ProductListComponent } from './views/product-list/product-list.component';
+import { ProductCreationComponent } from './views/product-creation/product-creation.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { CategoryCreationComponent } from './views/category-creation/category-cr
     CatalogProductsComponent,
     CategoryListComponent,
     CategoryEditionComponent,
-    CategoryCreationComponent
+    CategoryCreationComponent,
+    ProductEditionComponent,
+    ProductListComponent,
+    ProductCreationComponent
   ],
   imports: [
     AuthModule.forRoot(environment.auth),
