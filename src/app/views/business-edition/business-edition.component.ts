@@ -21,8 +21,9 @@ export class BusinessEditionComponent implements OnInit {
     private addressService: AddressService) { }
 
   public ngOnInit(): void {
+    // TODO fins the way to extract params from parent
     this.business$ = this.activeRouter.parent.params
-      .pipe(switchMap(({ id }) => this.businessService.getById(id)));
+      .pipe(switchMap(({ businessId }) => this.businessService.getById(businessId)));
   }
 
   public editBusiness(business: IBusiness) {

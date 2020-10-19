@@ -12,6 +12,7 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from './components/components.module';
 import { CommonModule } from '@angular/common';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { BusinessCreationComponent } from './views/business-creation/business-creation.component';
 import { BusinessComponent } from './views/business/business.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
@@ -31,6 +32,7 @@ import { ProductListComponent } from './views/product-list/product-list.componen
 import { ProductCreationComponent } from './views/product-creation/product-creation.component';
 import { AccountIsolationComponent } from './views/account-isolation/account-isolation.component';
 import { AccountEditionComponent } from './views/account-edition/account-edition.component';
+import { BusinessQrComponent } from './views/business-qr/business-qr.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import { AccountEditionComponent } from './views/account-edition/account-edition
     ProductListComponent,
     ProductCreationComponent,
     AccountIsolationComponent,
-    AccountEditionComponent
+    AccountEditionComponent,
+    BusinessQrComponent
   ],
   imports: [
     AuthModule.forRoot(environment.auth),
@@ -66,7 +69,8 @@ import { AccountEditionComponent } from './views/account-edition/account-edition
     GraphQLModule,
     HttpClientModule,
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxQRCodeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

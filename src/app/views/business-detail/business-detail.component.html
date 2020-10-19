@@ -1,6 +1,10 @@
 <div *ngIf="business$ | async as business; else loading">
-  <pre>{{business | json}}</pre>
-  <a [routerLink]="['edit']">Edit</a>
+  <h1>{{business.name}}</h1>
+  <hr />
+  <a [routerLink]="['edit']"><button class="btn btn-primary">Edit</button></a>
+  <a [routerLink]="['qr']"><button class="btn btn-secondary">See QR</button></a>
+  <a [routerLink]="['catalog']"><button class="btn btn-info">Catalog</button></a>
+
 </div>
 <ng-template #loading>
   <app-loader></app-loader>

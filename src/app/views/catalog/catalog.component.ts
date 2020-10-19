@@ -17,7 +17,7 @@ export class CatalogComponent implements OnInit {
 
   public ngOnInit(): void {
     this.business$ = this.router.params
-      .pipe(switchMap(({ id }) => this.businessService.getById(id)));
+      .pipe(switchMap(({ businessId }) => this.businessService.getById(businessId)));
   }
 
 }

@@ -19,9 +19,9 @@ export class CatalogSummaryComponent implements OnInit {
     private catalogService: CatalogService) { }
 
   public ngOnInit(): void {
-
+    // TODO fins the way to extract params from parent
     this.catalog$ = this.activatedRoute.parent.parent.params
-      .pipe(switchMap(({ id }) => this.catalogService.getCatalog(id)));
+      .pipe(switchMap(({ businessId }) => this.catalogService.getCatalog(businessId)));
   }
 
 }

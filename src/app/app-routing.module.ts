@@ -22,6 +22,7 @@ import { ProductCreationComponent } from './views/product-creation/product-creat
 import { ProductEditionComponent } from './views/product-edition/product-edition.component';
 import { AccountEditionComponent } from './views/account-edition/account-edition.component';
 import { AccountIsolationComponent } from './views/account-isolation/account-isolation.component';
+import { BusinessQrComponent } from './views/business-qr/business-qr.component';
 
 
 const routes: Routes = [
@@ -48,13 +49,17 @@ const routes: Routes = [
         component: BusinessCreationComponent
       },
       {
-        path: ':id',
+        path: ':businessId',
         component: BusinessIsolationComponent,
         children: [
           {
             path: '',
             component: BusinessDetailComponent,
             pathMatch: 'full'
+          },
+          {
+            path: 'qr',
+            component: BusinessQrComponent
           },
           {
             path: 'edit',

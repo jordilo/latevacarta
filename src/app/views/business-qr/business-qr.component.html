@@ -1,0 +1,13 @@
+<div *ngIf="url$ | async as url; else loading">
+    <div class="qr-print-wrapper">
+        <ngx-qrcode [elementType]="elementType"
+                    [errorCorrectionLevel]="correctionLevel"
+                    [value]="url"
+                    cssClass="bshadow"></ngx-qrcode>
+        <h4>{{hostname}}</h4>
+    </div>
+    <button class="btn btn-primary">Print</button>
+</div>
+<ng-template #loading>
+    <app-loader></app-loader>
+</ng-template>
