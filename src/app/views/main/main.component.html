@@ -5,7 +5,7 @@
       <h5 class="card-title">Account</h5>
       <div *ngIf="account$ | async as account ; else loadingProfile">
         <p class="card-text">Hello <b>{{account.name}}</b></p>
-        <a routerLink="profile">Go </a>
+        <a routerLink="account">Go </a>
       </div>
       <ng-template #loadingProfile>
         <app-loader></app-loader>

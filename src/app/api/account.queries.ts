@@ -15,3 +15,14 @@ query GetAccount {
   }
 }
 `;
+
+
+export const UPDATE_ACCOUNT = gql`
+mutation UpdateAccount(
+  $id: uuid!,
+  $lastname: String!,
+  $name: String!) {
+  update_account_by_pk(pk_columns: {id: $id}, _set: {lastname: $lastname, name: $name}){
+    id
+  }
+}`;

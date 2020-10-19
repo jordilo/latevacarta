@@ -20,6 +20,8 @@ import { CategoryCreationComponent } from './views/category-creation/category-cr
 import { ProductListComponent } from './views/product-list/product-list.component';
 import { ProductCreationComponent } from './views/product-creation/product-creation.component';
 import { ProductEditionComponent } from './views/product-edition/product-edition.component';
+import { AccountEditionComponent } from './views/account-edition/account-edition.component';
+import { AccountIsolationComponent } from './views/account-isolation/account-isolation.component';
 
 
 const routes: Routes = [
@@ -109,10 +111,20 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'profile',
-    component: ProfileComponent,
+    path: 'account',
+    component: AccountIsolationComponent,
     canActivate: [
       AuthGuard
+    ],
+    children: [
+      {
+        path: '',
+        component: ProfileComponent
+      },
+      {
+        path: 'edit',
+        component: AccountEditionComponent
+      }
     ]
   },
   {

@@ -1,0 +1,6 @@
+<app-account-form *ngIf="account$ | async as account ; else loading"
+                  [account]="account"
+                  (submitForm)="saveAccount($event)"></app-account-form>
+<ng-template #loading>
+    <app-loader></app-loader>
+</ng-template>

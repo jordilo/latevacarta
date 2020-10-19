@@ -2,7 +2,7 @@ import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
-import { GET_ACCOUNT_QUERY } from './account.queries';
+import { GET_ACCOUNT_QUERY, UPDATE_ACCOUNT } from './account.queries';
 import { IAccount } from './account';
 
 @Injectable({
@@ -17,4 +17,16 @@ export class AccountService {
       query: GET_ACCOUNT_QUERY,
     }).valueChanges.pipe(map((response) => response.data.account[0]));
   }
+
+  public updateAccount(account: IAccount) {
+    return this.apollo.mutate({
+      mutation: UPDATE_ACCOUNT,
+      variables: {
+        id: account.id,
+        name: account.name,
+        lastname: account.lastname
+      }
+    });
+  }
+
 }
