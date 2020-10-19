@@ -7,7 +7,7 @@
         <th>Delete</th>
     </tr>
     <tr *ngFor="let category of categories">
-        <td colspan="2"><a [routerLink]="[category.id]">{{category.name}}</a></td>
+        <td colspan="2">{{category.name}}</td>
         <td><a [routerLink]="[category.id, 'edit']">Edit</a></td>
         <td><a routerLink="."
                (click)="removeCategory(category.id)">Delete</a></td>

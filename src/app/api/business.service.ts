@@ -25,6 +25,7 @@ export class BusinessService {
     }).pipe(map((response) => response.data.business_by_pk));
   }
   public create(business: IBusiness): Observable<any> {
+    delete business.address.id;
     const businnesGQL = {
       name: business.name,
       type: business.type,
