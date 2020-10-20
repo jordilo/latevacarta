@@ -1,6 +1,7 @@
 import * as jsonPackage from './../../package.json';
 const domain = 'jordi-lopez.eu.auth0.com';
-
+const hostname = window.location.hostname;
+const protocol = window.location.protocol;
 export const environment = {
   production: true,
   appName: 'La teva carta ',
@@ -8,8 +9,8 @@ export const environment = {
   auth: {
     clientID: 'WhSzGqyXoczFWt1GOXaTbV7kevavhfIh',
     domain,
-    redirectUri: 'https://admin.latevacarta.click/callback',
-    returnTo: 'https://admin.latevacarta.click',
+    redirectUri: `${protocol}://${hostname}/callback`,
+    returnTo: `${protocol}://${hostname}`,
     scope: 'openid profile email',
     audience: `https://${domain}/userinfo`,
     responseType: 'token id_token',
