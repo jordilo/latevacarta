@@ -23,7 +23,7 @@ export class BusinessQrComponent implements OnInit {
   public ngOnInit(): void {
     // TODO fins the way to extract params from parent
     this.url$ = this.activatedRouter.parent.params.pipe(map(({ businessId }) => {
-      const url = `${window.location.protocol}://${this.hostname}/${businessId}`;
+      const url = `${window.location.protocol}//${this.hostname}/${businessId}`;
       return url;
     }));
   }
