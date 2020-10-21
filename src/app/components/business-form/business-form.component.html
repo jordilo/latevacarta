@@ -56,4 +56,17 @@
              formControlName="state" />
     </div>
   </div>
+  <div formGroupName="options">
+    <div class="form-group">
+      <label>Font</label>
+      <select class="form-control"
+              formControlName="font">
+        <optgroup *ngFor="let group of fonts"
+                  [label]="group.group">
+          <option *ngFor="let font of group.fonts"
+                  [value]="font">{{font}}</option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
 </form>

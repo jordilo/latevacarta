@@ -33,6 +33,11 @@ query GetBusinessById ($id: uuid!) {
       postal_code
       state
     }
+    business_meta{
+      id
+      name
+      value
+    }
     name
     slug
     type
@@ -63,4 +68,14 @@ mutation EditAddress($id: uuid!) {
     delete_business_by_pk(id: $id) {
         id
     }
+}`;
+
+export const REMOVE_METADATA = gql`
+mutation MyMutation($businessId: uuid, $metadata: [business_meta_insert_input!]!) {
+  delete_business_meta(where: {business_id: {_eq: $businessId}}) {
+    affected_rows
+  }
+  insert_business_meta(objects: $metadata){
+    affected_rows
+  }
 }`;

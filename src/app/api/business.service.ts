@@ -1,10 +1,17 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { IBusiness } from './business';
+import { IBusiness, IBusinesMeta } from './business';
 import { Observable } from 'rxjs';
 import { ACCOUNT_ID_KEY } from '../constants';
-import { BUSINESS_FULL_QUERY, BUSINESS_ID_QUERY, INSERT_BUSINESS, EDIT_BUSINESS, DELETE_BUSINESS } from './business.queries';
+import {
+  BUSINESS_FULL_QUERY,
+  BUSINESS_ID_QUERY,
+  INSERT_BUSINESS,
+  EDIT_BUSINESS,
+  DELETE_BUSINESS,
+  REMOVE_METADATA
+} from './business.queries';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +37,7 @@ export class BusinessService {
       name: business.name,
       type: business.type,
       account_id: localStorage.getItem(ACCOUNT_ID_KEY),
+      business_meta: { data: business.business_meta },
       address: {
         data: business.address
       }
@@ -50,6 +58,18 @@ export class BusinessService {
         id: business.id,
         name: business.name,
         type: business.type
+      }
+    });
+  }
+
+  public setMetadata(metadata: IBusinesMeta[], businessId: string) {
+
+    metadata.forEach((m) => m.business_id = businessId);
+    return this.apollo.mutate<any>({
+      mutation: REMOVE_METADATA,
+      variables: {
+        metadata,
+        businessId
       }
     });
   }

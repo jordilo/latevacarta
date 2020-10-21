@@ -26,11 +26,11 @@ export class AccountFormComponent implements OnInit {
       id: [this.account?.id],
       name: [this.account?.name, Validators.required],
       lastname: [this.account?.lastname, Validators.required]
-    });
-  }
+  });
+}
 
 
   public sendForm() {
-    this.submitForm.emit(this.accountForm.value);
-  }
+  this.submitForm.emit(this.accountForm.value);
+}
 }

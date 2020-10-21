@@ -29,6 +29,7 @@ export class BusinessEditionComponent implements OnInit {
   public editBusiness(business: IBusiness) {
     forkJoin([
       this.businessService.edit(business),
+      this.businessService.setMetadata(business.business_meta, business.id),
       this.addressService.updateAddress(business.address)
     ]
     ).subscribe(() => this.router.navigate(['/business']));
