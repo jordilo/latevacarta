@@ -12,6 +12,19 @@
       </ng-template>
     </div>
   </div>
+  <div class="card col-md-4 mt-3"
+       *ngIf="isAdmin">
+    <div class="card-body">
+      <h5 class="card-title">Account</h5>
+      <div *ngIf="accounts$ | async as account ; else loadingProfile">
+        <p class="card-text">Hello <b>{{account.length}}</b></p>
+        <a routerLink="account-list">Go </a>
+      </div>
+      <ng-template #loadingProfile>
+        <app-loader></app-loader>
+      </ng-template>
+    </div>
+  </div>
 
   <div class="card col-md-4 mt-3">
     <div class="card-body">

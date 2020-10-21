@@ -33,6 +33,7 @@ import { ProductCreationComponent } from './views/product-creation/product-creat
 import { AccountIsolationComponent } from './views/account-isolation/account-isolation.component';
 import { AccountEditionComponent } from './views/account-edition/account-edition.component';
 import { BusinessQrComponent } from './views/business-qr/business-qr.component';
+import { AccountListComponent } from './views/account-list/account-list.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { BusinessQrComponent } from './views/business-qr/business-qr.component';
     ProductCreationComponent,
     AccountIsolationComponent,
     AccountEditionComponent,
-    BusinessQrComponent
+    BusinessQrComponent,
+    AccountListComponent
   ],
   imports: [
     AuthModule.forRoot(environment.auth),

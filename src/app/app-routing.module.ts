@@ -1,3 +1,4 @@
+import { AccountListComponent } from './views/account-list/account-list.component';
 import { BusinessEditionComponent } from './views/business-edition/business-edition.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -113,6 +114,13 @@ const routes: Routes = [
           }
         ]
       },
+    ]
+  },
+  {
+    path: 'account-list',
+    component: AccountListComponent,
+    canActivate: [
+      AuthGuard
     ]
   },
   {

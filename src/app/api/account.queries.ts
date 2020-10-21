@@ -15,6 +15,21 @@ query GetAccount($userId: String!) {
   }
 }
 `;
+export const GET_ACCOUNTS_QUERY = gql`
+query GetAccounts {
+  account{
+    birthday
+    creation
+    email
+    id
+    lastname
+    last_seen
+    thumbnail
+    username
+    name
+  }
+}
+`;
 
 
 export const UPDATE_ACCOUNT = gql`

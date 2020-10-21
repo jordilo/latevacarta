@@ -14,6 +14,8 @@ export class MainComponent implements OnInit {
 
   public business$: Observable<IBusiness[]>;
   public account$: Observable<IAccount>;
+  public accounts$: Observable<IAccount[]>;
+
   constructor(
     private accountService: AccountService,
     private businessService: BusinessService) {
@@ -22,5 +24,10 @@ export class MainComponent implements OnInit {
   public ngOnInit() {
     this.business$ = this.businessService.getAll();
     this.account$ = this.accountService.getAccount();
+    this.accounts$ = this.accountService.getAccounts();
+  }
+
+  public get isAdmin() {
+    return this.accountService.isAdmin;
   }
 }

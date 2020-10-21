@@ -1,0 +1,8 @@
+<div *ngIf="accounts$ | async as accounts; else loading">
+  <div *ngFor="let account of accounts">
+    {{account.name}}
+  </div>
+</div>
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

@@ -128,7 +128,6 @@ export class AuthService {
   }
 
   private setSession(authResult, profile) {
-    console.log(authResult, profile);
     // Save authentication data and update login status subject
     this.expiresAt = authResult.expiresIn * 1000 + Date.now();
     localStorage.setItem(EXPIRES_AT_KEY, this.expiresAt.toString());
