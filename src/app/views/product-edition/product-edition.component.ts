@@ -20,10 +20,10 @@ export class ProductEditionComponent implements OnInit {
     this.editionData$ =
       this.activeRouter.params
         .pipe(
-          mergeMap(({ productId }) =>
+          mergeMap(({ businessId, productId }) =>
             combineLatest([
               this.catalogService.getProductById(productId),
-              this.catalogService.getCategories()
+              this.catalogService.getCategories(businessId)
             ])
           )
         );

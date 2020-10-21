@@ -1,7 +1,9 @@
+import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { CatalogService } from '../../api/catalog.service';
 import { ICategory } from 'src/app/api/catalog';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-category-list',
@@ -12,10 +14,12 @@ export class CategoryListComponent implements OnInit {
 
   public categories$: Observable<ICategory[]>;
 
-  constructor(private catalogService: CatalogService) { }
+  constructor(private router: ActivatedRoute, private catalogService: CatalogService) { }
 
   public ngOnInit(): void {
-    this.categories$ = this.catalogService.getCategories();
+    this.categories$ = this.router.params
+    .pipe(switchMap(({ businessId }) => this.catalogService.getCategories(businessId)));
+
   }
   public removeCategory(categoryId: string) {
     const areYoure = confirm('Are your sure ?');

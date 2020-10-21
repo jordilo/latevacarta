@@ -1,7 +1,7 @@
 import { AccountListComponent } from './views/account-list/account-list.component';
 import { BusinessEditionComponent } from './views/business-edition/business-edition.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { BusinessCreationComponent } from './views/business-creation/business-creation.component';
 import { BusinessDetailComponent } from './views/business-detail/business-detail.component';
@@ -145,9 +145,11 @@ const routes: Routes = [
     component: NotFoundComponent
   }
 ];
-
+export const routingConfiguration: ExtraOptions = {
+  paramsInheritanceStrategy: 'always'
+};
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, routingConfiguration)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

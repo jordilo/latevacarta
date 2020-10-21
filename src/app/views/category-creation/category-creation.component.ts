@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ICategory } from '../../api/catalog';
 import { CatalogService } from '../../api/catalog.service';
 import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-category-creation',
@@ -17,7 +18,8 @@ export class CategoryCreationComponent implements OnInit {
 
   public ngOnInit(): void {
     this.defaultCategory = {} as ICategory;
-    this.categories$ = this.catalogService.getCategories();
+    this.categories$ = this.activeRouter.params
+      .pipe(switchMap(({ businessId }) => this.catalogService.getCategories(businessId)));
   }
 
   public saveCategory(category: ICategory) {

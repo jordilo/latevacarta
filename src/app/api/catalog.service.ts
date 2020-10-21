@@ -29,9 +29,12 @@ export class CatalogService {
     }).valueChanges.pipe(map(({ data }) => data.category));
   }
 
-  public getCategories() {
+  public getCategories(businessId: string) {
     return this.apollo.watchQuery<{ category: ICategory[] }>({
-      query: GET_ALL_CATEGORIES
+      query: GET_ALL_CATEGORIES,
+      variables: {
+        businessId
+      }
     }).valueChanges.pipe(map(({ data }) => data.category));
   }
   public getCategoryById(categoryId: string) {
@@ -73,9 +76,12 @@ export class CatalogService {
     });
   }
 
-  public getProducts() {
+  public getProducts(businessId: string) {
     return this.apollo.watchQuery<{ product: IProduct[] }>({
-      query: GET_ALL_PRODUCTS
+      query: GET_ALL_PRODUCTS,
+      variables: {
+        businessId
+      }
     }).valueChanges.pipe(map(({ data }) => data.product));
   }
   public getProductById(productId: string) {

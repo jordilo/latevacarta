@@ -2,6 +2,8 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { CatalogService } from '../../api/catalog.service';
 import { IProduct } from 'src/app/api/catalog';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-list',
@@ -12,10 +14,11 @@ export class ProductListComponent implements OnInit {
 
   public products$: Observable<IProduct[]>;
 
-  constructor(private catalogService: CatalogService) { }
+  constructor(private catalogService: CatalogService, private router: ActivatedRoute) { }
 
   public ngOnInit(): void {
-    this.products$ = this.catalogService.getProducts();
+    this.products$ = this.router.params
+      .pipe(switchMap(({ businessId }) => this.catalogService.getProducts(businessId)));
   }
 
   public removeProduct(productId: string) {

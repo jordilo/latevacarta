@@ -2,8 +2,8 @@ import { gql } from 'apollo-angular';
 
 //#region Categories
 export const GET_ALL_CATEGORIES = gql`
-query GetAllCategories {
-  category {
+query GetAllCategories($businessId: uuid!) {
+  category(where: {business_id: { _eq : $businessId}}){
     id
     name
     parent_id
@@ -45,8 +45,8 @@ mutation RemoveCategory($id: uuid!) {
 //#region Products
 
 export const GET_ALL_PRODUCTS = gql`
-query GetProducts {
-  product {
+query GetProducts($businessId : uuid!) {
+  product(where: {category: {business_id: {_eq: $businessId}}}) {
     category {
       id
       name
