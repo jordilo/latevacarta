@@ -14,6 +14,7 @@ import { AuthPasswordResetComponent } from './auth.password-reset.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthRoutes } from './auth.routes';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AdminGuard } from './admin.guard';
 
 
 const routes: Routes = [
@@ -45,7 +46,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  providers: [AuthService, AuthGuard, NotAuthGuard],
+  providers: [AuthService, AuthGuard, NotAuthGuard, AdminGuard],
   declarations: [CallbackComponent, AuthSigninComponent, AuthSignupComponent, AuthPasswordResetComponent],
   imports: [CommonModule, ReactiveFormsModule, CommonModule, RouterModule.forRoot(routes)],
 })

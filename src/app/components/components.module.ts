@@ -6,15 +6,30 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CategoryFormComponent } from './category-form/category-form.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { AccountFormComponent } from './account-form/account-form.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
-  exports: [LoaderComponent, BusinessFormComponent, CategoryFormComponent, ProductFormComponent, AccountFormComponent],
-  declarations: [LoaderComponent, BusinessFormComponent, CategoryFormComponent, ProductFormComponent, AccountFormComponent],
+  exports: [
+    LoaderComponent,
+    BusinessFormComponent,
+    CategoryFormComponent,
+    ProductFormComponent,
+    AccountFormComponent,
+    SidebarComponent],
+  declarations: [
+    LoaderComponent,
+    BusinessFormComponent,
+    CategoryFormComponent,
+    ProductFormComponent,
+    AccountFormComponent,
+    SidebarComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class ComponentsModule { }

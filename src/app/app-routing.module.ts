@@ -3,6 +3,7 @@ import { BusinessEditionComponent } from './views/business-edition/business-edit
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { AdminGuard } from 'src/auth/admin.guard';
 import { BusinessCreationComponent } from './views/business-creation/business-creation.component';
 import { BusinessDetailComponent } from './views/business-detail/business-detail.component';
 import { BusinessComponent } from './views/business/business.component';
@@ -24,7 +25,7 @@ import { ProductEditionComponent } from './views/product-edition/product-edition
 import { AccountEditionComponent } from './views/account-edition/account-edition.component';
 import { AccountIsolationComponent } from './views/account-isolation/account-isolation.component';
 import { BusinessQrComponent } from './views/business-qr/business-qr.component';
-
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,11 @@ const routes: Routes = [
     canActivate: [
       AuthGuard
     ]
+  },
+  {
+    path: '',
+    outlet: 'sidebar',
+    component: SidebarComponent
   },
   {
     path: 'business',
@@ -120,7 +126,7 @@ const routes: Routes = [
     path: 'account-list',
     component: AccountListComponent,
     canActivate: [
-      AuthGuard
+      AdminGuard
     ]
   },
   {

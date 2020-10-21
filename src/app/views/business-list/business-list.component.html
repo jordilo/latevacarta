@@ -16,7 +16,7 @@
         <td><a [routerLink]="[business.id,'catalog']">See</a></td>
         <td><a [routerLink]="[business.id, 'edit']">Edit</a></td>
         <td><a (click)="removeBusiness(business.id)"
-               href="#">Delete</a></td>
+               routerLink=".">Delete</a></td>
     </tr>
     <tr *ngIf="!businesses.length">
         <td>There are any business <a [routerLink]="['create']">create your first one</a></td>

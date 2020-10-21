@@ -20,6 +20,11 @@ export class AuthService {
   public get user(): AuthUser {
     return this.userProfile;
   }
+  public get isAdmin(): boolean {
+    return this.userProfile &&
+      this.userProfile['https://hasura.io/jwt/claims'] &&
+      this.userProfile['https://hasura.io/jwt/claims']['x-hasura-default-role'] === 'admin' ? true : false;
+  }
 
   public get user$(): Observable<AuthUser> {
     return this.onUserLoginSubject.pipe(share());

@@ -12,7 +12,14 @@ footer {
   text-align: center;
   height: $footerHeight;
 }
-section {
+.main-container {
   padding-top: 80px;
   min-height: calc(100% - #{$footerHeight});
+  // display: flex;
+  nav {
+    flex: 0 0 250px;
+  }
+  section {
+    flex: 1;
+  }
 }

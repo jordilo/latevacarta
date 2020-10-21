@@ -14,9 +14,7 @@ export class AccountService {
   constructor(private apollo: Apollo, private auth: AuthService) { }
 
   public get isAdmin() {
-    return this.auth.user &&
-      this.auth.user['https://hasura.io/jwt/claims'] &&
-      this.auth.user['https://hasura.io/jwt/claims']['x-hasura-default-role'] === 'admin' ? true : false;
+    return this.auth.isAdmin;
   }
   public getAccount(): Observable<IAccount> {
     return this.apollo.watchQuery<{ account: IAccount[] }>({
