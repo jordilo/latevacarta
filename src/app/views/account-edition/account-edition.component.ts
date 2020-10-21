@@ -18,7 +18,6 @@ export class AccountEditionComponent implements OnInit {
   }
 
   public saveAccount(account: IAccount) {
-    account.birthday = new Date(account.birthday).toISOString();
     this.accountService.updateAccount(account).subscribe();
   }
 
