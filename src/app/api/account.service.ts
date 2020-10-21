@@ -15,6 +15,9 @@ export class AccountService {
   public getAccount(): Observable<IAccount> {
     return this.apollo.watchQuery<{ account: IAccount[] }>({
       query: GET_ACCOUNT_QUERY,
+      variables: {
+        userId: localStorage.getItem('user_id')
+      }
     }).valueChanges.pipe(map((response) => response.data.account[0]));
   }
 

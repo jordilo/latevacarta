@@ -1,8 +1,8 @@
 import { gql } from 'apollo-angular';
 
 export const GET_ACCOUNT_QUERY = gql`
-query GetAccount {
-  account {
+query GetAccount($userId: String!) {
+  account(where: {auth0_id: {_eq: $userId}}){
     birthday
     creation
     email

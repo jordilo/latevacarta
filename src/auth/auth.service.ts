@@ -11,6 +11,7 @@ import { share, take } from 'rxjs/operators';
 const EXPIRES_AT_KEY = 'expiresAt';
 const TOKEN_KEY = 'accessToken';
 const TOKEN_ID = 'token';
+const USER_ID = 'user_id';
 
 @Injectable()
 export class AuthService {
@@ -127,11 +128,13 @@ export class AuthService {
   }
 
   private setSession(authResult, profile) {
+    console.log(authResult, profile);
     // Save authentication data and update login status subject
     this.expiresAt = authResult.expiresIn * 1000 + Date.now();
     localStorage.setItem(EXPIRES_AT_KEY, this.expiresAt.toString());
     localStorage.setItem(TOKEN_KEY, authResult.accessToken);
     localStorage.setItem(TOKEN_ID, authResult.idToken);
+    localStorage.setItem(USER_ID, profile.sub);
     this.accessToken = authResult.accessToken;
     this.userProfile = profile;
     this.authenticated = true;
@@ -143,6 +146,7 @@ export class AuthService {
     localStorage.removeItem(EXPIRES_AT_KEY);
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(TOKEN_ID);
+    localStorage.removeItem(USER_ID);
     // Log out of Auth0 session
     // Ensure that returnTo URL is specified in Auth0
     // Application settings for Allowed Logout URLs
