@@ -20,6 +20,13 @@
                   class="btn btn-outline-light btn-sm"
                   (click)="login()">Login</button></a>
       </li>
+      <li class="nav-item"
+          *ngIf="isLoggedUserInError">
+        <a class="nav-link">
+          <button type="button"
+                  class="btn btn-outline-light btn-sm"
+                  (click)="login()">Logout</button></a>
+      </li>
       <li class="nav-item dropdown"
           *ngIf="isUserLogged && user">
         <a class="nav-link dropdown-toggle"

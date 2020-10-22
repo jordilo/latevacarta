@@ -4,9 +4,9 @@
             (logoutHandler)="logoutHandler()"
             (loginHandler)="loginHandler()"></app-header>
 <div class="main-container d-flex">
-    <nav class="sidebar">
-        <router-outlet *ngIf="isUserLogged"
-                       name="sidebar"></router-outlet>
+    <nav class="sidebar"
+         *ngIf="isUserLogged">
+        <router-outlet name="sidebar"></router-outlet>
     </nav>
     <section class="container-fluid">
         <router-outlet class="row"> </router-outlet>

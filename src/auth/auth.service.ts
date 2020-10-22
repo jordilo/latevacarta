@@ -8,10 +8,10 @@ import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { share, take } from 'rxjs/operators';
 
 (window as any).global = window;
-const EXPIRES_AT_KEY = 'expiresAt';
-const TOKEN_KEY = 'accessToken';
-const TOKEN_ID = 'token';
-const USER_ID = 'user_id';
+export const EXPIRES_AT_KEY = 'expiresAt';
+export const TOKEN_KEY = 'accessToken';
+export const TOKEN_ID = 'token';
+export const USER_ID = 'user_id';
 
 @Injectable()
 export class AuthService {

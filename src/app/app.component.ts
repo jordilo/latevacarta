@@ -26,7 +26,9 @@ export class AppComponent {
   constructor(private auth: AuthService, private accountService: AccountService) {
     this.user$ =
       this.auth.user$.pipe(
-        filter((user) => user !== null),
+        tap(console.warn),
+        filter((user) => user !== null || Boolean(localStorage.getItem(ACCOUNT_ID_KEY))),
+        tap(console.log),
         switchMap(() => this.accountService.getAccount()),
         tap((userFromDb) => localStorage.setItem(ACCOUNT_ID_KEY, userFromDb.id))
       );
