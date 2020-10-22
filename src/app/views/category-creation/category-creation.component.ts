@@ -24,7 +24,7 @@ export class CategoryCreationComponent implements OnInit {
 
   public saveCategory(category: ICategory) {
     // TODO investigation to get unknown parent parameter
-    const businessId = (this.activeRouter.parent.parent.parent.params as any).value.businessId;
+    const businessId = (this.activeRouter.params as any).value.businessId;
     category.business_id = businessId;
     this.catalogService.insertCategory(category).subscribe();
   }

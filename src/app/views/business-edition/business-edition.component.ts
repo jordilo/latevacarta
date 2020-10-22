@@ -22,7 +22,7 @@ export class BusinessEditionComponent implements OnInit {
 
   public ngOnInit(): void {
     // TODO fins the way to extract params from parent
-    this.business$ = this.activeRouter.parent.params
+    this.business$ = this.activeRouter.params
       .pipe(switchMap(({ businessId }) => this.businessService.getById(businessId)));
   }
 
