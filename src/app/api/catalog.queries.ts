@@ -114,31 +114,37 @@ mutation RemoveProduct($id: uuid!) {
 //#region Catalog
 export const GET_CATALOG = gql`
 query GetCatalogByBusiness($businessId: uuid!) {
-  category(where: {parent_category : {_is_null:true},business_id: { _eq : $businessId}}){
-    ...categoryModel
+    category(where: {parent_category : {_is_null:true},business_id: { _eq : $businessId}}){
+      ...categoryModel
+      categories{
+         ...subCategories
+      }
     }
-}
-fragment categoryModel on category {
-  id
-  name
-  categories{
+  }
+  fragment categoryModel on category {
     id
-  	name
+    name
     products {
-      id
-      name
-      description
-      price
-  	}
+        id
+        name
+        description
+        price
+    }
   }
-  products {
-      id
-      name
-      description
-      price
-  }
-}
 
+  fragment subCategories on category{
+    id
+      name
+      products {
+        id
+        name
+        description
+        price
+      }
+    categories{
+      ...categoryModel
+    }
+  }
 `;
 
 //#endregion
