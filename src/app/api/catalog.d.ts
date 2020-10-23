@@ -15,5 +15,6 @@ export interface IProduct {
     id: string;
     is_active: boolean;
     name: string;
+    business_id: string;
     price: number;
 }

@@ -34,7 +34,7 @@ export class CatalogService {
       query: GET_ALL_CATEGORIES,
       variables: {
         businessId
-      }
+      },
     }).valueChanges.pipe(map(({ data }) => data.category));
   }
   public getCategoryById(categoryId: string) {
@@ -48,31 +48,73 @@ export class CatalogService {
 
   public insertCategory(category: ICategory) {
     delete category.id;
+    console.log(category);
     return this.apollo.mutate<ICategory>({
       mutation: INSERT_CATEGORY,
       variables: {
         category
-      }
+      },
+      refetchQueries: [
+        {
+          query: GET_ALL_CATEGORIES,
+          variables: { businessId: category.business_id }
+        },
+        {
+          query: GET_CATALOG,
+          variables: {
+            businessId: category.business_id
+          }
+        }
+      ]
     });
   }
 
-  public editCategory(category: ICategory) {
+  public editCategory(category: ICategory, businessId: string) {
     return this.apollo.mutate({
       mutation: UPDATE_CATEGORY,
       variables: {
         id: category.id,
         name: category.name,
         parent_category: category.parent_category
-      }
+      },
+      refetchQueries: [
+        {
+          query: GET_CATEGORY,
+          variables: { categoryId: category.id }
+        },
+        {
+          query: GET_ALL_CATEGORIES,
+          variables: { businessId: category.business_id || businessId }
+        },
+        {
+          query: GET_CATALOG,
+          variables: {
+            businessId
+          }
+        }
+      ]
     }).pipe(take(1));
   }
 
-  public removeCategory(categoryId: string) {
+  public removeCategory(categoryId: string, businessId: string) {
     return this.apollo.mutate({
       mutation: REMOVE_CATEGORY,
       variables: {
         id: categoryId
-      }
+      },
+      awaitRefetchQueries: true,
+      refetchQueries: [
+        {
+          query: GET_ALL_CATEGORIES,
+          variables: { businessId },
+        },
+        {
+          query: GET_CATALOG,
+          variables: {
+            businessId
+          }
+        }
+      ]
     });
   }
 
@@ -100,7 +142,19 @@ export class CatalogService {
       mutation: INSERT_PRODUCT,
       variables: {
         product
-      }
+      },
+      refetchQueries: [{
+        query: GET_ALL_PRODUCTS,
+        variables: {
+          businessId: product.business_id
+        }
+      },
+      {
+        query: GET_CATALOG,
+        variables: {
+          businessId: product.business_id
+        }
+      }]
     });
   }
   public editProduct(product: IProduct) {
@@ -114,16 +168,48 @@ export class CatalogService {
         name: product.name,
         feature_image: product.feature_image,
         price: product.price
-      }
+      },
+      refetchQueries: [
+        {
+          query: GET_ALL_PRODUCTS,
+          variables: {
+            businessId: product.business_id
+          }
+        },
+        {
+          query: GET_PRODUCT_BY_ID,
+          variables: {
+            id: product.id
+          }
+        },
+        {
+          query: GET_CATALOG,
+          variables: {
+            businessId: product.business_id
+          }
+        }]
     });
   }
 
-  public removeProduct(productId: string) {
+  public removeProduct(productId: string, businessId: string) {
     return this.apollo.mutate<IProduct>({
       mutation: REMOVE_PRODUCT,
       variables: {
         id: productId
-      }
+      },
+      refetchQueries: [
+        {
+          query: GET_ALL_PRODUCTS,
+          variables: {
+            businessId
+          }
+        },
+        {
+          query: GET_CATALOG,
+          variables: {
+            businessId
+          }
+        }]
     });
   }
 }

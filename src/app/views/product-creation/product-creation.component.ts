@@ -3,7 +3,7 @@ import { IProduct, ICategory } from '../../api/catalog';
 import { CatalogService } from 'src/app/api/catalog.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-creation',
@@ -21,7 +21,9 @@ export class ProductCreationComponent implements OnInit {
 
   public ngOnInit(): void {
     this.categories$ = this.activeRouter.params
-      .pipe(switchMap(({ businessId }) => this.catalogService.getCategories(businessId)));
+      .pipe(
+        tap(({ businessId }) => this.defaultProduct = { business_id: businessId } as IProduct),
+        switchMap(({ businessId }) => this.catalogService.getCategories(businessId)));
   }
 
   public saveProduct(category: IProduct) {

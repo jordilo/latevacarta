@@ -10,7 +10,7 @@
         <td colspan="2">{{category.name}}</td>
         <td><a [routerLink]="[category.id, 'edit']">Edit</a></td>
         <td><a routerLink="."
-               (click)="removeCategory(category.id)">Delete</a></td>
+               (click)="removeCategory(category.id, category.business_id)">Delete</a></td>
     </tr>
     <tr *ngIf="!categories.length">
         <td>There are any category <a [routerLink]="['create']">create your first one</a></td>

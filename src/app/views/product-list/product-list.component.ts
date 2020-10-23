@@ -21,10 +21,10 @@ export class ProductListComponent implements OnInit {
       .pipe(switchMap(({ businessId }) => this.catalogService.getProducts(businessId)));
   }
 
-  public removeProduct(productId: string) {
+  public removeProduct(productId: string, businessId: string) {
     const areYourSure = confirm('Are you sure');
     if (areYourSure) {
-      this.catalogService.removeProduct(productId).subscribe();
+      this.catalogService.removeProduct(productId, businessId).subscribe();
     }
   }
 

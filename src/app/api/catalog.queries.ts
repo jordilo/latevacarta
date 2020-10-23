@@ -7,6 +7,7 @@ query GetAllCategories($businessId: uuid!) {
     id
     name
     parent_category
+    business_id
   }
 }`;
 
@@ -16,6 +17,7 @@ query GetCategory($categoryId:uuid!) {
     id
     name
     parent_category
+    business_id
   }
 }`;
 
@@ -51,6 +53,7 @@ query GetProducts($businessId : uuid!) {
       id
       name
     }
+    business_id
     description
     id
     name
@@ -64,6 +67,7 @@ query GetProductById($id:uuid!) {
       id
       name
     }
+    business_id
     category_id
     description
     id

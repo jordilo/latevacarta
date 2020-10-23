@@ -26,7 +26,8 @@ export class ProductFormComponent implements OnInit {
       category_id: [this.product?.category_id, Validators.required],
       is_active: [this.product?.is_active || true],
       feature_image: [this.product?.feature_image, ''],
-      price: [this.product?.price]
+      price: [this.product?.price],
+      business_id: [this.product?.business_id],
     });
   }
 

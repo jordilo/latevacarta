@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ICategory } from 'src/app/api/catalog';
 import { CatalogService } from 'src/app/api/catalog.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable, combineLatest, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 @Component({
@@ -12,7 +12,7 @@ import { mergeMap } from 'rxjs/operators';
 })
 export class CategoryEditionComponent implements OnInit {
 
-  public editionData$: Observable<[ICategory, ICategory[]]>;
+  public editionData$: Observable<[ICategory, ICategory[], string]>;
 
   constructor(
     private catalogService: CatalogService,
@@ -26,15 +26,17 @@ export class CategoryEditionComponent implements OnInit {
           mergeMap(({ businessId, categoryId }) =>
             combineLatest([
               this.catalogService.getCategoryById(categoryId),
-              this.catalogService.getCategories(businessId)
+              this.catalogService.getCategories(businessId),
+              of(businessId)
             ])
           )
         );
 
   }
 
-  public saveCategory(category: ICategory) {
-    this.catalogService.editCategory(category)
+  public saveCategory(category: ICategory, businessId: string) {
+
+    this.catalogService.editCategory(category, businessId)
       .subscribe(() => this.router.navigate(['../..'], { relativeTo: this.activeRouter }));
   }
 

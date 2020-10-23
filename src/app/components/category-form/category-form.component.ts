@@ -23,7 +23,7 @@ export class CategoryFormComponent implements OnInit {
     this.categoryForm = this.fb.group({
       id: [this.category?.id],
       name: [this.category?.name, Validators.required],
-      parent_category: [this.category?.parent_category || '']
+      parent_category: [this.category?.parent_category]
     });
   }
 
