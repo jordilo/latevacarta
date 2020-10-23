@@ -37,7 +37,13 @@ export class AccountService {
         id: account.id,
         name: account.name,
         lastname: account.lastname
-      }
+      },
+      refetchQueries: [{
+        query: GET_ACCOUNT_QUERY,
+        variables: {
+          userId: localStorage.getItem('user_id')
+        }
+      }]
     });
   }
 

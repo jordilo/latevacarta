@@ -47,7 +47,10 @@ export class BusinessService {
       mutation: INSERT_BUSINESS,
       variables: {
         business: businnesGQL
-      }
+      },
+      refetchQueries: [
+        { query: BUSINESS_FULL_QUERY }
+      ]
     }).pipe(map(({ data }) => data.insert_business_one));
   }
 
@@ -58,7 +61,14 @@ export class BusinessService {
         id: business.id,
         name: business.name,
         type: business.type
-      }
+      },
+      refetchQueries: [
+        { query: BUSINESS_FULL_QUERY },
+        {
+          query: BUSINESS_ID_QUERY,
+          variables: { id: business.id }
+        }
+      ]
     });
   }
 
@@ -79,7 +89,10 @@ export class BusinessService {
       mutation: DELETE_BUSINESS,
       variables: {
         id: businessId
-      }
+      },
+      refetchQueries: [
+        { query: BUSINESS_FULL_QUERY }
+      ]
     });
   }
 }
