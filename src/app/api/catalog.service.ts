@@ -62,7 +62,7 @@ export class CatalogService {
       variables: {
         id: category.id,
         name: category.name,
-        parent_id: category.parent_id
+        parent_category: category.parent_category
       }
     }).pipe(take(1));
   }

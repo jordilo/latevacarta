@@ -6,7 +6,7 @@ query GetAllCategories($businessId: uuid!) {
   category(where: {business_id: { _eq : $businessId}}){
     id
     name
-    parent_id
+    parent_category
   }
 }`;
 
@@ -15,7 +15,7 @@ query GetCategory($categoryId:uuid!) {
   category_by_pk(id: $categoryId){
     id
     name
-    parent_id
+    parent_category
   }
 }`;
 
@@ -27,8 +27,8 @@ mutation InsertCategory($category : category_insert_input!) {
 }`;
 
 export const UPDATE_CATEGORY = gql`
-mutation UPDATE_CATEGORY($id: uuid!,$name: String!,$parent_id: String!) {
-  update_category_by_pk(pk_columns: {id: $id},_set: {name: $name,parent_id: $parent_id}) {
+mutation UPDATE_CATEGORY($id: uuid!,$name: String!,$parent_category: uuid!) {
+  update_category_by_pk(pk_columns: {id: $id},_set: {name: $name,parent_category: $parent_category}) {
     id
     name
   }
@@ -114,18 +114,31 @@ mutation RemoveProduct($id: uuid!) {
 //#region Catalog
 export const GET_CATALOG = gql`
 query GetCatalogByBusiness($businessId: uuid!) {
-    category(where: { business_id: { _eq: $businessId } }) {
-        id
-        name
-        products {
-            id
-            name
-            description
-            price
-            __typename
-        }
-        __typename
+  category(where: {parent_category : {_is_null:true},business_id: { _eq : $businessId}}){
+    ...categoryModel
     }
-} `;
+}
+fragment categoryModel on category {
+  id
+  name
+  categories{
+    id
+  	name
+    products {
+      id
+      name
+      description
+      price
+  	}
+  }
+  products {
+      id
+      name
+      description
+      price
+  }
+}
+
+`;
 
 //#endregion

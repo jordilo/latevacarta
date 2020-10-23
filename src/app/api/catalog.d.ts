@@ -1,9 +1,10 @@
 export interface ICategory {
     id: string;
-    parent_id: string;
+    parent_category: string;
     name: string;
     business_id: string;
     products: IProduct[];
+    categories: ICategory[];
 }
 
 export interface IProduct {

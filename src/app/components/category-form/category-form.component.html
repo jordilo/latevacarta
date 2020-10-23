@@ -16,7 +16,7 @@
          [hidden]="!categories || !categories.length">
         <label>Type</label>
         <select class="form-control"
-                formControlName="parent_id">
+                formControlName="parent_category">
             <option value="">No parent</option>
             <option *ngFor="let cat of categories"
                     [disabled]="cat.id === categoryForm.value.id"
