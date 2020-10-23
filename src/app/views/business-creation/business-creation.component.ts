@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { BusinessService } from '../../api/business.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,7 +12,10 @@ import { IAddress, IBusiness } from 'src/app/api/business';
 export class BusinessCreationComponent implements OnInit {
 
   public defaultBusiness: IBusiness;
-  constructor(private fb: FormBuilder, private businessService: BusinessService) { }
+  constructor(
+    private router: Router,
+    private activeRoute: ActivatedRoute,
+    private businessService: BusinessService) { }
 
   public ngOnInit(): void {
     this.defaultBusiness = {
@@ -26,7 +30,7 @@ export class BusinessCreationComponent implements OnInit {
 
   public sendForm(business: IBusiness) {
     this.businessService.create(business)
-      .subscribe();
+      .subscribe(({ id }) => this.router.navigate(['../', id], { relativeTo: this.activeRoute }));
   }
 
 }

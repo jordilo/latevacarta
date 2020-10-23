@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICategory, IProduct } from 'src/app/api/catalog';
 import { CatalogService } from 'src/app/api/catalog.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { mergeMap } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
 
@@ -14,7 +14,10 @@ export class ProductEditionComponent implements OnInit {
 
   public editionData$: Observable<[IProduct, ICategory[]]>;
 
-  constructor(private catalogService: CatalogService, private activeRouter: ActivatedRoute) { }
+  constructor(
+    private catalogService: CatalogService,
+    private router: Router,
+    private activeRouter: ActivatedRoute) { }
 
   public ngOnInit(): void {
     this.editionData$ =
@@ -31,7 +34,8 @@ export class ProductEditionComponent implements OnInit {
   }
 
   public saveProduct(product: IProduct) {
-    this.catalogService.editProduct(product).subscribe();
+    this.catalogService.editProduct(product)
+      .subscribe(() => this.router.navigate(['../../'], { relativeTo: this.activeRouter }));
   }
 
 }

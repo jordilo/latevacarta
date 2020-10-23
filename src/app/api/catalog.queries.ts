@@ -27,7 +27,7 @@ mutation InsertCategory($category : category_insert_input!) {
 }`;
 
 export const UPDATE_CATEGORY = gql`
-mutation UPDATE_CATEGORY($id: uuid!,$name: String!,$parent_category: uuid!) {
+mutation UPDATE_CATEGORY($id: uuid!,$name: String!,$parent_category: uuid) {
   update_category_by_pk(pk_columns: {id: $id},_set: {name: $name,parent_category: $parent_category}) {
     id
     name

@@ -48,7 +48,7 @@ export class BusinessService {
       variables: {
         business: businnesGQL
       }
-    });
+    }).pipe(map(({ data }) => data.insert_business_one));
   }
 
   public edit(business: IBusiness) {

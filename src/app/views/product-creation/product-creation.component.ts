@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct, ICategory } from '../../api/catalog';
 import { CatalogService } from 'src/app/api/catalog.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -14,14 +14,18 @@ export class ProductCreationComponent implements OnInit {
 
   public defaultProduct: IProduct;
   public categories$: Observable<ICategory[]>;
-  constructor(private catalogService: CatalogService, private router: ActivatedRoute) { }
+  constructor(
+    private catalogService: CatalogService,
+    private router: Router,
+    private activeRouter: ActivatedRoute) { }
 
   public ngOnInit(): void {
-    this.categories$ = this.router.params
+    this.categories$ = this.activeRouter.params
       .pipe(switchMap(({ businessId }) => this.catalogService.getCategories(businessId)));
   }
 
   public saveProduct(category: IProduct) {
-    this.catalogService.insertProduct(category).subscribe();
+    this.catalogService.insertProduct(category)
+      .subscribe(() => this.router.navigate(['../'], { relativeTo: this.activeRouter }));
   }
 }
