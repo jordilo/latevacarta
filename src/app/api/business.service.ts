@@ -21,9 +21,9 @@ export class BusinessService {
   constructor(private apollo: Apollo) { }
 
   public getAll(): Observable<IBusiness[]> {
-    return this.apollo.subscribe<{ business: IBusiness[] }>({
+    return this.apollo.watchQuery<{ business: IBusiness[] }>({
       query: BUSINESS_FULL_QUERY
-    }).pipe(map((response) => response.data.business));
+    }).valueChanges.pipe(map((response) => response.data.business));
   }
   public getById(id: string): Observable<IBusiness> {
     return this.apollo.subscribe<{ business_by_pk: IBusiness }>({
