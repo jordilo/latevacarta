@@ -8,6 +8,7 @@ import { ProductFormComponent } from './product-form/product-form.component';
 import { AccountFormComponent } from './account-form/account-form.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
+import { FilterLanguagesPipe } from './business-form/filter-languages.pipe';
 
 
 
@@ -25,7 +26,8 @@ import { RouterModule } from '@angular/router';
     CategoryFormComponent,
     ProductFormComponent,
     AccountFormComponent,
-    SidebarComponent],
+    SidebarComponent,
+    FilterLanguagesPipe],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -4,6 +4,10 @@ export const BUSINESS_FULL_QUERY = gql`
 query GetFullBusiness {
   business {
     id
+    default_lang
+    languages {
+      language
+    }
     address {
       address
       city
@@ -23,6 +27,11 @@ export const BUSINESS_ID_QUERY = gql`
 query GetBusinessById ($id: uuid!) {
   business_by_pk(id: $id){
     id
+    default_lang
+    languages {
+      __typename
+      language
+    }
     address {
       address
       city
@@ -56,10 +65,23 @@ mutation InsertBusiness($business : business_insert_input!) {
 }`;
 
 export const EDIT_BUSINESS = gql`
-mutation UpdateBusiness($id: uuid!, $name: String! ,$type: String!) {
-  update_business_by_pk(pk_columns: {id: $id}, _set: {name: $name , type: $type}) {
+mutation UpdateBusiness(
+  $id: uuid!,
+  $name: String!,
+  $type: String!,
+  $default_lang: language_enum!,
+  $languages: [business_languages_insert_input!]!
+  ) {
+  update_business_by_pk(pk_columns: {id: $id}, _set: {name: $name , type: $type, default_lang: $default_lang}) {
     id
   }
+  delete_business_languages(where: {business_id: {_eq: $id}}) {
+    affected_rows
+  }
+  insert_business_languages(objects : $languages){
+    affected_rows
+  }
+
 }`;
 
 

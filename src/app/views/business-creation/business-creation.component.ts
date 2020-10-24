@@ -1,8 +1,11 @@
+import { MetadataService } from './../../api/metadata.service';
+import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BusinessService } from '../../api/business.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IAddress, IBusiness } from 'src/app/api/business';
+import { ILanguage } from 'src/app/api/metadata';
 
 @Component({
   selector: 'app-business-creation',
@@ -11,13 +14,18 @@ import { IAddress, IBusiness } from 'src/app/api/business';
 })
 export class BusinessCreationComponent implements OnInit {
 
+  public languages$: Observable<ILanguage[]>;
   public defaultBusiness: IBusiness;
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private businessService: BusinessService) { }
+    private businessService: BusinessService,
+    private metadata: MetadataService
+  ) { }
 
   public ngOnInit(): void {
+
+    this.languages$ = this.metadata.getLanguages();
     this.defaultBusiness = {
       name: '',
       type: 'BAR',

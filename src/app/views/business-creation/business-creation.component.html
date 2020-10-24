@@ -1,2 +1,8 @@
-<app-business-form [business]="defaultBusiness"
-                   (submitForm)="sendForm($event)"></app-business-form>
+<div *ngIf="languages$ | async as languages; else  loading">
+  <app-business-form [business]="defaultBusiness"
+                     [languages]="languages"
+                     (submitForm)="sendForm($event)"></app-business-form>
+</div>
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

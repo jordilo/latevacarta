@@ -38,6 +38,10 @@ export class BusinessService {
       type: business.type,
       account_id: localStorage.getItem(ACCOUNT_ID_KEY),
       business_meta: { data: business.business_meta },
+      default_lang: business.default_lang,
+      languages: {
+        data: business.languages
+      },
       address: {
         data: business.address
       }
@@ -55,12 +59,16 @@ export class BusinessService {
   }
 
   public edit(business: IBusiness) {
+    const languages = business.languages.map(({ language }) => ({ language, business_id: business.id }));
+    console.log(languages);
     return this.apollo.mutate<IBusiness>({
       mutation: EDIT_BUSINESS,
       variables: {
         id: business.id,
         name: business.name,
-        type: business.type
+        type: business.type,
+        default_lang: business.default_lang,
+        languages
       },
       refetchQueries: [
         { query: BUSINESS_FULL_QUERY },

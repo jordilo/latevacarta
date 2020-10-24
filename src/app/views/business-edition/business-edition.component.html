@@ -1,6 +1,9 @@
-<app-business-form *ngIf="business$ | async as business ;else loading"
-                   (submitForm)="editBusiness($event)"
-                   [business]="business"></app-business-form>
+<div *ngIf="data$ | async as data ;else loading">
+
+  <app-business-form [languages]="data[1]"
+                     (submitForm)="editBusiness($event)"
+                     [business]="data[0]"></app-business-form>
+</div>
 <ng-template #loading>
   <app-loader></app-loader>
 </ng-template>

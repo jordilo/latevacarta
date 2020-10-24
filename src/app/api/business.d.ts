@@ -1,3 +1,4 @@
+import { ILanguage } from './metadata.d';
 export interface IBusiness {
   id: string;
   address: IAddress;
@@ -5,10 +6,15 @@ export interface IBusiness {
   slug: string;
   state: string;
   type: 'BAR' | 'PUB' | 'RES';
-  business_meta: IBusinesMeta[]
+  business_meta: IBusinesMeta[];
+  default_lang: string;
+  languages: IBusinessLanguage[];
 }
 
-
+export interface IBusinessLanguage {
+  business_id: string;
+  language: string;
+}
 export interface IBusinesMeta {
   id: string;
   name: 'font';

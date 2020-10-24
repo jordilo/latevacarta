@@ -1,7 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { map } from 'rxjs/operators';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { IBusiness } from 'src/app/api/business';
 import { BusinessService } from 'src/app/api/business.service';
+import { ILanguage } from 'src/app/api/metadata';
 import { IBusinesMeta } from '../../api/business';
 
 const fonts = [
@@ -30,31 +33,51 @@ const fonts = [
     ]
   }
 ];
-
+const defaultLang = 'ca_ES';
 @Component({
   selector: 'app-business-form',
   templateUrl: './business-form.component.html',
   styleUrls: ['./business-form.component.css']
 })
-export class BusinessFormComponent implements OnInit {
+export class BusinessFormComponent implements OnInit, OnDestroy {
 
   @Input() public business: IBusiness;
+  @Input() public languages: ILanguage[];
   @Output() public submitForm = new EventEmitter<IBusiness>();
 
 
   public busninessForm: FormGroup;
+  public languagesForm: FormArray;
   public fonts = fonts;
   public currentFont: IBusinesMeta;
+
+  public languagesSubscription: Subscription;
   constructor(private fb: FormBuilder, private businessService: BusinessService) { }
 
   public ngOnInit(): void {
 
     this.currentFont = this.business?.business_meta?.find((meta) => meta.name === 'font');
     const font = this.currentFont?.value || 'Arial, Helvetica, sans-serif';
+
+    const languages = this.business?.languages?.map(({ language }) => {
+      return this.languages.find((lang) => lang.code === language);
+
+    }) || [];
+    this.languagesForm = this.fb.array(languages);
+    this.languagesSubscription = this.languagesForm.valueChanges.subscribe((value: ILanguage[]) => {
+      if (value.length === 1 || !value.some(({ code }) => code === this.busninessForm.value.default_language)) {
+        this.setLanguageAsDefault(value[0].code);
+      }
+    });
+
+
     this.busninessForm = this.fb.group({
       id: [this.business.id],
       name: [this.business.name, Validators.required],
       type: [this.business.type, Validators.required],
+      default_lang: [this.business?.default_lang || defaultLang, Validators.required],
+      languages: this.languagesForm,
+      addLanguage: this.fb.group({ code: [null, Validators.required] }),
       address: this.fb.group({
         id: [this.business?.address.id],
         address: [this.business?.address.address, Validators.required],
@@ -71,12 +94,18 @@ export class BusinessFormComponent implements OnInit {
     });
   }
 
+  public ngOnDestroy() {
+    this.languagesSubscription.unsubscribe();
+  }
+
   public sendForm() {
     const business: IBusiness = {
       id: this.busninessForm.value.id,
       name: this.busninessForm.value.name,
       type: this.busninessForm.value.type,
       address: this.busninessForm.value.address,
+      default_lang: this.busninessForm.value.default_lang,
+      languages: this.busninessForm.value.languages.map(({ code: language }) => ({ language })),
       business_meta: [
         {
           name: 'font',
@@ -89,4 +118,16 @@ export class BusinessFormComponent implements OnInit {
   }
 
 
+  public addLanguage() {
+    const selectedLanguage = this.busninessForm.value.addLanguage.code;
+    const language = this.languages.find((lang) => lang.code === selectedLanguage);
+    this.busninessForm.get('addLanguage').patchValue({ code: null });
+    this.languagesForm.push(this.fb.group({ code: language.code, name: language.name }));
+  }
+  public removeLanguage(index: number) {
+    this.languagesForm.removeAt(index);
+  }
+  public setLanguageAsDefault(languageEnum: string) {
+    this.busninessForm.patchValue({ default_lang: languageEnum }, { emitEvent: false });
+  }
 }

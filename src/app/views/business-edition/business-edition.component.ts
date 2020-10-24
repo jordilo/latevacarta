@@ -1,10 +1,12 @@
 import { AddressService } from './../../api/address.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin, Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { forkJoin, Observable, combineLatest } from 'rxjs';
+import { mergeMap, switchMap } from 'rxjs/operators';
 import { IBusiness } from 'src/app/api/business';
 import { BusinessService } from 'src/app/api/business.service';
+import { ILanguage } from 'src/app/api/metadata';
+import { MetadataService } from 'src/app/api/metadata.service';
 
 @Component({
   selector: 'app-business-edition',
@@ -13,17 +15,25 @@ import { BusinessService } from 'src/app/api/business.service';
 })
 export class BusinessEditionComponent implements OnInit {
 
-  public business$: Observable<IBusiness>;
+  public data$: Observable<[IBusiness, ILanguage[]]>;
+  public languages$: Observable<ILanguage[]>;
   constructor(
     private activeRouter: ActivatedRoute,
     private router: Router,
     private businessService: BusinessService,
-    private addressService: AddressService) { }
+    private addressService: AddressService,
+    private metadata: MetadataService) { }
 
   public ngOnInit(): void {
     // TODO fins the way to extract params from parent
-    this.business$ = this.activeRouter.params
-      .pipe(switchMap(({ businessId }) => this.businessService.getById(businessId)));
+    this.data$ = this.activeRouter.params
+      .pipe(mergeMap(({ businessId }) => {
+        return combineLatest([
+          this.businessService.getById(businessId),
+          this.metadata.getLanguages()
+        ]);
+      }
+      ));
   }
 
   public editBusiness(business: IBusiness) {

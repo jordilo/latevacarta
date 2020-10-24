@@ -20,6 +20,51 @@
       <option value="PUB">Pub</option>
     </select>
   </div>
+  <div>
+    <h3>Languages</h3>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Delete</th>
+        <th>Default</th>
+      </tr>
+      <tr *ngFor="let lang of languagesForm.controls; index as i">
+        <td> {{lang.value.name}} </td>
+        <td><button type="button"
+                  [disabled]="languagesForm.controls.length === 1"
+                  class="btn btn-secondary"
+                  (click)="removeLanguage(i)">Remove</button></td>
+        <td><button type="button"
+                  *ngIf="busninessForm.value.default_lang !== lang.value.code; else defaultLang"
+                  class="btn btn-info"
+                  (click)="setLanguageAsDefault(lang.value.code)">SetAsDefault</button>
+          <ng-template #defaultLang>
+            Is default
+          </ng-template>
+        </td>
+      </tr>
+    </table>
+    <div class="form-group-inline"
+         formGroupName="addLanguage"
+         *ngIf="languages.length !== languagesForm.controls.length ">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <button class="btn btn-secondary"
+                  type="button"
+                  [disabled]="busninessForm.get('addLanguage').invalid"
+                  (click)="addLanguage()">Add</button>
+        </div>
+        <select class="form-control"
+                formControlName="code">
+          <option [ngValue]="null">Select one language…</option>
+          <option *ngFor="let lang of languages | filterLanguages : languagesForm.value"
+                  [value]="lang.code">{{lang.name}}</option>
+        </select>
+      </div>
+
+    </div>
+  </div>
+
   <div formGroupName="address">
     <h3>Address</h3>
     <div class="form-group">
