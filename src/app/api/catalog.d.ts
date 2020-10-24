@@ -1,3 +1,4 @@
+import { ILanguageTranslations } from './api.d';
 export interface ICategory {
     id: string;
     parent_category: string;
@@ -5,8 +6,12 @@ export interface ICategory {
     business_id: string;
     products: IProduct[];
     categories: ICategory[];
+    name_languages: ICategoryNames[];
 }
 
+export interface ICategoryNames extends ILanguageTranslations {
+    category_id: string;
+}
 export interface IProduct {
     category: ICategory;
     category_id: string;

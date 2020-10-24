@@ -1,16 +1,20 @@
 <form class="col-md-6"
+      *ngIf="categoryForm"
       [formGroup]="categoryForm"
       (ngSubmit)="sendForm()">
 
     <div class="form-group text-right">
         <button class="btn btn-primary"
-                [disabled]="categoryForm.invalid"
+                [disabled]="categoryForm.invalid || nameForm.invalid"
                 type="submit">Save</button>
     </div>
-    <div class="form-group">
-        <label>Name</label>
-        <input class="form-control"
-               formControlName="name" />
+    <div formArrayName="name_languages">
+        <div class="form-group"
+             *ngFor="let language of langs.controls; index as i">
+            <label>Name in {{language.value.name}}</label>
+            <input class="form-control"
+                   [formControl]="language.get('value')" />
+        </div>
     </div>
     <div class="form-group"
          [hidden]="!categories || !categories.length">

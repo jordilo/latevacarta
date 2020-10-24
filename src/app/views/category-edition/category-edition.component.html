@@ -1,6 +1,9 @@
 <app-category-form *ngIf="editionData$ | async as data ; else loading"
-                   [categories]="data[1]"
                    [category]="data[0]"
+                   [categories]="data[1]"
+                   [languages]="data[3]"
+                   [businessLanguages]="data[4]"
+                   [defaultLanguage]="data[5]"
                    (submitForm)="saveCategory($event , data[2])"></app-category-form>
 <ng-template #loading>
     <app-loader></app-loader>

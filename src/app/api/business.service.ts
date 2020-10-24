@@ -60,7 +60,6 @@ export class BusinessService {
 
   public edit(business: IBusiness) {
     const languages = business.languages.map(({ language }) => ({ language, business_id: business.id }));
-    console.log(languages);
     return this.apollo.mutate<IBusiness>({
       mutation: EDIT_BUSINESS,
       variables: {

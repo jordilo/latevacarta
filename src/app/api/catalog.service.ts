@@ -52,7 +52,12 @@ export class CatalogService {
     return this.apollo.mutate<ICategory>({
       mutation: INSERT_CATEGORY,
       variables: {
-        category
+        category: {
+          business_id: category.business_id,
+          name: category.name,
+          name_languages: { data: category.name_languages },
+          parent_category: category.parent_category
+        }
       },
       refetchQueries: [
         {
@@ -75,7 +80,8 @@ export class CatalogService {
       variables: {
         id: category.id,
         name: category.name,
-        parent_category: category.parent_category
+        parent_category: category.parent_category,
+        languages: category.name_languages.map((lang) => ({ ...lang, category_id: category.id }))
       },
       refetchQueries: [
         {

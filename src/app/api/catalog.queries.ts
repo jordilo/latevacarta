@@ -8,6 +8,10 @@ query GetAllCategories($businessId: uuid!) {
     name
     parent_category
     business_id
+    name_languages{
+      language
+      value
+    }
   }
 }`;
 
@@ -18,6 +22,10 @@ query GetCategory($categoryId:uuid!) {
     name
     parent_category
     business_id
+    name_languages{
+      language
+      value
+    }
   }
 }`;
 
@@ -29,10 +37,16 @@ mutation InsertCategory($category : category_insert_input!) {
 }`;
 
 export const UPDATE_CATEGORY = gql`
-mutation UPDATE_CATEGORY($id: uuid!,$name: String!,$parent_category: uuid) {
+mutation UPDATE_CATEGORY($id: uuid!,$name: String!,$parent_category: uuid, $languages: [category_name_langs_insert_input!]!) {
   update_category_by_pk(pk_columns: {id: $id},_set: {name: $name,parent_category: $parent_category}) {
     id
     name
+  }
+  delete_category_name_langs(where: {category_id: {_eq: $id}}){
+    affected_rows
+  }
+  insert_category_name_langs(objects: $languages){
+    affected_rows
   }
 }`;
 
@@ -128,6 +142,10 @@ query GetCatalogByBusiness($businessId: uuid!) {
   fragment categoryModel on category {
     id
     name
+    name_languages{
+      language
+      value
+    }
     products {
         id
         name
@@ -138,13 +156,17 @@ query GetCatalogByBusiness($businessId: uuid!) {
 
   fragment subCategories on category{
     id
+    name
+    products {
+      id
       name
-      products {
-        id
-        name
-        description
-        price
-      }
+      description
+      price
+    }
+    name_languages{
+      language
+      value
+    }
     categories{
       ...categoryModel
     }
