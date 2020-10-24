@@ -3,14 +3,16 @@
             [isUserLogged]="isUserLogged"
             (logoutHandler)="logoutHandler()"
             (loginHandler)="loginHandler()"></app-header>
-<div class="main-container d-flex">
-    <nav class="sidebar"
+<div class="main-container">
+    <div class="sidebar span4"
          *ngIf="isUserLogged">
         <router-outlet name="sidebar"></router-outlet>
-    </nav>
-    <section class="container-fluid">
-        <router-outlet class="row"> </router-outlet>
-    </section>
+    </div>
+    <div class="main">
+        <section class="container-fluid">
+            <router-outlet class="row-fluid"> </router-outlet>
+        </section>
+    </div>
 </div>
 <footer>
     © {{appInfo.name}} <small>{{appInfo.version}}</small>

@@ -1,4 +1,78 @@
-<ul class="nav flex-column">
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light primary-color">
+
+    <!-- Navbar brand -->
+    <!-- <a class="nav-link"
+       [routerLink]="['/']"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact: true}">Dashboard</a> -->
+
+    <!-- Collapse button -->
+    <button class="collapse navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target=".navbar-collapse"
+            data-target="#basicExampleNav"
+            aria-controls="basicExampleNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse"
+         id="basicExampleNav">
+        <ul class="nav flex-column">
+            <li class="nav-item"
+                data-toggle="collapse"
+                data-target=".navbar-collapse">
+                <a class="nav-link"
+                   [routerLink]="['/']"
+                   routerLinkActive="active"
+                   [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+            </li>
+            <li class="nav-item"
+                data-toggle="collapse"
+                data-target=".navbar-collapse">
+                <a class="nav-link"
+                   [routerLink]="['/account']"
+                   routerLinkActive="active"
+                   [routerLinkActiveOptions]="{exact: true}">My Account</a>
+            </li>
+            <li class="nav-item"
+                data-toggle="collapse"
+                data-target=".navbar-collapse"
+                *ngIf="isAdmin">
+                <a class="nav-link"
+                   [routerLink]="['/account-list']"
+                   routerLinkActive="active">Accounts</a>
+            </li>
+
+            <li class="nav-item"
+                data-toggle="collapse"
+                data-target=".navbar-collapse">
+                <a class="nav-link"
+                   [routerLink]="['/business']"
+                   routerLinkActive="active">Business</a>
+            </li>
+        </ul>
+
+
+        <!-- <form class="form-inline">
+            <div class="md-form my-0">
+                <input class="form-control mr-sm-2"
+                       type="text"
+                       placeholder="Search"
+                       aria-label="Search">
+            </div>
+        </form> -->
+    </div>
+    <!-- Collapsible content -->
+
+</nav>
+<!--/.Navbar-->
+
+<!-- <ul class="nav flex-column">
     <li class="nav-item">
         <a class="nav-link"
            [routerLink]="['/']"
@@ -23,4 +97,4 @@
            [routerLink]="['/business']"
            routerLinkActive="active">Business</a>
     </li>
-</ul>
+</ul> -->

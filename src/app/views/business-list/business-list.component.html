@@ -4,7 +4,6 @@
         <th><a [routerLink]="['create']">+</a></th>
         <th>Name</th>
         <th>QR</th>
-        <th>Type</th>
         <th>Catalog</th>
         <th>Edit</th>
         <th>Delete</th>
@@ -12,7 +11,6 @@
     <tr *ngFor="let business of businesses">
         <td colspan="2"><a [routerLink]="[business.id]">{{business.name}}</a></td>
         <td><a [routerLink]="[business.id, 'qr']">QR</a></td>
-        <td>{{business.type}}</td>
         <td><a [routerLink]="[business.id,'catalog']">See</a></td>
         <td><a [routerLink]="[business.id, 'edit']">Edit</a></td>
         <td><a (click)="removeBusiness(business.id)"

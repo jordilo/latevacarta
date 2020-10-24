@@ -15,10 +15,18 @@ footer {
 .main-container {
   padding-top: 80px;
   min-height: calc(100% - #{$footerHeight});
-  // display: flex;
-  nav {
-    flex: 0 0 250px;
+  display: flex;
+  @media screen and (max-width: 767.98px) {
+    flex-flow: column;
   }
+  // display: flex;
+  .sidebar {
+    flex: 0 0 250px;
+    @media screen and (max-width: 767.98px) {
+      flex: 0;
+    }
+  }
+  .main,
   section {
     flex: 1;
   }
