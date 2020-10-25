@@ -1,21 +1,36 @@
-<form class="col-md-6"
+<form class="col-lg-6"
       [formGroup]="productForm"
       (ngSubmit)="sendForm()">
-
     <div class="form-group text-right">
         <button class="btn btn-primary"
-                [disabled]="productForm.invalid"
+                [disabled]="productForm.invalid || nameForm.invalid"
                 type="submit">Save</button>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label>Name</label>
         <input class="form-control"
                formControlName="name" />
+    </div> -->
+    <div formArrayName="name_languages">
+        <div class="form-group"
+             *ngFor="let language of nameForm.controls; index as i">
+            <label>Name in {{language.value.name}}</label>
+            <input class="form-control"
+                   [formControl]="language.get('value')" />
+        </div>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label>Description</label>
         <input class="form-control"
-               formControlName="description" />
+        formControlName="description" />
+    </div> -->
+    <div formArrayName="description_languages">
+        <div class="form-group"
+             *ngFor="let language of descriptionForm.controls; index as i">
+            <label>Description in {{language.value.name}}</label>
+            <input class="form-control"
+                   [formControl]="language.get('value')" />
+        </div>
     </div>
     <div class="form-group">
         <label>Price</label>

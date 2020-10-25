@@ -72,6 +72,14 @@ query GetProducts($businessId : uuid!) {
     id
     name
     price
+    name_languages{
+      language
+      value
+    }
+    description_languages{
+      language
+      value
+    }
   }
 }`;
 export const GET_PRODUCT_BY_ID = gql`
@@ -87,6 +95,14 @@ query GetProductById($id:uuid!) {
     id
     name
     price
+    name_languages{
+      language
+      value
+    }
+    description_languages{
+      language
+      value
+    }
   }
 }`;
 
@@ -105,7 +121,9 @@ mutation UpdateProduct(
     $description: String,
     $feature_image: String,
     $category_id: uuid!,
-    $is_active: Boolean
+    $is_active: Boolean,
+    $name_languages: [product_name_langs_insert_input!]!,
+    $description_languages: [product_description_langs_insert_input!]!,
 ) {
     update_product_by_pk(pk_columns: {id: $id},
     _set: {
@@ -118,7 +136,19 @@ mutation UpdateProduct(
       name
       price
     }
-  }`;
+    delete_product_name_langs(where: {product_id: {_eq: $id}}){
+      affected_rows
+    }
+    insert_product_name_langs(objects: $name_languages){
+      affected_rows
+    }
+    delete_product_description_langs(where: {product_id: {_eq: $id}}){
+      affected_rows
+    }
+    insert_product_description_langs(objects: $description_languages){
+      affected_rows
+    }
+}`;
 
 export const REMOVE_PRODUCT = gql`
 mutation RemoveProduct($id: uuid!) {

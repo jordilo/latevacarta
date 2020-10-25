@@ -39,7 +39,6 @@ export class CategoryCreationComponent implements OnInit {
 
   public saveCategory(category: ICategory) {
 
-    console.log(category);
     const businessId = (this.activeRouter.params as any).value.businessId;
     category.business_id = businessId;
     this.catalogService.insertCategory(category)

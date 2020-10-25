@@ -1,6 +1,9 @@
 <app-product-form (submitForm)="saveProduct($event)"
-                  *ngIf="categories$ | async as categories ; else loading"
-                  [categories]="categories"
+                  *ngIf="data$ | async as data ; else loading"
+                  [categories]="data[0]"
+                  [languages]="data[1]"
+                  [businessLanguages]="data[2]"
+                  [defaultLanguage]="data[3]"
                   [product]="defaultProduct"></app-product-form>
 <ng-template #loading>
     <app-loader></app-loader>

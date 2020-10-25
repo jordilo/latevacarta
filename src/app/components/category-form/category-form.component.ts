@@ -24,15 +24,11 @@ export class CategoryFormComponent implements OnInit {
   public categoryForm: FormGroup;
   public nameForm: FormArray;
 
-  public defaultLanguageObj: ILanguage;
   public availableLanguages: any[];
   constructor(private fb: FormBuilder, private businessService: BusinessService) { }
 
 
   public ngOnInit(): void {
-
-    this.defaultLanguageObj = this.languages.find(({ code }) => code === this.defaultLanguage);
-    console.log(this);
 
     this.availableLanguages = this.businessLanguages
       .reduce((acc, current) => {

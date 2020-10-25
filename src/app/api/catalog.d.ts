@@ -12,6 +12,9 @@ export interface ICategory {
 export interface ICategoryNames extends ILanguageTranslations {
     category_id: string;
 }
+export interface IProductTranslations extends ILanguageTranslations {
+    product_id: string;
+}
 export interface IProduct {
     category: ICategory;
     category_id: string;
@@ -22,4 +25,6 @@ export interface IProduct {
     name: string;
     business_id: string;
     price: number;
+    name_languages: IProductTranslations[];
+    description_languages: IProductTranslations[];
 }

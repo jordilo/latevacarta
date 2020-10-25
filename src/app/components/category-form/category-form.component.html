@@ -8,6 +8,7 @@
                 [disabled]="categoryForm.invalid || nameForm.invalid"
                 type="submit">Save</button>
     </div>
+    
     <div formArrayName="name_languages">
         <div class="form-group"
              *ngFor="let language of langs.controls; index as i">

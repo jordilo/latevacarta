@@ -50,7 +50,6 @@ export class CategoryEditionComponent implements OnInit {
   }
 
   public saveCategory(category: ICategory, businessId: string) {
-    console.log(category, businessId);
     this.catalogService.editCategory(category, businessId)
       .subscribe(() => this.router.navigate(['../..'], { relativeTo: this.activeRouter }));
   }

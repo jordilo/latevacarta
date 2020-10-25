@@ -147,7 +147,18 @@ export class CatalogService {
     return this.apollo.mutate<IProduct>({
       mutation: INSERT_PRODUCT,
       variables: {
-        product
+        product: {
+          id: product.id,
+          name: product.name,
+          description: product.description,
+          category_id: product.category_id,
+          is_active: product.is_active,
+          feature_image: product.feature_image,
+          price: product.price,
+          business_id: product.business_id,
+          name_languages: { data: product.name_languages },
+          description_languages: { data: product.description_languages },
+        }
       },
       refetchQueries: [{
         query: GET_ALL_PRODUCTS,
@@ -173,7 +184,9 @@ export class CatalogService {
         is_active: product.is_active,
         name: product.name,
         feature_image: product.feature_image,
-        price: product.price
+        price: product.price,
+        name_languages: product.name_languages.map((lang) => ({ ...lang, product_id: product.id })),
+        description_languages: product.name_languages.map((lang) => ({ ...lang, product_id: product.id }))
       },
       refetchQueries: [
         {
