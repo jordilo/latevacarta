@@ -186,7 +186,7 @@ export class CatalogService {
         feature_image: product.feature_image,
         price: product.price,
         name_languages: product.name_languages.map((lang) => ({ ...lang, product_id: product.id })),
-        description_languages: product.name_languages.map((lang) => ({ ...lang, product_id: product.id }))
+        description_languages: product.description_languages.map((lang) => ({ ...lang, product_id: product.id }))
       },
       refetchQueries: [
         {
