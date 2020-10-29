@@ -1,14 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IProduct, ICategory } from '../../api/catalog';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { BusinessService } from 'src/app/api/business.service';
-import { ILanguage } from 'src/app/api/metadata';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IBusinessLanguage } from 'src/app/api/business';
+import { ILanguage } from 'src/app/api/metadata';
+import { ICategory, IProduct } from '../../api/catalog';
 
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.css']
+  styleUrls: ['./product-form.component.css'],
 })
 export class ProductFormComponent implements OnInit {
 
@@ -24,7 +23,6 @@ export class ProductFormComponent implements OnInit {
   public descriptionForm: FormArray;
   public availableLanguages: any[];
   constructor(private fb: FormBuilder) { }
-
 
   public ngOnInit(): void {
 
@@ -44,7 +42,6 @@ export class ProductFormComponent implements OnInit {
       .array(this.availableLanguages
         .map(({ descriptionValue: value, name, language }) => this.fb.group({ language, name, value })));
 
-
     this.productForm = this.fb.group({
       id: [this.product?.id],
       name: [this.product?.name],
@@ -55,7 +52,7 @@ export class ProductFormComponent implements OnInit {
       price: [this.product?.price],
       business_id: [this.product?.business_id],
       name_languages: this.nameForm,
-      description_languages: this.descriptionForm
+      description_languages: this.descriptionForm,
     });
   }
 
@@ -73,7 +70,7 @@ export class ProductFormComponent implements OnInit {
       price: this.productForm.value.price,
       business_id: this.productForm.value.business_id,
       name_languages: this.nameForm.value.map(({ language, value }) => ({ language, value })),
-      description_languages: this.descriptionForm.value.map(({ language, value }) => ({ language, value }))
+      description_languages: this.descriptionForm.value.map(({ language, value }) => ({ language, value })),
     } as IProduct;
     // name_languages: this.nameForm.value.map(({ language, value }) => ({ language, value }))
     this.submitForm.emit(product);

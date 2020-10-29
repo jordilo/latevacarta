@@ -8,7 +8,7 @@ describe('AddBusinessComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BusinessCreationComponent ]
+      declarations: [ BusinessCreationComponent ],
     })
     .compileComponents();
   }));

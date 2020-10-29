@@ -1,59 +1,59 @@
-import { AccountListComponent } from './views/account-list/account-list.component';
-import { BusinessEditionComponent } from './views/business-edition/business-edition.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, ExtraOptions } from '@angular/router';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from 'src/auth/admin.guard';
-import { BusinessCreationComponent } from './views/business-creation/business-creation.component';
-import { BusinessDetailComponent } from './views/business-detail/business-detail.component';
-import { BusinessComponent } from './views/business/business.component';
-import { MainComponent } from './views/main/main.component';
-import { NotFoundComponent } from './views/not-found/not-found.component';
-import { ProfileComponent } from './views/profile/profile.component';
-import { BusinessListComponent } from './views/business-list/business-list.component';
-import { CatalogComponent } from './views/catalog/catalog.component';
-import { BusinessIsolationComponent } from './views/business-isolation/business-isolation.component';
-import { CatalogSummaryComponent } from './views/catalog-summary/catalog-summary.component';
-import { CatalogProductsComponent } from './views/catalog-products/catalog-products.component';
-import { CatalogCategoriesComponent } from './views/catalog-categories/catalog-categories.component';
-import { CategoryListComponent } from './views/category-list/category-list.component';
-import { CategoryEditionComponent } from './views/category-edition/category-edition.component';
-import { CategoryCreationComponent } from './views/category-creation/category-creation.component';
-import { ProductListComponent } from './views/product-list/product-list.component';
-import { ProductCreationComponent } from './views/product-creation/product-creation.component';
-import { ProductEditionComponent } from './views/product-edition/product-edition.component';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AccountEditionComponent } from './views/account-edition/account-edition.component';
 import { AccountIsolationComponent } from './views/account-isolation/account-isolation.component';
+import { AccountListComponent } from './views/account-list/account-list.component';
+import { BusinessCreationComponent } from './views/business-creation/business-creation.component';
+import { BusinessDetailComponent } from './views/business-detail/business-detail.component';
+import { BusinessEditionComponent } from './views/business-edition/business-edition.component';
+import { BusinessIsolationComponent } from './views/business-isolation/business-isolation.component';
+import { BusinessListComponent } from './views/business-list/business-list.component';
 import { BusinessQrComponent } from './views/business-qr/business-qr.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { BusinessComponent } from './views/business/business.component';
+import { CatalogCategoriesComponent } from './views/catalog-categories/catalog-categories.component';
+import { CatalogProductsComponent } from './views/catalog-products/catalog-products.component';
+import { CatalogSummaryComponent } from './views/catalog-summary/catalog-summary.component';
+import { CatalogComponent } from './views/catalog/catalog.component';
+import { CategoryCreationComponent } from './views/category-creation/category-creation.component';
+import { CategoryEditionComponent } from './views/category-edition/category-edition.component';
+import { CategoryListComponent } from './views/category-list/category-list.component';
+import { MainComponent } from './views/main/main.component';
+import { NotFoundComponent } from './views/not-found/not-found.component';
+import { ProductCreationComponent } from './views/product-creation/product-creation.component';
+import { ProductEditionComponent } from './views/product-edition/product-edition.component';
+import { ProductListComponent } from './views/product-list/product-list.component';
+import { ProfileComponent } from './views/profile/profile.component';
 
 const routes: Routes = [
   {
     path: '',
     component: MainComponent,
     canActivate: [
-      AuthGuard
-    ]
+      AuthGuard,
+    ],
   },
   {
     path: '',
     outlet: 'sidebar',
-    component: SidebarComponent
+    component: SidebarComponent,
   },
   {
     path: 'business',
     component: BusinessComponent,
     canActivate: [
-      AuthGuard
+      AuthGuard,
     ],
     children: [
       {
         path: '',
-        component: BusinessListComponent
+        component: BusinessListComponent,
       },
       {
         path: 'create',
-        component: BusinessCreationComponent
+        component: BusinessCreationComponent,
       },
       {
         path: ':businessId',
@@ -62,15 +62,15 @@ const routes: Routes = [
           {
             path: '',
             component: BusinessDetailComponent,
-            pathMatch: 'full'
+            pathMatch: 'full',
           },
           {
             path: 'qr',
-            component: BusinessQrComponent
+            component: BusinessQrComponent,
           },
           {
             path: 'edit',
-            component: BusinessEditionComponent
+            component: BusinessEditionComponent,
           },
           {
             path: 'catalog',
@@ -78,7 +78,7 @@ const routes: Routes = [
             children: [
               {
                 path: '',
-                component: CatalogSummaryComponent
+                component: CatalogSummaryComponent,
               },
               {
                 path: 'categories',
@@ -86,17 +86,17 @@ const routes: Routes = [
                 children: [
                   {
                     path: '',
-                    component: CategoryListComponent
+                    component: CategoryListComponent,
                   },
                   {
                     path: 'create',
-                    component: CategoryCreationComponent
+                    component: CategoryCreationComponent,
                   },
                   {
                     path: ':categoryId/edit',
-                    component: CategoryEditionComponent
-                  }
-                ]
+                    component: CategoryEditionComponent,
+                  },
+                ],
               },
               {
                 path: 'products',
@@ -104,58 +104,58 @@ const routes: Routes = [
                 children: [
                   {
                     path: '',
-                    component: ProductListComponent
+                    component: ProductListComponent,
                   },
                   {
                     path: 'create',
-                    component: ProductCreationComponent
+                    component: ProductCreationComponent,
                   },
                   {
                     path: ':productId/edit',
-                    component: ProductEditionComponent
-                  }
-                ]
+                    component: ProductEditionComponent,
+                  },
+                ],
               },
-            ]
-          }
-        ]
+            ],
+          },
+        ],
       },
-    ]
+    ],
   },
   {
     path: 'account-list',
     component: AccountListComponent,
     canActivate: [
-      AdminGuard
-    ]
+      AdminGuard,
+    ],
   },
   {
     path: 'account',
     component: AccountIsolationComponent,
     canActivate: [
-      AuthGuard
+      AuthGuard,
     ],
     children: [
       {
         path: '',
-        component: ProfileComponent
+        component: ProfileComponent,
       },
       {
         path: 'edit',
-        component: AccountEditionComponent
-      }
-    ]
+        component: AccountEditionComponent,
+      },
+    ],
   },
   {
     path: '**',
-    component: NotFoundComponent
-  }
+    component: NotFoundComponent,
+  },
 ];
 export const routingConfiguration: ExtraOptions = {
-  paramsInheritanceStrategy: 'always'
+  paramsInheritanceStrategy: 'always',
 };
 @NgModule({
   imports: [RouterModule.forRoot(routes, routingConfiguration)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

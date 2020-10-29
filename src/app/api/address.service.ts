@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { IAddress } from './business';
 import { UPDATE_ADDRESS } from './address.queries';
+import { IAddress } from './business';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AddressService {
 
@@ -13,7 +13,7 @@ export class AddressService {
   public updateAddress(address: IAddress) {
     return this.apollo.mutate<IAddress>({
       mutation: UPDATE_ADDRESS,
-      variables: address
+      variables: address,
     });
   }
 }

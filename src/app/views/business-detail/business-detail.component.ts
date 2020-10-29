@@ -1,14 +1,14 @@
-import { BusinessService } from './../../api/business.service';
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { IBusiness } from 'src/app/api/business';
-import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { IBusiness } from 'src/app/api/business';
+import { BusinessService } from './../../api/business.service';
 
 @Component({
   selector: 'app-business-detail',
   templateUrl: './business-detail.component.html',
-  styleUrls: ['./business-detail.component.css']
+  styleUrls: ['./business-detail.component.css'],
 })
 export class BusinessDetailComponent implements OnInit {
 

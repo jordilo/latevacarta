@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import * as auth0 from 'auth0-js';
 import { Router } from '@angular/router';
+import * as auth0 from 'auth0-js';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { share } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { AuthConfigService } from './auth-config.service';
 import { AuthUser } from './auth';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
-import { share, take } from 'rxjs/operators';
+import { AuthConfigService } from './auth-config.service';
 
 (window as any).global = window;
 export const EXPIRES_AT_KEY = 'expiresAt';
@@ -90,6 +90,7 @@ export class AuthService {
         connection: 'Username-Password-Authentication',
         email,
       }, (err, ok) => {
+        // tslint:disable-next-line:no-console
         console.log(err, ok);
         if (ok !== undefined) {
           subscriber.next(ok.Id);
@@ -107,6 +108,7 @@ export class AuthService {
         window.location.hash = '';
         this.getUserInfo(authResult, true);
       } else if (err) {
+        // tslint:disable-next-line:no-console
         console.error(`Error: ${err.error}`);
       }
     });
@@ -156,7 +158,7 @@ export class AuthService {
     // Application settings for Allowed Logout URLs
     this.auth0.logout({
       returnTo: environment.auth.returnTo,
-      clientID: environment.auth.clientID
+      clientID: environment.auth.clientID,
     });
   }
 

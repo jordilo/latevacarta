@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NEVER } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthRoutes } from './auth.routes';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-signin',
-  templateUrl: './auth.signin.component.html'
+  templateUrl: './auth.signin.component.html',
 })
 export class AuthSigninComponent implements OnInit {
 

@@ -1,14 +1,14 @@
-import { Observable } from 'rxjs';
-import { BusinessService } from './../../api/business.service';
 import { Component, OnInit } from '@angular/core';
-import { IBusiness } from '../../api/business';
-import { AccountService } from '../../api/account.service';
+import { Observable } from 'rxjs';
 import { IAccount } from 'src/app/api/account';
+import { AccountService } from '../../api/account.service';
+import { IBusiness } from '../../api/business';
+import { BusinessService } from './../../api/business.service';
 
 @Component({
   selector: 'app-main',
   templateUrl: 'main.component.html',
-  styleUrls: ['main.component.css']
+  styleUrls: ['main.component.css'],
 })
 export class MainComponent implements OnInit {
 

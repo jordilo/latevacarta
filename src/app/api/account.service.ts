@@ -1,13 +1,13 @@
-import { AuthService } from './../../auth/auth.service';
-import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
-import { GET_ACCOUNTS_QUERY, GET_ACCOUNT_QUERY, UPDATE_ACCOUNT } from './account.queries';
+import { map } from 'rxjs/operators';
+import { AuthService } from './../../auth/auth.service';
 import { IAccount } from './account';
+import { GET_ACCOUNT_QUERY, GET_ACCOUNTS_QUERY, UPDATE_ACCOUNT } from './account.queries';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AccountService {
 
@@ -20,13 +20,13 @@ export class AccountService {
     return this.apollo.watchQuery<{ account: IAccount[] }>({
       query: GET_ACCOUNT_QUERY,
       variables: {
-        userId: localStorage.getItem('user_id')
-      }
+        userId: localStorage.getItem('user_id'),
+      },
     }).valueChanges.pipe(map((response) => response.data.account[0]));
   }
   public getAccounts(): Observable<IAccount[]> {
     return this.apollo.watchQuery<{ account: IAccount[] }>({
-      query: GET_ACCOUNTS_QUERY
+      query: GET_ACCOUNTS_QUERY,
     }).valueChanges.pipe(map((response) => response.data.account));
   }
 
@@ -36,14 +36,14 @@ export class AccountService {
       variables: {
         id: account.id,
         name: account.name,
-        lastname: account.lastname
+        lastname: account.lastname,
       },
       refetchQueries: [{
         query: GET_ACCOUNT_QUERY,
         variables: {
-          userId: localStorage.getItem('user_id')
-        }
-      }]
+          userId: localStorage.getItem('user_id'),
+        },
+      }],
     });
   }
 

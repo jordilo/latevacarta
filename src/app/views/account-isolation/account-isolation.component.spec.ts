@@ -8,7 +8,7 @@ describe('AccountIsolationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountIsolationComponent ]
+      declarations: [ AccountIsolationComponent ],
     })
     .compileComponents();
   }));

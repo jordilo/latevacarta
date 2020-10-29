@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import { ActivatedRoute } from '@angular/router';
+import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-business-qr',
   templateUrl: './business-qr.component.html',
-  styleUrls: ['./business-qr.component.css']
+  styleUrls: ['./business-qr.component.css'],
 })
 export class BusinessQrComponent implements OnInit {
 

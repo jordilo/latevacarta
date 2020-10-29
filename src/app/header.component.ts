@@ -1,8 +1,8 @@
-import { IAccount } from './api/account.d';
-import { Component, EventEmitter, Output, Input, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
-import { EXPIRES_AT_KEY, TOKEN_KEY, TOKEN_ID, USER_ID } from 'src/auth/auth.service';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { EXPIRES_AT_KEY, TOKEN_ID, TOKEN_KEY, USER_ID } from 'src/auth/auth.service';
+import { IAccount } from './api/account.d';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

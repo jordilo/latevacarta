@@ -1,14 +1,13 @@
-import { AuthServiceMock } from './auth.service.mock';
-import { environment } from './../environments/environment.prod';
-import { AuthModule } from './auth.module';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { AuthService } from './auth.service';
-import { AuthSigninComponent } from './auth.signin.component';
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EMPTY, throwError } from 'rxjs';
+import { environment } from './../environments/environment.prod';
 import { AuthConfigService } from './auth-config.service';
+import { AuthModule } from './auth.module';
+import { AuthService } from './auth.service';
+import { AuthServiceMock } from './auth.service.mock';
+import { AuthSigninComponent } from './auth.signin.component';
 describe('Given a auth signin component', () => {
-
 
     let component: AuthSigninComponent;
     let fixture: ComponentFixture<AuthSigninComponent>;
@@ -20,7 +19,7 @@ describe('Given a auth signin component', () => {
         TestBed.configureTestingModule({
             declarations: [AuthSigninComponent],
             providers: [{ provide: AuthService, useClass: AuthServiceMock }, AuthConfigService],
-            imports: [FormsModule, ReactiveFormsModule, AuthModule.forRoot(environment.auth)]
+            imports: [FormsModule, ReactiveFormsModule, AuthModule.forRoot(environment.auth)],
         }).compileComponents();
     }));
 

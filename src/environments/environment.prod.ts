@@ -13,5 +13,5 @@ export const environment = {
     scope: 'openid profile email',
     audience: `https://${domain}/userinfo`,
     responseType: 'token id_token',
-  }
+  },
 };

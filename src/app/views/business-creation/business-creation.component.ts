@@ -1,16 +1,15 @@
-import { MetadataService } from './../../api/metadata.service';
-import { Observable } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BusinessService } from '../../api/business.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { IAddress, IBusiness } from 'src/app/api/business';
 import { ILanguage } from 'src/app/api/metadata';
+import { BusinessService } from '../../api/business.service';
+import { MetadataService } from './../../api/metadata.service';
 
 @Component({
   selector: 'app-business-creation',
   templateUrl: './business-creation.component.html',
-  styleUrls: ['./business-creation.component.css']
+  styleUrls: ['./business-creation.component.css'],
 })
 export class BusinessCreationComponent implements OnInit {
 
@@ -20,7 +19,7 @@ export class BusinessCreationComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private businessService: BusinessService,
-    private metadata: MetadataService
+    private metadata: MetadataService,
   ) { }
 
   public ngOnInit(): void {
@@ -30,8 +29,8 @@ export class BusinessCreationComponent implements OnInit {
       name: '',
       type: 'BAR',
       address: {
-        country: 1
-      } as IAddress
+        country: 1,
+      } as IAddress,
     } as IBusiness;
 
   }

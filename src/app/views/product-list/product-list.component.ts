@@ -1,14 +1,14 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { CatalogService } from '../../api/catalog.service';
-import { IProduct } from 'src/app/api/catalog';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { IProduct } from 'src/app/api/catalog';
+import { CatalogService } from '../../api/catalog.service';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
 

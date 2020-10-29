@@ -1,18 +1,18 @@
-import { IBusinessLanguage } from './../../api/business.d';
-import { BusinessService } from 'src/app/api/business.service';
-import { ILanguage } from './../../api/metadata.d';
-import { MetadataService } from './../../api/metadata.service';
-import { combineLatest, Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { combineLatest, Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { BusinessService } from 'src/app/api/business.service';
 import { ICategory } from '../../api/catalog';
 import { CatalogService } from '../../api/catalog.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap, map } from 'rxjs/operators';
+import { IBusinessLanguage } from './../../api/business.d';
+import { ILanguage } from './../../api/metadata.d';
+import { MetadataService } from './../../api/metadata.service';
 
 @Component({
   selector: 'app-category-creation',
   templateUrl: './category-creation.component.html',
-  styleUrls: ['./category-creation.component.css']
+  styleUrls: ['./category-creation.component.css'],
 })
 export class CategoryCreationComponent implements OnInit {
 
@@ -33,7 +33,7 @@ export class CategoryCreationComponent implements OnInit {
           this.catalogService.getCategories(businessId),
           this.metaService.getLanguages(),
           this.businessService.getById(businessId).pipe(map(({ languages }) => languages)),
-          this.businessService.getById(businessId).pipe(map(({ default_lang }) => default_lang))
+          this.businessService.getById(businessId).pipe(map(({ default_lang }) => default_lang)),
         ])));
   }
 

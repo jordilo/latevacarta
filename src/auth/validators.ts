@@ -1,4 +1,4 @@
-import { ValidatorFn, AbstractControl } from '@angular/forms';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 export function samePassword(originalControlName: string): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
@@ -8,7 +8,7 @@ export function samePassword(originalControlName: string): ValidatorFn {
     const originalControl = control.parent.get(originalControlName);
     const isDifferentValue = originalControl.value !== control.value;
     if (isDifferentValue && originalControl.valid) {
-      const error = { differentValue: true, };
+      const error = { differentValue: true };
       originalControl.setErrors(error);
       return error;
     }

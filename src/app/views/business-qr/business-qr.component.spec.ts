@@ -8,7 +8,7 @@ describe('BusinessQrComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BusinessQrComponent ]
+      declarations: [ BusinessQrComponent ],
     })
     .compileComponents();
   }));

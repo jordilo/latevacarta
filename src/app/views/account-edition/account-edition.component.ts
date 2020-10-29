@@ -1,13 +1,13 @@
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../../api/account.service';
 import { IAccount } from 'src/app/api/account';
+import { AccountService } from '../../api/account.service';
 
 @Component({
   selector: 'app-account-edition',
   templateUrl: './account-edition.component.html',
-  styleUrls: ['./account-edition.component.css']
+  styleUrls: ['./account-edition.component.css'],
 })
 export class AccountEditionComponent implements OnInit {
 

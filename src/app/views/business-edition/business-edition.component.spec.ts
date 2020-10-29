@@ -8,7 +8,7 @@ describe('BusinessEditionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BusinessEditionComponent ]
+      declarations: [ BusinessEditionComponent ],
     })
     .compileComponents();
   }));

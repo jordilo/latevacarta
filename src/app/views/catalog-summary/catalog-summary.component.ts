@@ -1,14 +1,14 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { CatalogService } from '../../api/catalog.service';
 import { ActivatedRoute } from '@angular/router';
-import { ICategory } from 'src/app/api/catalog';
+import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { ICategory } from 'src/app/api/catalog';
+import { CatalogService } from '../../api/catalog.service';
 
 @Component({
   selector: 'app-catalog-summary',
   templateUrl: './catalog-summary.component.html',
-  styleUrls: ['./catalog-summary.component.css']
+  styleUrls: ['./catalog-summary.component.css'],
 })
 export class CatalogSummaryComponent implements OnInit {
 

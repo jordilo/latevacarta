@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { BusinessService } from '../../api/business.service';
-import { IBusiness } from 'src/app/api/business';
 import { Observable } from 'rxjs';
+import { IBusiness } from 'src/app/api/business';
+import { BusinessService } from '../../api/business.service';
 
 @Component({
   selector: 'app-business-list',
   templateUrl: './business-list.component.html',
-  styleUrls: ['./business-list.component.css']
+  styleUrls: ['./business-list.component.css'],
 })
 export class BusinessListComponent implements OnInit {
 

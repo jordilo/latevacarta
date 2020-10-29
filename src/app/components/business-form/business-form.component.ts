@@ -1,7 +1,7 @@
-import { map } from 'rxjs/operators';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { IBusiness } from 'src/app/api/business';
 import { BusinessService } from 'src/app/api/business.service';
 import { ILanguage } from 'src/app/api/metadata';
@@ -16,35 +16,34 @@ const fonts = [
       '"Lucida Sans Unicode", "Lucida Grande", sans-serif',
       'Tahoma, Geneva, sans-serif',
       '"Trebuchet MS", Helvetica, sans-serif',
-      'Verdana, Geneva, sans-serif'
-    ]
+      'Verdana, Geneva, sans-serif',
+    ],
   }, {
     group: 'Serif',
     fonts: [
       '"Times New Roman", Times, serif',
       'Georgia, serif',
       '"Palatino Linotype", "Book Antiqua", Palatino, serif',
-    ]
+    ],
   }, {
     group: 'Monospace',
     fonts: [
       'Courier New',
-      'Lucida Console'
-    ]
-  }
+      'Lucida Console',
+    ],
+  },
 ];
 const defaultLang = 'ca_ES';
 @Component({
   selector: 'app-business-form',
   templateUrl: './business-form.component.html',
-  styleUrls: ['./business-form.component.css']
+  styleUrls: ['./business-form.component.css'],
 })
 export class BusinessFormComponent implements OnInit, OnDestroy {
 
   @Input() public business: IBusiness;
   @Input() public languages: ILanguage[];
   @Output() public submitForm = new EventEmitter<IBusiness>();
-
 
   public busninessForm: FormGroup;
   public languagesForm: FormArray;
@@ -70,7 +69,6 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
       }
     });
 
-
     this.busninessForm = this.fb.group({
       id: [this.business.id],
       name: [this.business.name, Validators.required],
@@ -86,11 +84,11 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
         lat: [this.business?.address.lat],
         lng: [this.business?.address.lng],
         postal_code: [this.business?.address.postal_code, Validators.required],
-        state: [this.business?.address.state]
+        state: [this.business?.address.state],
       }),
       options: this.fb.group({
-        font: [font]
-      })
+        font: [font],
+      }),
     });
   }
 
@@ -109,14 +107,13 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
       business_meta: [
         {
           name: 'font',
-          value: this.busninessForm.value.options.font
-        }
-      ]
+          value: this.busninessForm.value.options.font,
+        },
+      ],
     } as IBusiness;
 
     this.submitForm.emit(business);
   }
-
 
   public addLanguage() {
     const selectedLanguage = this.busninessForm.value.addLanguage.code;

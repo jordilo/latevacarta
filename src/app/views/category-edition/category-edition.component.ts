@@ -1,18 +1,18 @@
-import { BusinessService } from 'src/app/api/business.service';
-import { MetadataService } from './../../api/metadata.service';
-import { IBusinessLanguage } from './../../api/business.d';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { combineLatest, Observable, of } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
+import { BusinessService } from 'src/app/api/business.service';
 import { ICategory } from 'src/app/api/catalog';
 import { CatalogService } from 'src/app/api/catalog.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, combineLatest, of } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
 import { ILanguage } from 'src/app/api/metadata';
+import { IBusinessLanguage } from './../../api/business.d';
+import { MetadataService } from './../../api/metadata.service';
 
 @Component({
   selector: 'app-category-edition',
   templateUrl: './category-edition.component.html',
-  styleUrls: ['./category-edition.component.css']
+  styleUrls: ['./category-edition.component.css'],
 })
 export class CategoryEditionComponent implements OnInit {
 
@@ -43,9 +43,9 @@ export class CategoryEditionComponent implements OnInit {
               of(businessId),
               this.metaService.getLanguages(),
               this.businessService.getById(businessId).pipe(map(({ languages }) => languages)),
-              this.businessService.getById(businessId).pipe(map(({ default_lang }) => default_lang))
-            ])
-          )
+              this.businessService.getById(businessId).pipe(map(({ default_lang }) => default_lang)),
+            ]),
+          ),
         );
   }
 

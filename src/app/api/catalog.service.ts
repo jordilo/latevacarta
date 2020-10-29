@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import {
-  GET_ALL_CATEGORIES,
-  INSERT_CATEGORY,
-  GET_CATEGORY,
-  UPDATE_CATEGORY,
-  REMOVE_CATEGORY,
-  GET_ALL_PRODUCTS,
-  GET_PRODUCT_BY_ID
-} from './catalog.queries';
 import { map, take } from 'rxjs/operators';
 import { ICategory, IProduct } from './catalog';
-import { INSERT_PRODUCT, UPDATE_PRODUCT, REMOVE_PRODUCT, GET_CATALOG } from './catalog.queries';
+import {
+  GET_ALL_CATEGORIES,
+  GET_ALL_PRODUCTS,
+  GET_CATEGORY,
+  GET_PRODUCT_BY_ID,
+  INSERT_CATEGORY,
+  REMOVE_CATEGORY,
+  UPDATE_CATEGORY,
+} from './catalog.queries';
+import { GET_CATALOG, INSERT_PRODUCT, REMOVE_PRODUCT, UPDATE_PRODUCT } from './catalog.queries';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CatalogService {
 
@@ -24,8 +24,8 @@ export class CatalogService {
     return this.apollo.watchQuery<{ category: ICategory[] }>({
       query: GET_CATALOG,
       variables: {
-        businessId
-      }
+        businessId,
+      },
     }).valueChanges.pipe(map(({ data }) => data.category));
   }
 
@@ -33,7 +33,7 @@ export class CatalogService {
     return this.apollo.watchQuery<{ category: ICategory[] }>({
       query: GET_ALL_CATEGORIES,
       variables: {
-        businessId
+        businessId,
       },
     }).valueChanges.pipe(map(({ data }) => data.category));
   }
@@ -41,14 +41,13 @@ export class CatalogService {
     return this.apollo.watchQuery<{ category_by_pk: ICategory }>({
       query: GET_CATEGORY,
       variables: {
-        categoryId
-      }
+        categoryId,
+      },
     }).valueChanges.pipe(map(({ data }) => data.category_by_pk));
   }
 
   public insertCategory(category: ICategory) {
     delete category.id;
-    console.log(category);
     return this.apollo.mutate<ICategory>({
       mutation: INSERT_CATEGORY,
       variables: {
@@ -56,21 +55,21 @@ export class CatalogService {
           business_id: category.business_id,
           name: category.name,
           name_languages: { data: category.name_languages },
-          parent_category: category.parent_category
-        }
+          parent_category: category.parent_category,
+        },
       },
       refetchQueries: [
         {
           query: GET_ALL_CATEGORIES,
-          variables: { businessId: category.business_id }
+          variables: { businessId: category.business_id },
         },
         {
           query: GET_CATALOG,
           variables: {
-            businessId: category.business_id
-          }
-        }
-      ]
+            businessId: category.business_id,
+          },
+        },
+      ],
     });
   }
 
@@ -81,24 +80,24 @@ export class CatalogService {
         id: category.id,
         name: category.name,
         parent_category: category.parent_category,
-        languages: category.name_languages.map((lang) => ({ ...lang, category_id: category.id }))
+        languages: category.name_languages.map((lang) => ({ ...lang, category_id: category.id })),
       },
       refetchQueries: [
         {
           query: GET_CATEGORY,
-          variables: { categoryId: category.id }
+          variables: { categoryId: category.id },
         },
         {
           query: GET_ALL_CATEGORIES,
-          variables: { businessId: category.business_id || businessId }
+          variables: { businessId: category.business_id || businessId },
         },
         {
           query: GET_CATALOG,
           variables: {
-            businessId
-          }
-        }
-      ]
+            businessId,
+          },
+        },
+      ],
     }).pipe(take(1));
   }
 
@@ -106,7 +105,7 @@ export class CatalogService {
     return this.apollo.mutate({
       mutation: REMOVE_CATEGORY,
       variables: {
-        id: categoryId
+        id: categoryId,
       },
       awaitRefetchQueries: true,
       refetchQueries: [
@@ -117,10 +116,10 @@ export class CatalogService {
         {
           query: GET_CATALOG,
           variables: {
-            businessId
-          }
-        }
-      ]
+            businessId,
+          },
+        },
+      ],
     });
   }
 
@@ -128,16 +127,16 @@ export class CatalogService {
     return this.apollo.watchQuery<{ product: IProduct[] }>({
       query: GET_ALL_PRODUCTS,
       variables: {
-        businessId
-      }
+        businessId,
+      },
     }).valueChanges.pipe(map(({ data }) => data.product));
   }
   public getProductById(productId: string) {
     return this.apollo.watchQuery<{ product_by_pk: IProduct }>({
       query: GET_PRODUCT_BY_ID,
       variables: {
-        id: productId
-      }
+        id: productId,
+      },
     }).valueChanges.pipe(map(({ data }) => data.product_by_pk));
   }
 
@@ -158,20 +157,20 @@ export class CatalogService {
           business_id: product.business_id,
           name_languages: { data: product.name_languages },
           description_languages: { data: product.description_languages },
-        }
+        },
       },
       refetchQueries: [{
         query: GET_ALL_PRODUCTS,
         variables: {
-          businessId: product.business_id
-        }
+          businessId: product.business_id,
+        },
       },
       {
         query: GET_CATALOG,
         variables: {
-          businessId: product.business_id
-        }
-      }]
+          businessId: product.business_id,
+        },
+      }],
     });
   }
   public editProduct(product: IProduct) {
@@ -186,27 +185,27 @@ export class CatalogService {
         feature_image: product.feature_image,
         price: product.price,
         name_languages: product.name_languages.map((lang) => ({ ...lang, product_id: product.id })),
-        description_languages: product.name_languages.map((lang) => ({ ...lang, product_id: product.id }))
+        description_languages: product.name_languages.map((lang) => ({ ...lang, product_id: product.id })),
       },
       refetchQueries: [
         {
           query: GET_ALL_PRODUCTS,
           variables: {
-            businessId: product.business_id
-          }
+            businessId: product.business_id,
+          },
         },
         {
           query: GET_PRODUCT_BY_ID,
           variables: {
-            id: product.id
-          }
+            id: product.id,
+          },
         },
         {
           query: GET_CATALOG,
           variables: {
-            businessId: product.business_id
-          }
-        }]
+            businessId: product.business_id,
+          },
+        }],
     });
   }
 
@@ -214,21 +213,21 @@ export class CatalogService {
     return this.apollo.mutate<IProduct>({
       mutation: REMOVE_PRODUCT,
       variables: {
-        id: productId
+        id: productId,
       },
       refetchQueries: [
         {
           query: GET_ALL_PRODUCTS,
           variables: {
-            businessId
-          }
+            businessId,
+          },
         },
         {
           query: GET_CATALOG,
           variables: {
-            businessId
-          }
-        }]
+            businessId,
+          },
+        }],
     });
   }
 }

@@ -1,4 +1,4 @@
-import { Subject, Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AuthUser } from './auth';
 
 const tokenSubject = new Subject<string>();
@@ -10,7 +10,7 @@ const defaultUser: AuthUser = {
     nickname: 'test',
     picture: '',
     sub: '"auth0|122334abcdef"',
-    updated_at: '2020-04-25T08:28:17.576Z'
+    updated_at: '2020-04-25T08:28:17.576Z',
 };
 export class AuthServiceMock {
     public get user(): AuthUser { return defaultUser; }

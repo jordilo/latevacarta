@@ -1,14 +1,14 @@
-import { switchMap, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { CatalogService } from '../../api/catalog.service';
-import { ICategory } from 'src/app/api/catalog';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
+import { ICategory } from 'src/app/api/catalog';
+import { CatalogService } from '../../api/catalog.service';
 
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.css']
+  styleUrls: ['./category-list.component.css'],
 })
 export class CategoryListComponent implements OnInit {
 

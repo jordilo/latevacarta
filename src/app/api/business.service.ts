@@ -1,20 +1,20 @@
-import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { IBusiness, IBusinesMeta } from './business';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ACCOUNT_ID_KEY } from '../constants';
+import { IBusinesMeta, IBusiness } from './business';
 import {
   BUSINESS_FULL_QUERY,
   BUSINESS_ID_QUERY,
-  INSERT_BUSINESS,
-  EDIT_BUSINESS,
   DELETE_BUSINESS,
-  REMOVE_METADATA
+  EDIT_BUSINESS,
+  INSERT_BUSINESS,
+  REMOVE_METADATA,
 } from './business.queries';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BusinessService {
 
@@ -22,13 +22,13 @@ export class BusinessService {
 
   public getAll(): Observable<IBusiness[]> {
     return this.apollo.watchQuery<{ business: IBusiness[] }>({
-      query: BUSINESS_FULL_QUERY
+      query: BUSINESS_FULL_QUERY,
     }).valueChanges.pipe(map((response) => response.data.business));
   }
   public getById(id: string): Observable<IBusiness> {
     return this.apollo.subscribe<{ business_by_pk: IBusiness }>({
       query: BUSINESS_ID_QUERY,
-      variables: { id }
+      variables: { id },
     }).pipe(map((response) => response.data.business_by_pk));
   }
   public create(business: IBusiness): Observable<any> {
@@ -40,21 +40,21 @@ export class BusinessService {
       business_meta: { data: business.business_meta },
       default_lang: business.default_lang,
       languages: {
-        data: business.languages
+        data: business.languages,
       },
       address: {
-        data: business.address
-      }
+        data: business.address,
+      },
     };
     return this.apollo.mutate<any>({
       // query: BUSINESS_FULL_QUERY
       mutation: INSERT_BUSINESS,
       variables: {
-        business: businnesGQL
+        business: businnesGQL,
       },
       refetchQueries: [
-        { query: BUSINESS_FULL_QUERY }
-      ]
+        { query: BUSINESS_FULL_QUERY },
+      ],
     }).pipe(map(({ data }) => data.insert_business_one));
   }
 
@@ -67,15 +67,15 @@ export class BusinessService {
         name: business.name,
         type: business.type,
         default_lang: business.default_lang,
-        languages
+        languages,
       },
       refetchQueries: [
         { query: BUSINESS_FULL_QUERY },
         {
           query: BUSINESS_ID_QUERY,
-          variables: { id: business.id }
-        }
-      ]
+          variables: { id: business.id },
+        },
+      ],
     });
   }
 
@@ -86,8 +86,8 @@ export class BusinessService {
       mutation: REMOVE_METADATA,
       variables: {
         metadata,
-        businessId
-      }
+        businessId,
+      },
     });
   }
 
@@ -95,11 +95,11 @@ export class BusinessService {
     return this.apollo.mutate<IBusiness>({
       mutation: DELETE_BUSINESS,
       variables: {
-        id: businessId
+        id: businessId,
       },
       refetchQueries: [
-        { query: BUSINESS_FULL_QUERY }
-      ]
+        { query: BUSINESS_FULL_QUERY },
+      ],
     });
   }
 }

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NEVER } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { AuthRoutes } from './auth.routes';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-signin',
-  templateUrl: './auth.password-reset.component.html'
+  templateUrl: './auth.password-reset.component.html',
 })
 export class AuthPasswordResetComponent implements OnInit {
 
@@ -28,7 +28,7 @@ export class AuthPasswordResetComponent implements OnInit {
 
   public ngOnInit() {
     this.pswResetForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
     });
   }
 

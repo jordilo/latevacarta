@@ -1,8 +1,8 @@
-import { ILanguage } from './../../api/metadata.d';
 import { Pipe, PipeTransform } from '@angular/core';
+import { ILanguage } from './../../api/metadata.d';
 
 @Pipe({
-  name: 'filterLanguages'
+  name: 'filterLanguages',
 })
 export class FilterLanguagesPipe implements PipeTransform {
 

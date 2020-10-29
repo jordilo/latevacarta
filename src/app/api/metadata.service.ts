@@ -1,12 +1,12 @@
+import { Injectable } from '@angular/core';
+import { Apollo } from 'apollo-angular';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GET_LANGUAGES } from './medatata.queries';
 import { ILanguage } from './metadata.d';
-import { Observable } from 'rxjs';
-import { Apollo } from 'apollo-angular';
-import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MetadataService {
 
@@ -14,7 +14,7 @@ export class MetadataService {
 
   public getLanguages(): Observable<ILanguage[]> {
     return this.apollo.watchQuery<{ language: ILanguage[] }>({
-      query: GET_LANGUAGES
+      query: GET_LANGUAGES,
     }).valueChanges.pipe(map(({ data }) => data.language));
   }
 }

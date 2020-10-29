@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { IBusiness } from 'src/app/api/business';
 import { ActivatedRoute } from '@angular/router';
-import { BusinessService } from 'src/app/api/business.service';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { IBusiness } from 'src/app/api/business';
+import { BusinessService } from 'src/app/api/business.service';
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
-  styleUrls: ['./catalog.component.css']
+  styleUrls: ['./catalog.component.css'],
 })
 export class CatalogComponent implements OnInit {
 

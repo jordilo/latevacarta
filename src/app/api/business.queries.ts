@@ -84,7 +84,6 @@ mutation UpdateBusiness(
 
 }`;
 
-
 export const DELETE_BUSINESS = gql`
 mutation EditAddress($id: uuid!) {
     delete_business_by_pk(id: $id) {

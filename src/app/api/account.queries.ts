@@ -31,7 +31,6 @@ query GetAccounts {
 }
 `;
 
-
 export const UPDATE_ACCOUNT = gql`
 mutation UpdateAccount(
   $id: uuid!,

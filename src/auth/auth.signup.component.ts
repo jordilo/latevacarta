@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NEVER } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 import { samePassword } from './validators';
 
 const pswStrength = /^(?:([A-Z])*([a-z])*(\d)*(\W)*){8,12}$/;
 
 @Component({
   selector: 'app-signup',
-  templateUrl: './auth.signup.component.html'
+  templateUrl: './auth.signup.component.html',
 })
 export class AuthSignupComponent implements OnInit {
 

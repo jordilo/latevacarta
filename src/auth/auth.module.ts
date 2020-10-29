@@ -1,48 +1,47 @@
-import { NotAuthGuard } from './not-auth.guard';
-import { AuthHttpInterceptorService } from './auth.http.interceptor';
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './auth.service';
-import { CallbackComponent } from './callback.component';
-import { AuthGuard } from './auth.guard';
+import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from './admin.guard';
 import { AuthConfig } from './auth';
 import { AuthConfigService } from './auth-config.service';
+import { AuthGuard } from './auth.guard';
+import { AuthHttpInterceptorService } from './auth.http.interceptor';
+import { AuthPasswordResetComponent } from './auth.password-reset.component';
+import { AuthRoutes } from './auth.routes';
+import { AuthService } from './auth.service';
 import { AuthSigninComponent } from './auth.signin.component';
 import { AuthSignupComponent } from './auth.signup.component';
-import { CommonModule } from '@angular/common';
-import { AuthPasswordResetComponent } from './auth.password-reset.component';
-import { RouterModule, Routes } from '@angular/router';
-import { AuthRoutes } from './auth.routes';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AdminGuard } from './admin.guard';
-
+import { CallbackComponent } from './callback.component';
+import { NotAuthGuard } from './not-auth.guard';
 
 const routes: Routes = [
   {
     path: AuthRoutes.CALLBACK,
-    component: CallbackComponent
+    component: CallbackComponent,
   },
   {
     path: AuthRoutes.SIGNIN,
     component: AuthSigninComponent,
     canActivate: [
-      NotAuthGuard
-    ]
+      NotAuthGuard,
+    ],
   },
   {
     path: AuthRoutes.PASSWORD_RESET,
     component: AuthPasswordResetComponent,
     canActivate: [
-      NotAuthGuard
-    ]
+      NotAuthGuard,
+    ],
   },
   {
     path: AuthRoutes.SIGNUP,
     component: AuthSignupComponent,
     canActivate: [
-      NotAuthGuard
-    ]
-  }
+      NotAuthGuard,
+    ],
+  },
 ];
 
 @NgModule({
@@ -60,9 +59,9 @@ export class AuthModule {
         {
           provide: HTTP_INTERCEPTORS,
           useClass: AuthHttpInterceptorService,
-          multi: true
-        }
-      ]
+          multi: true,
+        },
+      ],
     };
   }
 }

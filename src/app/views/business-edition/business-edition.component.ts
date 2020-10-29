@@ -1,17 +1,17 @@
-import { AddressService } from './../../api/address.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin, Observable, combineLatest } from 'rxjs';
-import { mergeMap, switchMap } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 import { IBusiness } from 'src/app/api/business';
 import { BusinessService } from 'src/app/api/business.service';
 import { ILanguage } from 'src/app/api/metadata';
 import { MetadataService } from 'src/app/api/metadata.service';
+import { AddressService } from './../../api/address.service';
 
 @Component({
   selector: 'app-business-edition',
   templateUrl: './business-edition.component.html',
-  styleUrls: ['./business-edition.component.css']
+  styleUrls: ['./business-edition.component.css'],
 })
 export class BusinessEditionComponent implements OnInit {
 
@@ -30,9 +30,9 @@ export class BusinessEditionComponent implements OnInit {
       .pipe(mergeMap(({ businessId }) => {
         return combineLatest([
           this.businessService.getById(businessId),
-          this.metadata.getLanguages()
+          this.metadata.getLanguages(),
         ]);
-      }
+      },
       ));
   }
 
@@ -40,8 +40,8 @@ export class BusinessEditionComponent implements OnInit {
     forkJoin([
       this.businessService.edit(business),
       this.businessService.setMetadata(business.business_meta, business.id),
-      this.addressService.updateAddress(business.address)
-    ]
+      this.addressService.updateAddress(business.address),
+    ],
     ).subscribe(() => this.router.navigate(['/business']));
   }
 }

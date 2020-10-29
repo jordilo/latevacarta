@@ -8,7 +8,7 @@ describe('BusinessListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BusinessListComponent ]
+      declarations: [ BusinessListComponent ],
     })
     .compileComponents();
   }));

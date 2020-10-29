@@ -1,11 +1,11 @@
-import { AccountService } from './api/account.service';
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { filter, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 import { environment } from '../environments/environment';
-import { Observable } from 'rxjs';
-import { filter, tap, switchMap } from 'rxjs/operators';
-import { ACCOUNT_ID_KEY } from './constants';
 import { IAccount } from './api/account.d';
+import { AccountService } from './api/account.service';
+import { ACCOUNT_ID_KEY } from './constants';
 @Component({
   selector: 'app-root',
   styleUrls: ['./app.component.scss'],
@@ -13,10 +13,9 @@ import { IAccount } from './api/account.d';
 })
 export class AppComponent {
 
-
   public appInfo = {
     name: environment.appName,
-    version: environment.version
+    version: environment.version,
   };
   public get isUserLogged(): boolean {
     return this.auth.isLoggedIn;
@@ -28,7 +27,7 @@ export class AppComponent {
       this.auth.user$.pipe(
         filter((user) => user !== null || Boolean(localStorage.getItem(ACCOUNT_ID_KEY))),
         switchMap(() => this.accountService.getAccount()),
-        tap((userFromDb) => localStorage.setItem(ACCOUNT_ID_KEY, userFromDb.id))
+        tap((userFromDb) => localStorage.setItem(ACCOUNT_ID_KEY, userFromDb.id)),
       );
   }
 
