@@ -69,6 +69,7 @@ query GetProducts($businessId : uuid!) {
     }
     business_id
     description
+    feature_image
     id
     name
     price
@@ -92,6 +93,7 @@ query GetProductById($id:uuid!) {
     business_id
     category_id
     description
+    feature_image
     id
     name
     price

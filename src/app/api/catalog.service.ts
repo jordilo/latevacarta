@@ -142,7 +142,6 @@ export class CatalogService {
 
   public insertProduct(product: IProduct) {
     delete product.id;
-    product.feature_image = 'null';
     return this.apollo.mutate<IProduct>({
       mutation: INSERT_PRODUCT,
       variables: {

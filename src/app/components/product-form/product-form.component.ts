@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IBusinessLanguage } from 'src/app/api/business';
 import { ILanguage } from 'src/app/api/metadata';
+import { UploadFileService } from 'src/app/api/upload-file.service';
 import { ICategory, IProduct } from '../../api/catalog';
 
 @Component({
@@ -22,10 +23,11 @@ export class ProductFormComponent implements OnInit {
   public nameForm: FormArray;
   public descriptionForm: FormArray;
   public availableLanguages: any[];
-  constructor(private fb: FormBuilder) { }
+  public productCopy: IProduct;
+  constructor(private fb: FormBuilder, private uploadFileService: UploadFileService) { }
 
   public ngOnInit(): void {
-
+    this.productCopy = { ...this.product };
     this.availableLanguages = this.businessLanguages
       .reduce((acc, current) => {
         const language = this.languages.find(({ code }) => code === current.language);
@@ -53,6 +55,7 @@ export class ProductFormComponent implements OnInit {
       business_id: [this.product?.business_id],
       name_languages: this.nameForm,
       description_languages: this.descriptionForm,
+      featured_image: [this.product?.feature_image],
     });
   }
 
@@ -74,5 +77,19 @@ export class ProductFormComponent implements OnInit {
     } as IProduct;
     // name_languages: this.nameForm.value.map(({ language, value }) => ({ language, value }))
     this.submitForm.emit(product);
+  }
+
+  public selectFile(event: InputEvent, type: string) {
+    const file = (event.target as any).files[0];
+    this.uploadFileService.upload(type, 'accountId', file)
+      .subscribe(
+        ({ Location }: any) => {
+          if (!this.productCopy) {
+            this.productCopy = {} as IProduct;
+          }
+          this.productCopy.feature_image = Location;
+          this.productForm.patchValue({ feature_image: Location });
+        },
+      );
   }
 }
