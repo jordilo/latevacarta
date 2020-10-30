@@ -8,6 +8,7 @@ import { AuthModule } from '../auth/auth.module';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BackendUrlProvider } from './backend-url';
 import { ComponentsModule } from './components/components.module';
 import { GraphQLModule } from './graphql.module';
 import { HeaderComponent } from './header.component';
@@ -74,7 +75,7 @@ import { ProfileComponent } from './views/profile/profile.component';
     ReactiveFormsModule,
     NgxQRCodeModule,
   ],
-  providers: [],
+  providers: [BackendUrlProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

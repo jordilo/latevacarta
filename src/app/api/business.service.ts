@@ -36,6 +36,7 @@ export class BusinessService {
     const businnesGQL = {
       name: business.name,
       type: business.type,
+      logotype: business.logotype,
       account_id: localStorage.getItem(ACCOUNT_ID_KEY),
       business_meta: { data: business.business_meta },
       default_lang: business.default_lang,
@@ -66,6 +67,7 @@ export class BusinessService {
         id: business.id,
         name: business.name,
         type: business.type,
+        logotype: business.logotype,
         default_lang: business.default_lang,
         languages,
       },

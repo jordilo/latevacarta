@@ -5,6 +5,7 @@ export interface IBusiness {
   name: string;
   slug: string;
   state: string;
+  logotype: string;
   type: 'BAR' | 'PUB' | 'RES';
   business_meta: IBusinesMeta[];
   default_lang: string;

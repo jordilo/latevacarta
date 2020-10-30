@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { IBusiness } from 'src/app/api/business';
-import { BusinessService } from 'src/app/api/business.service';
 import { ILanguage } from 'src/app/api/metadata';
+import { UploadFileService } from 'src/app/api/upload-file.service';
 import { IBusinesMeta } from '../../api/business';
 
 const fonts = [
@@ -51,7 +50,7 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
   public currentFont: IBusinesMeta;
 
   public languagesSubscription: Subscription;
-  constructor(private fb: FormBuilder, private businessService: BusinessService) { }
+  constructor(private fb: FormBuilder, private uploadFileService: UploadFileService) { }
 
   public ngOnInit(): void {
 
@@ -73,6 +72,7 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
       id: [this.business.id],
       name: [this.business.name, Validators.required],
       type: [this.business.type, Validators.required],
+      logotype: this.business?.logotype,
       default_lang: [this.business?.default_lang || defaultLang, Validators.required],
       languages: this.languagesForm,
       addLanguage: this.fb.group({ code: [null, Validators.required] }),
@@ -101,6 +101,7 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
       id: this.busninessForm.value.id,
       name: this.busninessForm.value.name,
       type: this.busninessForm.value.type,
+      logotype: this.busninessForm.value.logotype,
       address: this.busninessForm.value.address,
       default_lang: this.busninessForm.value.default_lang,
       languages: this.busninessForm.value.languages.map(({ code: language }) => ({ language })),
@@ -126,5 +127,16 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
   }
   public setLanguageAsDefault(languageEnum: string) {
     this.busninessForm.patchValue({ default_lang: languageEnum }, { emitEvent: false });
+  }
+
+  public selectFile(event: InputEvent, type: string) {
+    const file = (event.target as any).files[0];
+    this.uploadFileService.upload(type, 'accountId', file)
+      .subscribe(
+        ({ Location }: any) => {
+          this.business.logotype = Location;
+          this.busninessForm.patchValue({ logotype: Location });
+        },
+      );
   }
 }

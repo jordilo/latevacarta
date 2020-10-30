@@ -3,6 +3,8 @@ const domain = 'jordi-lopez.eu.auth0.com';
 
 export const environment = {
   production: false,
+  graphQlUrl: 'https://latevacarta.herokuapp.com/v1/graphql',
+  backendUrl: 'http://backend.latevacarta.click:3000/',
   appName: jsonPackage.name,
   version: 'dev.' + jsonPackage.version,
   auth: {

@@ -1,4 +1,4 @@
-<form class="col-md-6"
+<form class="col-lg-6"
       [formGroup]="busninessForm"
       (ngSubmit)="sendForm()">
 
@@ -10,6 +10,16 @@
     <label>Name</label>
     <input class="form-control"
            formControlName="name" />
+  </div>
+  <div class="form-group">
+    <label>Logo</label>
+    <div *ngIf="business.logotype">
+      <img [src]="business.logotype"
+           width="150">
+    </div>
+    <input class="form-control"
+           type="file"
+           (change)="selectFile($event, 'logotype')" />
   </div>
   <div class="form-group">
     <label>Type</label>
