@@ -5,7 +5,7 @@ export const environment = {
   production: true,
   appName: 'La teva carta ',
   graphQlUrl: 'https://latevacarta.herokuapp.com/v1/graphql',
-  backendUrl: 'http://backend.latevacarta.click:3000/',
+  backendUrl: 'https://backend-tlc.herokuapp.com/',
   version: jsonPackage.version,
   auth: {
     clientID: 'WhSzGqyXoczFWt1GOXaTbV7kevavhfIh',
