@@ -24,6 +24,7 @@ import { MainComponent } from './views/main/main.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { ProductCreationComponent } from './views/product-creation/product-creation.component';
 import { ProductEditionComponent } from './views/product-edition/product-edition.component';
+import { ProductHighlightComponent } from './views/product-highlight/product-highlight.component';
 import { ProductListComponent } from './views/product-list/product-list.component';
 import { ProfileComponent } from './views/profile/profile.component';
 
@@ -115,6 +116,10 @@ const routes: Routes = [
                     component: ProductEditionComponent,
                   },
                 ],
+              },
+              {
+                path: 'highlighted-products',
+                component: ProductHighlightComponent,
               },
             ],
           },

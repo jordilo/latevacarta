@@ -28,3 +28,9 @@ export interface IProduct {
     name_languages: IProductTranslations[];
     description_languages: IProductTranslations[];
 }
+
+export interface IProductHighlight {
+    product_id: string;
+    product: IProduct;
+    business_id: string;
+}

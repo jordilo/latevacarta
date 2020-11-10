@@ -206,3 +206,29 @@ query GetCatalogByBusiness($businessId: uuid!) {
 `;
 
 //#endregion
+
+//#region Products Highligted
+export const GET_PRODUCTS_HIGHLIGHT = gql`
+query GetProductsHighlighted($businessId: uuid = "") {
+  product_highlight(where: {business_id: {_eq: $businessId}}){
+    product_id
+    product{
+      name
+      id
+    }
+  }
+}`;
+
+export const INSERT_PRODUCTS_HIGHLIGHT = gql`
+mutation UpdateHighlightedProducts($businessId: uuid = "" , $productsHighlighted: [product_highlight_insert_input!]!) {
+  delete_product_highlight(where: {business_id: {_eq: $businessId}}) {
+    affected_rows
+  }
+  insert_product_highlight(objects: $productsHighlighted){
+    affected_rows
+  }
+}
+
+`;
+
+//#endregion

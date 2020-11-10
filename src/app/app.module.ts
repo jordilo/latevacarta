@@ -35,6 +35,8 @@ import { ProductCreationComponent } from './views/product-creation/product-creat
 import { ProductEditionComponent } from './views/product-edition/product-edition.component';
 import { ProductListComponent } from './views/product-list/product-list.component';
 import { ProfileComponent } from './views/profile/profile.component';
+import { ProductHighlightComponent } from './views/product-highlight/product-highlight.component';
+import { FilterUsedProductsPipe } from './views/product-highlight/filter-used-products.pipe';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,8 @@ import { ProfileComponent } from './views/profile/profile.component';
     AccountEditionComponent,
     BusinessQrComponent,
     AccountListComponent,
+    ProductHighlightComponent,
+    FilterUsedProductsPipe,
   ],
   imports: [
     AuthModule.forRoot(environment.auth),

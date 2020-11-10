@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { map, take } from 'rxjs/operators';
-import { ICategory, IProduct } from './catalog';
+import { ICategory, IProduct, IProductHighlight } from './catalog';
 import {
   GET_ALL_CATEGORIES,
   GET_ALL_PRODUCTS,
   GET_CATEGORY,
   GET_PRODUCT_BY_ID,
+  GET_PRODUCTS_HIGHLIGHT,
   INSERT_CATEGORY,
   REMOVE_CATEGORY,
   UPDATE_CATEGORY,
 } from './catalog.queries';
-import { GET_CATALOG, INSERT_PRODUCT, REMOVE_PRODUCT, UPDATE_PRODUCT } from './catalog.queries';
+import { GET_CATALOG, INSERT_PRODUCT, INSERT_PRODUCTS_HIGHLIGHT, REMOVE_PRODUCT, UPDATE_PRODUCT } from './catalog.queries';
 
 @Injectable({
   providedIn: 'root',
@@ -227,6 +228,30 @@ export class CatalogService {
             businessId,
           },
         }],
+    });
+  }
+
+  public getHightlightProducts(businessId: string) {
+    return this.apollo.watchQuery<{ product_highlight: IProductHighlight[] }>({
+      query: GET_PRODUCTS_HIGHLIGHT,
+      variables: {
+        businessId,
+      },
+    }).valueChanges.pipe(map(({ data }) => data.product_highlight));
+  }
+  public addHighlightProducts(productsIds: string[], businessId: string) {
+    return this.apollo.mutate<IProduct>({
+      mutation: INSERT_PRODUCTS_HIGHLIGHT,
+      variables: {
+        businessId,
+        productsHighlighted: productsIds.map((product_id) => ({ product_id, business_id: businessId })),
+      },
+      refetchQueries: [{
+        query: GET_PRODUCTS_HIGHLIGHT,
+        variables: {
+          businessId,
+        },
+      }],
     });
   }
 }
