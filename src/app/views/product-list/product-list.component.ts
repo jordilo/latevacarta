@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { IProduct } from 'src/app/api/catalog';
 import { CatalogService } from '../../api/catalog.service';
+import { InsertFullCatalog } from '../../api/utils';
 
 @Component({
   selector: 'app-product-list',
@@ -12,13 +13,21 @@ import { CatalogService } from '../../api/catalog.service';
 })
 export class ProductListComponent implements OnInit {
 
+  public businessId$: Observable<string>;
   public products$: Observable<IProduct[]>;
 
   constructor(private catalogService: CatalogService, private router: ActivatedRoute) { }
 
   public ngOnInit(): void {
-    this.products$ = this.router.params
-      .pipe(switchMap(({ businessId }) => this.catalogService.getProducts(businessId)));
+    this.businessId$ = this.router.params.pipe(map(({ businessId }) => businessId));
+
+    this.products$ = this.businessId$
+      .pipe(switchMap((businessId) => this.catalogService.getProducts(businessId)));
+
+  }
+
+  public insertCatalog(data: InsertFullCatalog) {
+    this.catalogService.insertFullCatalog(data).subscribe();
   }
 
   public removeProduct(productId: string, businessId: string) {

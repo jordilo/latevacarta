@@ -9,6 +9,7 @@ import { CategoryFormComponent } from './category-form/category-form.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { UploadExcelComponent } from './upload-excel/upload-excel.component';
 
 @NgModule({
   exports: [
@@ -17,7 +18,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     CategoryFormComponent,
     ProductFormComponent,
     AccountFormComponent,
-    SidebarComponent],
+    SidebarComponent,
+    UploadExcelComponent],
   declarations: [
     LoaderComponent,
     BusinessFormComponent,
@@ -25,7 +27,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     ProductFormComponent,
     AccountFormComponent,
     SidebarComponent,
-    FilterLanguagesPipe],
+    FilterLanguagesPipe,
+    UploadExcelComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

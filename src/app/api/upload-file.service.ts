@@ -7,10 +7,7 @@ import { BACKEND_URL } from '../backend-url';
 })
 export class UploadFileService {
 
-  constructor(@Inject(BACKEND_URL) private backendUrl: string, private http: HttpClient) {
-    // tslint:disable-next-line:no-console
-    console.log(this.backendUrl);
-  }
+  constructor(@Inject(BACKEND_URL) private backendUrl: string, private http: HttpClient) { }
 
   public upload(type: string, accountId: string, file: any) {
     const formData = new FormData();

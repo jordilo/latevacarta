@@ -9,10 +9,12 @@ import {
   GET_PRODUCT_BY_ID,
   GET_PRODUCTS_HIGHLIGHT,
   INSERT_CATEGORY,
+  INSERT_FULL_CATEGORY,
   REMOVE_CATEGORY,
   UPDATE_CATEGORY,
 } from './catalog.queries';
 import { GET_CATALOG, INSERT_PRODUCT, INSERT_PRODUCTS_HIGHLIGHT, REMOVE_PRODUCT, UPDATE_PRODUCT } from './catalog.queries';
+import { InsertFullCatalog } from './utils';
 
 @Injectable({
   providedIn: 'root',
@@ -68,6 +70,36 @@ export class CatalogService {
           query: GET_CATALOG,
           variables: {
             businessId: category.business_id,
+          },
+        },
+      ],
+    });
+  }
+
+  public insertFullCatalog(categories: InsertFullCatalog) {
+    const businessId = categories[0].business_id;
+    return this.apollo.mutate<ICategory>({
+      mutation: INSERT_FULL_CATEGORY,
+      variables: {
+        categories,
+      },
+      refetchQueries: [
+        {
+          query: GET_ALL_CATEGORIES,
+          variables: {
+            businessId,
+          },
+        },
+        {
+          query: GET_CATALOG,
+          variables: {
+            businessId,
+          },
+        },
+        {
+          query: GET_ALL_PRODUCTS,
+          variables: {
+            businessId,
           },
         },
       ],

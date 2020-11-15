@@ -5,6 +5,9 @@ export const environment = {
   production: false,
   graphQlUrl: 'https://latevacarta.herokuapp.com/v1/graphql',
   backendUrl: 'https://backend-tlc.herokuapp.com/',
+  files: {
+    product_template: 'https://latevacarta.s3.eu-central-1.amazonaws.com/assets/products.xlsx',
+  },
   appName: jsonPackage.name,
   version: 'dev.' + jsonPackage.version,
   auth: {

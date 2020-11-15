@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { ICategory } from 'src/app/api/catalog';
+import { InsertFullCatalog } from 'src/app/api/utils';
 import { CatalogService } from '../../api/catalog.service';
 
 @Component({
@@ -12,6 +13,7 @@ import { CatalogService } from '../../api/catalog.service';
 })
 export class CatalogSummaryComponent implements OnInit {
 
+  public businessId$: Observable<string>;
   public catalog$: Observable<ICategory[]>;
 
   constructor(
@@ -19,9 +21,13 @@ export class CatalogSummaryComponent implements OnInit {
     private catalogService: CatalogService) { }
 
   public ngOnInit(): void {
-    // TODO fins the way to extract params from parent
-    this.catalog$ = this.activatedRoute.params
-      .pipe(switchMap(({ businessId }) => this.catalogService.getCatalog(businessId)));
+    this.businessId$ = this.activatedRoute.params.pipe(map(({ businessId }) => businessId));
+
+    this.catalog$ = this.businessId$
+      .pipe(switchMap((businessId) => this.catalogService.getCatalog(businessId)));
   }
 
+  public insertCatalog(data: InsertFullCatalog) {
+    this.catalogService.insertFullCatalog(data).subscribe();
+  }
 }

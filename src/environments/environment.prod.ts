@@ -6,6 +6,9 @@ export const environment = {
   appName: 'La teva carta ',
   graphQlUrl: 'https://latevacarta.herokuapp.com/v1/graphql',
   backendUrl: 'https://backend-tlc.herokuapp.com/',
+  files: {
+    product_template: 'https://latevacarta.s3.eu-central-1.amazonaws.com/assets/products.xlsx',
+  },
   version: jsonPackage.version,
   auth: {
     clientID: 'WhSzGqyXoczFWt1GOXaTbV7kevavhfIh',

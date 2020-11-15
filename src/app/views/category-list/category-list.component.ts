@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { ICategory } from 'src/app/api/catalog';
+import { InsertFullCatalog } from 'src/app/api/utils';
 import { CatalogService } from '../../api/catalog.service';
 
 @Component({
@@ -12,15 +13,18 @@ import { CatalogService } from '../../api/catalog.service';
 })
 export class CategoryListComponent implements OnInit {
 
+  public businessId$: Observable<string>;
   public categories$: Observable<ICategory[]>;
   public businessId: string;
   constructor(private router: ActivatedRoute, private catalogService: CatalogService) { }
 
   public ngOnInit(): void {
-    this.categories$ = this.router.params
+    this.businessId$ = this.router.params.pipe(map(({ businessId }) => businessId));
+
+    this.categories$ = this.businessId$
       .pipe(
-        tap(({ businessId }) => this.businessId = businessId),
-        switchMap(({ businessId }) => this.catalogService.getCategories(businessId)));
+        tap((businessId) => this.businessId = businessId),
+        switchMap((businessId) => this.catalogService.getCategories(businessId)));
 
   }
   public removeCategory(categoryId: string, businessId: string) {
@@ -31,5 +35,8 @@ export class CategoryListComponent implements OnInit {
           this.categories$ = this.catalogService.getCategories(this.businessId);
         });
     }
+  }
+  public insertCatalog(data: InsertFullCatalog) {
+    this.catalogService.insertFullCatalog(data).subscribe();
   }
 }

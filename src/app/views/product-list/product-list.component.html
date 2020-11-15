@@ -17,6 +17,12 @@
     <tr *ngIf="!products.length">
         <td>There are any product <a [routerLink]="['create']">create your first one</a></td>
     </tr>
+    <tr *ngIf="!products.length">
+        <td>
+            <app-upload-excel [businessId]="businessId$ | async"
+                              (fileChange)="insertCatalog($event)"></app-upload-excel>
+        </td>
+    </tr>
 </table>
 <ng-template #loading>
     <app-loader></app-loader>

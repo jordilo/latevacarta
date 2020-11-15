@@ -1,5 +1,16 @@
 import { gql } from 'apollo-angular';
 
+export const INSERT_FULL_CATEGORY = gql`
+mutation UpdateCategories($categories: [category_insert_input!]!) {
+  insert_category(objects: $categories){
+    affected_rows
+    returning{
+      id
+    }
+  }
+}
+`;
+
 //#region Categories
 export const GET_ALL_CATEGORIES = gql`
 query GetAllCategories($businessId: uuid!) {

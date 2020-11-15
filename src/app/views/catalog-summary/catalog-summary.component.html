@@ -14,6 +14,10 @@
             <span class="badge badge-primary badge-pill">{{product.price}} €</span>
         </li>
     </ul>
+    <div *ngIf="!catalog.length">
+        <app-upload-excel [businessId]="businessId$ | async"
+                          (fileChange)="insertCatalog($event)"></app-upload-excel>
+    </div>
 </div>
 <ng-template #loading>
     <app-loader></app-loader>
