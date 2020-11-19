@@ -1,11 +1,12 @@
+import { AgmCoreModule } from '@agm/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { environment } from 'src/environments/environment';
 import { AuthModule } from '../auth/auth.module';
-import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BackendUrlProvider } from './backend-url';
@@ -33,11 +34,10 @@ import { MainComponent } from './views/main/main.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { ProductCreationComponent } from './views/product-creation/product-creation.component';
 import { ProductEditionComponent } from './views/product-edition/product-edition.component';
+import { FilterUsedProductsPipe } from './views/product-highlight/filter-used-products.pipe';
+import { ProductHighlightComponent } from './views/product-highlight/product-highlight.component';
 import { ProductListComponent } from './views/product-list/product-list.component';
 import { ProfileComponent } from './views/profile/profile.component';
-import { ProductHighlightComponent } from './views/product-highlight/product-highlight.component';
-import { FilterUsedProductsPipe } from './views/product-highlight/filter-used-products.pipe';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +78,10 @@ import { FilterUsedProductsPipe } from './views/product-highlight/filter-used-pr
     ComponentsModule,
     ReactiveFormsModule,
     NgxQRCodeModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.googleMapsApi,
+      libraries: ['places'],
+    }),
   ],
   providers: [BackendUrlProvider],
   bootstrap: [AppComponent],

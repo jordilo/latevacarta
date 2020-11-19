@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { IBusiness } from 'src/app/api/business';
+import { IAddress, IBusiness } from 'src/app/api/business';
 import { ILanguage } from 'src/app/api/metadata';
 import { UploadFileService } from 'src/app/api/upload-file.service';
 import { IBusinesMeta } from '../../api/business';
@@ -43,14 +43,15 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
   @Input() public business: IBusiness;
   @Input() public languages: ILanguage[];
   @Output() public submitForm = new EventEmitter<IBusiness>();
-
   public busninessForm: FormGroup;
   public languagesForm: FormArray;
   public fonts = fonts;
   public currentFont: IBusinesMeta;
-
+  public places: any;
   public languagesSubscription: Subscription;
-  constructor(private fb: FormBuilder, private uploadFileService: UploadFileService) { }
+  constructor(
+    private fb: FormBuilder,
+    private uploadFileService: UploadFileService) { }
 
   public ngOnInit(): void {
 
@@ -67,7 +68,6 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
         this.setLanguageAsDefault(value[0].code);
       }
     });
-
     this.busninessForm = this.fb.group({
       id: [this.business.id],
       name: [this.business.name, Validators.required],
@@ -138,5 +138,9 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
           this.busninessForm.patchValue({ logotype: Location });
         },
       );
+  }
+
+  public addressChange(address: IAddress) {
+    this.busninessForm.patchValue({ address }, { emitEvent: false });
   }
 }

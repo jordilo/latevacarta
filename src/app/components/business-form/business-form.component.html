@@ -77,6 +77,10 @@
 
   <div formGroupName="address">
     <h3>Address</h3>
+
+    <div class="form-group">
+      <app-set-address (addressChange)="addressChange($event)"></app-set-address>
+    </div>
     <div class="form-group">
       <label>Address</label>
       <input class="form-control"
@@ -87,7 +91,7 @@
       <input class="form-control"
              formControlName="city" />
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label>Latitude</label>
       <input class="form-control"
              type="number"
@@ -98,7 +102,7 @@
       <input class="form-control"
              type="number"
              formControlName="lng" />
-    </div>
+    </div> -->
     <div class="form-group">
       <label>Postal code</label>
       <input class="form-control"

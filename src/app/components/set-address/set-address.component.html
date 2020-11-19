@@ -1,0 +1,6 @@
+<label>Search Address</label>
+<input class="form-control"
+       #searchAddress />
+<input [hidden]="!shouldRequireNumber"
+       (change)="changeAddressNumber($event)">
+<pre [innerHTML]="places?.adr_address"></pre>

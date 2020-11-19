@@ -10,6 +10,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { UploadExcelComponent } from './upload-excel/upload-excel.component';
+import { SetAddressComponent } from './set-address/set-address.component';
 
 @NgModule({
   exports: [
@@ -28,7 +29,8 @@ import { UploadExcelComponent } from './upload-excel/upload-excel.component';
     AccountFormComponent,
     SidebarComponent,
     FilterLanguagesPipe,
-    UploadExcelComponent],
+    UploadExcelComponent,
+    SetAddressComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

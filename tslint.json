@@ -2,5 +2,10 @@
   "extends": ["tslint:recommended","tslint-angular","tslint-etc"],
   "rules": {
     "no-unused-declaration": true
+  },
+  "linterOptions": {
+    "exclude": [
+        "node_modules/**/*"
+    ]
   }
 }
