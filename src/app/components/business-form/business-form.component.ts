@@ -131,7 +131,7 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
 
   public selectFile(event: InputEvent, type: string) {
     const file = (event.target as any).files[0];
-    this.uploadFileService.upload(type, 'accountId', file)
+    this.uploadFileService.upload(type, 'business-logo', file)
       .subscribe(
         ({ Location }: any) => {
           this.business.logotype = Location;

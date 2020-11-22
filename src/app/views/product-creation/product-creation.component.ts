@@ -18,6 +18,7 @@ export class ProductCreationComponent implements OnInit {
 
   public defaultProduct: IProduct;
   public data$: Observable<[ICategory[], ILanguage[], IBusinessLanguage[], string]>;
+  public businessId$: Observable<string>;
   constructor(
     private catalogService: CatalogService,
     private router: Router,
@@ -26,15 +27,16 @@ export class ProductCreationComponent implements OnInit {
     private activeRouter: ActivatedRoute) { }
 
   public ngOnInit(): void {
-
-    this.data$ = this.activeRouter.params
-      .pipe(switchMap(({ businessId }) =>
-        combineLatest([
-          this.catalogService.getCategories(businessId),
-          this.metaService.getLanguages(),
-          this.businessService.getById(businessId).pipe(map(({ languages }) => languages)),
-          this.businessService.getById(businessId).pipe(map(({ default_lang }) => default_lang)),
-        ])));
+    this.businessId$ = this.activeRouter.params.pipe(map(({ businessId }) => businessId));
+    this.data$ = this.businessId$
+      .pipe(
+        switchMap((businessId) =>
+          combineLatest([
+            this.catalogService.getCategories(businessId),
+            this.metaService.getLanguages(),
+            this.businessService.getById(businessId).pipe(map(({ languages }) => languages)),
+            this.businessService.getById(businessId).pipe(map(({ default_lang }) => default_lang)),
+          ])));
   }
 
   public saveProduct(category: IProduct) {

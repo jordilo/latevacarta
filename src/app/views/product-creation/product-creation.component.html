@@ -2,6 +2,7 @@
                   *ngIf="data$ | async as data ; else loading"
                   [categories]="data[0]"
                   [languages]="data[1]"
+                  [businessId]="businessId$ | async"
                   [businessLanguages]="data[2]"
                   [defaultLanguage]="data[3]"
                   [product]="defaultProduct"></app-product-form>

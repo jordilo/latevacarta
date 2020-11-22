@@ -16,6 +16,7 @@ export class ProductFormComponent implements OnInit {
   @Input() public categories: ICategory[];
   @Input() public languages: ILanguage[];
   @Input() public defaultLanguage: string;
+  @Input() public businessId: string;
   @Input() public businessLanguages: IBusinessLanguage[];
 
   @Output() public submitForm = new EventEmitter<IProduct>();
@@ -81,7 +82,7 @@ export class ProductFormComponent implements OnInit {
 
   public selectFile(event: InputEvent, type: string) {
     const file = (event.target as any).files[0];
-    this.uploadFileService.upload(type, 'accountId', file)
+    this.uploadFileService.upload(type, this.businessId, file)
       .subscribe(
         ({ Location }: any) => {
           if (!this.productCopy) {
