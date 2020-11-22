@@ -7,6 +7,7 @@ import { IAccount } from './api/account.d';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-header',
+  styleUrls: ['./header.component.scss'],
   templateUrl: './header.component.html',
 })
 

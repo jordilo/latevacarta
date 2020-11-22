@@ -2,9 +2,9 @@
       [formGroup]="loginForm"
       (ngSubmit)="sendForm()">
   <img class="rounded mx-auto d-block"
-       src="../assets/logo.svg"
-       width="100"
-       height="100" />
+       src="../assets/brand/latevacarta_full-color.svg"
+       width="300"
+       height="300" />
   <div class="form-group">
     <label>Username/Email</label>
     <input class="form-control"
@@ -35,9 +35,9 @@
           id="login-button"
           [disabled]="loginForm.invalid || loginForm.disabled">ok</button>
 </form>
-<div class="col-md-4 offset-md-4">
+<!-- <div class="col-md-4 offset-md-4">
   use default login from Aut0
   <button class="btn btn-primary btn-lg"
           id="call-to-default-login"
           (click)="defaultLogin()">Default Aut0 Login</button>
-</div>
+</div> -->
