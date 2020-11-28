@@ -6,7 +6,8 @@
                     cssClass="bshadow"></ngx-qrcode>
         <h4>{{hostname}}</h4>
     </div>
-    <button class="btn btn-primary">Print</button>
+    <button (click)="print()"
+            class="btn btn-primary">Print</button>
 </div>
 <ng-template #loading>
     <app-loader></app-loader>
