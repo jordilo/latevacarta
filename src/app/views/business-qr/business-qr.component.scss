@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  .qr-print-wrapper {
+    text-align: center;
+    &.hide {
+      position: fixed;
+      top: -1999999px;
+    }
+  }
+}

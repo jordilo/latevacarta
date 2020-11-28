@@ -1,14 +1,48 @@
-<div *ngIf="url$ | async as url; else loading">
-    <div class="qr-print-wrapper">
+<ng-container *ngIf="data$ | async as data; else loading">
+    <ng-container
+                  *ngTemplateOutlet="preview;context :{id:'print',url: data.url , size: form.value.size , hide: true, business: data.business}">
+    </ng-container>
+    <form [formGroup]="form">
+
+        <select class="form-control"
+                formControlName="size">
+            <option *ngFor="let opt of sizes"
+                    [ngValue]="opt.size">
+                {{opt.name}}
+            </option>
+        </select>
+    </form>
+    <ng-template *ngTemplateOutlet="preview;context :{id:'preview',url: data.url , size: 250, business: data.business}">
+    </ng-template>
+    <button (click)="print()"
+            class="btn btn-primary">Print</button>
+</ng-container>
+
+<ng-template #preview
+             let-size="size"
+             let-id="id"
+             let-business="business"
+             let-hide="hide"
+             let-url="url">
+    <div class="qr-print-wrapper"
+         [id]="id"
+         [ngClass]="{'hide':hide}"
+         [style.width.px]="size"
+         #content>
+        <img src="../../../assets//brand/latevacarta_full-color.svg"
+             [height]="size / 3">
         <ngx-qrcode [elementType]="elementType"
                     [errorCorrectionLevel]="correctionLevel"
                     [value]="url"
+                    [width]="size"
                     cssClass="bshadow"></ngx-qrcode>
-        <h4>{{hostname}}</h4>
+        <div class="business-name"
+             [style.marginBottom.px]="size / 10"
+             [style.fontSize.px]="size / 10">{{business.name}}</div>
     </div>
-    <button (click)="print()"
-            class="btn btn-primary">Print</button>
-</div>
+
+
+</ng-template>
 <ng-template #loading>
     <app-loader></app-loader>
 </ng-template>
