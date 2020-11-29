@@ -44,6 +44,7 @@ export class BusinessQrComponent implements OnInit {
 
     this.form = this.fb.group({
       size: this.sizes[0].size,
+      copies: 1,
     });
 
     // TODO fins the way to extract params from parent
@@ -56,19 +57,23 @@ export class BusinessQrComponent implements OnInit {
     }));
     this.data$ = combineLatest([business$, url$]).pipe(map((data) => ({ business: data[0], url: data[1] })));
   }
+
   public print() {
 
     const element = this.contents.find(({ nativeElement }) => nativeElement.id === 'print');
-    // tslint:disable-next-line:no-console
-    // console.log(this.qr.qrcElement.nativeElement.querySelector('img').src);
-    html2canvas(element.nativeElement).then((canvas) => {
+    html2canvas(element.nativeElement, {
+      scrollX: 0,
+      scrollY: 0,
+      scale: 1,
+    }).then((canvas) => {
       const contentDataURL = canvas.toDataURL('image/png');
       const width = this.pxToCm(canvas.width);
       const height = this.pxToCm(canvas.height);
-      // context.drawImage(canvas, 0, 0);
-      const pdf = new jspdf('p', 'cm', [width, height]); // Generates PDF in landscape mode
-      // let pdf = new jspdf('p', 'cm', 'a4'); Generates PDF in portrait mode
-      pdf.addImage(contentDataURL, 'WEBP', 0, 0, width, height);
+      const pdf = new jspdf('p', 'cm', [width, height]);
+      pdf.addImage(contentDataURL, 'WEBP', 0, 0, width, height, 'none');
+      [...Array(this.form.value.copies - 1).keys()].forEach(() => {
+        pdf.addPage([width, height], 'p').addImage(contentDataURL, 'WEBP', 0, 0, width, height, 'none');
+      });
       pdf.save('Filename.pdf');
     });
   }
