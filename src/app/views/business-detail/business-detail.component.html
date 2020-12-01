@@ -1,10 +1,31 @@
-<div *ngIf="business$ | async as business; else loading">
-  <h1>{{business.name}}</h1>
-  <hr />
-  <a [routerLink]="['edit']"><button class="btn btn-primary">Edit</button></a>
-  <a [routerLink]="['qr']"><button class="btn btn-secondary">See QR</button></a>
-  <a [routerLink]="['catalog']"><button class="btn btn-info">Catalog</button></a>
-
+<div class="row">
+  <div class="col-md-8"
+       *ngIf="business$ | async as business; else loading">
+    <div class="card card-user">
+      <div class="image">
+        <img src="../../../assets//brand/latevacarta_background.svg"
+             alt="...">
+      </div>
+      <div class="card-body">
+        <div class="author">
+          <a [routerLink]="['..']">
+            <img class="avatar border-gray"
+                 [src]="business.logotype"
+                 alt="...">
+            <h5 class="title">{{business.name}}</h5>
+          </a>
+        </div>
+      </div>
+      <div class="card-footer">
+        <hr>
+        <div class="button-container">
+          <a [routerLink]="['edit']"><button class="btn btn-primary">Edit</button></a>
+          <a [routerLink]="['qr']"><button class="btn btn-secondary">See QR</button></a>
+          <a [routerLink]="['catalog']"><button class="btn btn-info">Catalog</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <ng-template #loading>
   <app-loader></app-loader>

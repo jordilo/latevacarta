@@ -12,4 +12,14 @@
       justify-content: center;
     }
   }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+  .qr-preview {
+    border: 1px solid #a0a0a0;
+    margin: 20px auto;
+    display: inline-block;
+    align-self: center;
+  }
 }

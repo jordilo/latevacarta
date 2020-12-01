@@ -1,48 +1,65 @@
-<ng-container *ngIf="data$ | async as data; else loading">
-    <ng-container
-                  *ngTemplateOutlet="preview;context :{id:'print',url: data.url , size: form.value.size , hide: true, business: data.business}">
-    </ng-container>
-    <form [formGroup]="form">
+<div class="col-md-8">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title text-primary">Print your Qr code</h4>
+    </div>
+    <div class="card-body">
+      <ng-container *ngIf="data$ | async as data; else loading">
+        <ng-container
+                      *ngTemplateOutlet="preview;context :{id:'print',url: data.url , size: form.value.size , hide: true, business: data.business}">
+        </ng-container>
+        <form [formGroup]="form">
 
-        <select class="form-control"
-                formControlName="size">
+          <select class="form-control"
+                  formControlName="size">
             <option *ngFor="let opt of sizes"
                     [ngValue]="opt.size">
-                {{opt.name}}
+              {{opt.name}}
             </option>
-        </select>
-    </form>
-    <ng-template *ngTemplateOutlet="preview;context :{id:'preview',url: data.url , size: 250, business: data.business}">
-    </ng-template>
-    <button (click)="print()"
-            class="btn btn-primary">Print</button>
-</ng-container>
+          </select>
+        </form>
+        <div class="qr-preview">
+          <ng-template
+                       *ngTemplateOutlet="preview;context :{id:'preview',url: data.url , size: 250, business: data.business}">
+          </ng-template>
+        </div>
 
+        <div class="row">
+          <div class="update ml-auto mr-auto">
+            <button type="submit"
+                    (click)="print(data.business.id)"
+                    class="btn btn-primary btn-round">Print</button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
 <ng-template #preview
              let-size="size"
              let-id="id"
              let-business="business"
              let-hide="hide"
              let-url="url">
-    <div class="qr-print-wrapper"
-         [id]="id"
-         [ngClass]="{'hide':hide}"
-         [style.width.px]="size"
-         #content>
-        <img src="../../../assets//brand/latevacarta_full-color.svg"
-             [height]="size / 3">
-        <ngx-qrcode [elementType]="elementType"
-                    [errorCorrectionLevel]="correctionLevel"
-                    [value]="url"
-                    [width]="size"
-                    cssClass="bshadow"></ngx-qrcode>
-        <div class="business-name"
-             [style.height.px]="size / 5"
-             [style.fontSize.px]="size / 10">{{business.name}}</div>
-    </div>
+  <div class="qr-print-wrapper"
+       [id]="id"
+       [ngClass]="{'hide':hide}"
+       [style.width.px]="size"
+       #content>
+    <img src="../../../assets//brand/latevacarta_full-color.svg"
+         [height]="size / 3">
+    <ngx-qrcode [elementType]="elementType"
+                [errorCorrectionLevel]="correctionLevel"
+                [value]="url"
+                [width]="size"
+                cssClass="bshadow"></ngx-qrcode>
+    <div class="business-name"
+         [style.height.px]="size / 5"
+         [style.fontSize.px]="size / 10">{{business.name}}</div>
+  </div>
 
 
 </ng-template>
 <ng-template #loading>
-    <app-loader></app-loader>
+  <app-loader></app-loader>
 </ng-template>

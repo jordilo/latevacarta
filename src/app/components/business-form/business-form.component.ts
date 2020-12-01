@@ -36,7 +36,7 @@ const defaultLang = 'ca_ES';
 @Component({
   selector: 'app-business-form',
   templateUrl: './business-form.component.html',
-  styleUrls: ['./business-form.component.css'],
+  styleUrls: ['./business-form.component.scss'],
 })
 export class BusinessFormComponent implements OnInit, OnDestroy {
 
@@ -74,8 +74,8 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
       type: [this.business.type, Validators.required],
       logotype: this.business?.logotype,
       default_lang: [this.business?.default_lang || defaultLang, Validators.required],
-      languages: this.languagesForm,
-      addLanguage: this.fb.group({ code: [null, Validators.required] }),
+      languages: [this.languagesForm, Validators.minLength(1)],
+      addLanguage: this.fb.group({ code: [null] }),
       address: this.fb.group({
         id: [this.business?.address.id],
         address: [this.business?.address.address, Validators.required],

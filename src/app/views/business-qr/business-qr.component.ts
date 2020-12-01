@@ -58,7 +58,7 @@ export class BusinessQrComponent implements OnInit {
     this.data$ = combineLatest([business$, url$]).pipe(map((data) => ({ business: data[0], url: data[1] })));
   }
 
-  public print() {
+  public print(businessId: string) {
 
     const element = this.contents.find(({ nativeElement }) => nativeElement.id === 'print');
     html2canvas(element.nativeElement, {
@@ -74,7 +74,7 @@ export class BusinessQrComponent implements OnInit {
       [...Array(this.form.value.copies - 1).keys()].forEach(() => {
         pdf.addPage([width, height], 'p').addImage(contentDataURL, 'WEBP', 0, 0, width, height, 'none');
       });
-      pdf.save('Filename.pdf');
+      pdf.save(`qr-code__${businessId}.pdf`);
     });
   }
   private pxToCm(pixel: number): number {

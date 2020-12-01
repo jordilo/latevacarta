@@ -1,0 +1,14 @@
+select {
+  height: 39px;
+  align-self: center;
+}
+
+.logo-wrap {
+  display: flex;
+  .logo-image {
+    flex: 0 0 160px;
+  }
+  input {
+    flex: 1;
+  }
+}

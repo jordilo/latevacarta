@@ -1,25 +1,29 @@
-<form class="col-lg-6"
-      [formGroup]="busninessForm"
+<form [formGroup]="busninessForm"
       (ngSubmit)="sendForm()">
-
-  <div class="form-group text-right">
-    <button class="btn btn-primary"
-            type="submit">Save</button>
-  </div>
-  <div class="form-group">
-    <label>Name</label>
-    <input class="form-control"
-           formControlName="name" />
-  </div>
-  <div class="form-group">
-    <label>Logo</label>
-    <div *ngIf="business.logotype">
-      <img [src]="business.logotype"
-           width="150">
+  <div class="row">
+    <div class="col-md-5 pr-1">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control"
+               formControlName="name" />
+      </div>
     </div>
-    <input class="form-control"
-           type="file"
-           (change)="selectFile($event, 'logotype')" />
+    <div class="col-md5 pl-1">
+      <div class="form-group">
+        <label>Logo</label>
+        <div class="logo-wrap">
+          <div *ngIf="business.logotype"
+               class="logo-image">
+            <img [src]="business.logotype"
+                 width="150">
+          </div>
+          <input class="form-control"
+                 type="file"
+                 (change)="selectFile($event, 'logotype')" />
+        </div>
+      </div>
+    </div>
+
   </div>
   <div class="form-group">
     <label>Type</label>
@@ -31,7 +35,7 @@
     </select>
   </div>
   <div>
-    <h3>Languages</h3>
+    <h5 class="text-primary">Languages</h5>
     <table class="table">
       <tr>
         <th>Name</th>
@@ -76,7 +80,7 @@
   </div>
 
   <div formGroupName="address">
-    <h3>Address</h3>
+    <h5 class="text-primary">Address</h5>
 
     <div class="form-group">
       <app-set-address (addressChange)="addressChange($event)"></app-set-address>
@@ -86,36 +90,33 @@
       <input class="form-control"
              formControlName="address" />
     </div>
-    <div class="form-group">
-      <label>City</label>
-      <input class="form-control"
-             formControlName="city" />
-    </div>
-    <!-- <div class="form-group">
-      <label>Latitude</label>
-      <input class="form-control"
-             type="number"
-             formControlName="lat" />
-    </div>
-    <div class="form-group">
-      <label>Longitude</label>
-      <input class="form-control"
-             type="number"
-             formControlName="lng" />
-    </div> -->
-    <div class="form-group">
-      <label>Postal code</label>
-      <input class="form-control"
-             type="number"
-             formControlName="postal_code" />
-    </div>
-    <div class="form-group">
-      <label>State/Province</label>
-      <input class="form-control"
-             formControlName="state" />
+    <div class="row">
+      <div class="col-md-4 pr-1">
+        <div class="form-group">
+          <label>City</label>
+          <input class="form-control"
+                 formControlName="city" />
+        </div>
+      </div>
+      <div class="col-md-4 px-1">
+        <div class="form-group">
+          <label>Postal code</label>
+          <input class="form-control"
+                 type="number"
+                 formControlName="postal_code" />
+        </div>
+      </div>
+      <div class="col-md-4 pl-1">
+        <div class="form-group">
+          <label>State/Province</label>
+          <input class="form-control"
+                 formControlName="state" />
+        </div>
+      </div>
     </div>
   </div>
   <div formGroupName="options">
+    <h5 class="text-primary">Options</h5>
     <div class="form-group">
       <label>Font</label>
       <select class="form-control"
@@ -126,6 +127,13 @@
                   [value]="font">{{font}}</option>
         </optgroup>
       </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="update ml-auto mr-auto">
+      <button type="submit"
+              [disabled]="busninessForm.invalid"
+              class="btn btn-primary btn-round">Save</button>
     </div>
   </div>
 </form>
