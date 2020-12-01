@@ -1,6 +1,15 @@
-<app-account-form *ngIf="account$ | async as account ; else loading"
-                  [account]="account"
-                  (submitForm)="saveAccount($event)"></app-account-form>
+<div class="col-md-8">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Edit Profile</h5>
+        </div>
+        <div class="card-body">
+            <app-account-form *ngIf="account$ | async as account ; else loading"
+                              [account]="account"
+                              (submitForm)="saveAccount($event)"></app-account-form>
+        </div>
+    </div>
+</div>
 <ng-template #loading>
     <app-loader></app-loader>
 </ng-template>

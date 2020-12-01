@@ -12,7 +12,7 @@ export interface IRouteInfo {
 
 export const ROUTES: IRouteInfo[] = [
     { path: '/', title: 'Dashboard', icon: 'nc-world-2', class: '', isExact: true },
-    { path: '/account', title: 'My Account', icon: 'nc-single-02', class: '', isExact: true },
+    { path: '/account', title: 'My Account', icon: 'nc-single-02', class: '', isExact: false },
     { path: '/account-list', title: 'All accounts', icon: 'nc-laptop', class: '', needsAdmin: true, isExact: false },
     { path: '/business', title: 'Business', icon: 'nc-shop', class: '', isExact: false },
 

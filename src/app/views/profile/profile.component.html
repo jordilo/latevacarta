@@ -1,13 +1,32 @@
 <div class="row"
      *ngIf="user$ | async as user;else loading">
+
   <div class="col-md-6">
-    <h1>{{user.username}}</h1>
-    <p>{{user.name}} {{user.lastname}}</p>
-    <p>{{user.email}}</p>
-    <img [src]="user.thumbnail" />
-    <hr />
-    <a routerLink="edit">
-      <button class="btn btn-primary">Edit</button></a>
+    <div class="card card-user">
+      <div class="image">
+        <img src="../../../assets//brand/latevacarta_background.svg"
+             alt="...">
+      </div>
+      <div class="card-body">
+        <div class="author">
+          <a [routerLink]="['..']">
+            <img class="avatar border-gray"
+                 [src]="user.thumbnail"
+                 alt="...">
+            <h5 class="title">{{user.name}}</h5>
+          </a>
+          <p class="description">
+            {{user.email}}
+          </p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="button-container">
+          <a routerLink="edit">
+            <button class="btn btn-primary">Edit</button></a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
