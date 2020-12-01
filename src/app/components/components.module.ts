@@ -8,9 +8,8 @@ import { FilterLanguagesPipe } from './business-form/filter-languages.pipe';
 import { CategoryFormComponent } from './category-form/category-form.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ProductFormComponent } from './product-form/product-form.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { UploadExcelComponent } from './upload-excel/upload-excel.component';
 import { SetAddressComponent } from './set-address/set-address.component';
+import { UploadExcelComponent } from './upload-excel/upload-excel.component';
 
 @NgModule({
   exports: [
@@ -19,7 +18,6 @@ import { SetAddressComponent } from './set-address/set-address.component';
     CategoryFormComponent,
     ProductFormComponent,
     AccountFormComponent,
-    SidebarComponent,
     UploadExcelComponent],
   declarations: [
     LoaderComponent,
@@ -27,7 +25,6 @@ import { SetAddressComponent } from './set-address/set-address.component';
     CategoryFormComponent,
     ProductFormComponent,
     AccountFormComponent,
-    SidebarComponent,
     FilterLanguagesPipe,
     UploadExcelComponent,
     SetAddressComponent],

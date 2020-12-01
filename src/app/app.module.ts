@@ -13,6 +13,10 @@ import { BackendUrlProvider } from './backend-url';
 import { ComponentsModule } from './components/components.module';
 import { GraphQLModule } from './graphql.module';
 import { HeaderComponent } from './header.component';
+import { FixedPluginModule } from './shared/fixedplugin/fixedplugin.module';
+import { FooterModule } from './shared/footer/footer.module';
+import { NavbarModule } from './shared/navbar/navbar.module';
+import { SidebarModule } from './sidebar/sidebar.module';
 import { AccountEditionComponent } from './views/account-edition/account-edition.component';
 import { AccountIsolationComponent } from './views/account-isolation/account-isolation.component';
 import { AccountListComponent } from './views/account-list/account-list.component';
@@ -82,6 +86,10 @@ import { ProfileComponent } from './views/profile/profile.component';
       apiKey: environment.googleMapsApi,
       libraries: ['places'],
     }),
+    SidebarModule,
+    NavbarModule,
+    FooterModule,
+    FixedPluginModule,
   ],
   providers: [BackendUrlProvider],
   bootstrap: [AppComponent],

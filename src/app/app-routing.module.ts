@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from 'src/auth/admin.guard';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AccountEditionComponent } from './views/account-edition/account-edition.component';
 import { AccountIsolationComponent } from './views/account-isolation/account-isolation.component';
 import { AccountListComponent } from './views/account-list/account-list.component';
@@ -35,11 +34,6 @@ const routes: Routes = [
     canActivate: [
       AuthGuard,
     ],
-  },
-  {
-    path: '',
-    outlet: 'sidebar',
-    component: SidebarComponent,
   },
   {
     path: 'business',

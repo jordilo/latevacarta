@@ -1,4 +1,4 @@
-<app-header [title]="appInfo.name"
+<!-- <app-header [title]="appInfo.name"
             [user]="user$ | async"
             [isUserLogged]="isUserLogged"
             (logoutHandler)="logoutHandler()"
@@ -13,7 +13,21 @@
             <router-outlet class="row-fluid"> </router-outlet>
         </section>
     </div>
-</div>
-<footer>
+</div> -->
+<!-- <footer>
     © {{appInfo.name}} <small>{{appInfo.version}}</small>
-</footer>
+</footer> -->
+
+<div class="wrapper">
+    <div class="sidebar" data-color="white" data-active-color="danger">
+        <sidebar-cmp></sidebar-cmp>
+    </div>
+    <div class="main-panel">
+        <navbar-cmp></navbar-cmp>
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+        <footer-cmp></footer-cmp>
+    </div>
+</div>
+<fixedplugin-cmp></fixedplugin-cmp>
