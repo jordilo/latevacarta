@@ -104,7 +104,7 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
       logotype: this.busninessForm.value.logotype,
       address: this.busninessForm.value.address,
       default_lang: this.busninessForm.value.default_lang,
-      languages: this.busninessForm.value.languages.map(({ code: language }) => ({ language })),
+      languages: this.busninessForm.value.languages.value.map(({ code: language }) => ({ language })),
       business_meta: [
         {
           name: 'font',

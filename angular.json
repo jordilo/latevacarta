@@ -27,13 +27,17 @@
               "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/scss/paper-dashboard.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/bootstrap/scss/_functions.scss",
+              "node_modules/bootstrap/scss/_variables.scss",
+              "node_modules/bootstrap/scss/_mixins.scss",
+              "node_modules/ngx-toastr/toastr-bs4-alert.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/chart.js/dist/Chart.min.js"              
+              "node_modules/chart.js/dist/Chart.min.js"
             ]
           },
           "configurations": {

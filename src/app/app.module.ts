@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { environment } from 'src/environments/environment';
 import { AuthModule } from '../auth/auth.module';
@@ -42,6 +43,8 @@ import { FilterUsedProductsPipe } from './views/product-highlight/filter-used-pr
 import { ProductHighlightComponent } from './views/product-highlight/product-highlight.component';
 import { ProductListComponent } from './views/product-list/product-list.component';
 import { ProfileComponent } from './views/profile/profile.component';
+
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,6 +93,8 @@ import { ProfileComponent } from './views/profile/profile.component';
     NavbarModule,
     FooterModule,
     FixedPluginModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [BackendUrlProvider],
   bootstrap: [AppComponent],
