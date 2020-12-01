@@ -1,7 +1,35 @@
-<div *ngIf="accounts$ | async as accounts; else loading">
-  <div *ngFor="let account of accounts">
-    {{account.name}}
-  </div>
+<div class="row">
+  <ng-container *ngIf="accounts$ | async as accounts; else loading">
+    <div *ngFor="let account of accounts"
+         class="col-md-4">
+      <div class="card card-user">
+        <div class="image">
+          <img src="../../../assets//brand/latevacarta_background.svg"
+               alt="...">
+        </div>
+        <div class="card-body">
+          <div class="author">
+            <a href="javascript:void()">
+              <img class="avatar border-gray"
+                   [src]="account.thumbnail"
+                   alt="...">
+              <h5 class="title">{{account.name}}</h5>
+            </a>
+            <p class="description">
+              {{account.email}}
+            </p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <hr>
+          <div class="button-container">
+            <a href="javascript:void()">
+              <button class="btn btn-primary">Edit</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 </div>
 <ng-template #loading>
   <app-loader></app-loader>
