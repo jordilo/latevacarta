@@ -1,27 +1,36 @@
-<table class="table"
-       *ngIf="categories$ | async as categories; else loading">
-    <tr *ngIf="categories.length">
-        <th><a [routerLink]="['create']">+</a></th>
-        <th>Name</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    <tr *ngFor="let category of categories">
-        <td colspan="2">{{category.name}}</td>
-        <td><a [routerLink]="[category.id, 'edit']">Edit</a></td>
-        <td><a routerLink="."
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title">Categories</h4>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table"
+             *ngIf="categories$ | async as categories; else loading">
+        <tr *ngIf="categories.length">
+          <th><a [routerLink]="['create']">+</a></th>
+          <th>Name</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr *ngFor="let category of categories">
+          <td colspan="2">{{category.name}}</td>
+          <td><a [routerLink]="[category.id, 'edit']">Edit</a></td>
+          <td><a routerLink="."
                (click)="removeCategory(category.id, category.business_id)">Delete</a></td>
-    </tr>
-    <tr *ngIf="!categories.length">
-        <td>There are any category <a [routerLink]="['create']">create your first one</a></td>
-    </tr>
-    <tr *ngIf="!categories.length">
-        <td>
+        </tr>
+        <tr *ngIf="!categories.length">
+          <td>There are any category <a [routerLink]="['create']">create your first one</a></td>
+        </tr>
+        <tr *ngIf="!categories.length">
+          <td>
             <app-upload-excel [businessId]="businessId$ | async"
                               (fileChange)="insertCatalog($event)"></app-upload-excel>
-        </td>
-    </tr>
-</table>
-<ng-template #loading>
-    <app-loader></app-loader>
-</ng-template>
+          </td>
+        </tr>
+      </table>
+      <ng-template #loading>
+        <app-loader></app-loader>
+      </ng-template>
+    </div>
+  </div>
+</div>

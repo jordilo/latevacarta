@@ -1,6 +1,9 @@
 import { Location } from '@angular/common';
+import { ChangeDetectorRef, EventEmitter, Input, Output } from '@angular/core';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { IAccount } from 'src/app/api/account';
+import { EXPIRES_AT_KEY, TOKEN_ID, TOKEN_KEY, USER_ID } from 'src/auth/auth.service';
 import { ROUTES } from '../../sidebar/sidebar.component';
 
 @Component({
@@ -10,8 +13,26 @@ import { ROUTES } from '../../sidebar/sidebar.component';
 })
 
 export class NavbarComponent implements OnInit {
+
+  @Input() public title: string;
+  @Input() public user: IAccount;
+  @Input() public isUserLogged: boolean;
+  @Output() public logoutHandler: EventEmitter<any> = new EventEmitter();
+  @Output() public loginHandler: EventEmitter<any> = new EventEmitter();
+
+  public isMaingPage: boolean;
+
+  public get isLoggedUserInError(): boolean {
+    return !this.isUserLogged &&
+      (
+        Boolean(localStorage.getItem(EXPIRES_AT_KEY)),
+        Boolean(localStorage.getItem(TOKEN_KEY)),
+        Boolean(localStorage.getItem(TOKEN_ID)),
+        Boolean(localStorage.getItem(USER_ID))
+      );
+  }
+
   private listTitles: any[];
-  location: Location;
   private nativeElement: Node;
   private toggleButton;
   private sidebarVisible: boolean;
@@ -19,13 +40,27 @@ export class NavbarComponent implements OnInit {
   public isCollapsed = true;
   @ViewChild('navbar-cmp', { static: false }) button;
 
-  constructor(location: Location, private renderer: Renderer2, private element: ElementRef, private router: Router) {
-    this.location = location;
+  constructor(
+    private location: Location,
+    private renderer: Renderer2,
+    private element: ElementRef,
+    private cdr: ChangeDetectorRef,
+    private router: Router) {
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
   }
 
   ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (event.url === '/') {
+          this.isMaingPage = true;
+        } else {
+          this.isMaingPage = false;
+        }
+        this.cdr.detectChanges();
+      }
+    });
     this.listTitles = ROUTES.filter((listTitle) => listTitle);
     const navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
@@ -91,6 +126,15 @@ export class NavbarComponent implements OnInit {
       navbar.classList.remove('bg-white');
     }
 
+  }
+  public logout() {
+    this.logoutHandler.emit();
+  }
+  public login() {
+    this.loginHandler.emit();
+  }
+  public goBack() {
+    this.location.back();
   }
 
 }

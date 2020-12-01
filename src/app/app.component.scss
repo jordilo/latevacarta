@@ -1,33 +1,4 @@
-$footerHeight: 40px;
-
-app-header {
-  position: absolute;
+.main-panel.full {
   width: 100%;
-}
-footer {
-  width: 100%;
-  background-color: #343a40;
-  color: white;
-  padding: 8px;
-  text-align: center;
-  height: $footerHeight;
-}
-.main-container {
-  padding-top: 80px;
-  min-height: calc(100% - #{$footerHeight});
-  display: flex;
-  @media screen and (max-width: 767.98px) {
-    flex-flow: column;
-  }
-  // display: flex;
-  .sidebar {
-    flex: 0 0 250px;
-    @media screen and (max-width: 767.98px) {
-      flex: 0;
-    }
-  }
-  .main,
-  section {
-    flex: 1;
-  }
+  transition: none !important;
 }

@@ -1,33 +1,19 @@
-<!-- <app-header [title]="appInfo.name"
-            [user]="user$ | async"
-            [isUserLogged]="isUserLogged"
-            (logoutHandler)="logoutHandler()"
-            (loginHandler)="loginHandler()"></app-header>
-<div class="main-container">
-    <div class="sidebar span4"
-         *ngIf="isUserLogged">
-        <router-outlet name="sidebar"></router-outlet>
-    </div>
-    <div class="main">
-        <section class="container-fluid">
-            <router-outlet class="row-fluid"> </router-outlet>
-        </section>
-    </div>
-</div> -->
-<!-- <footer>
-    © {{appInfo.name}} <small>{{appInfo.version}}</small>
-</footer> -->
-
 <div class="wrapper">
-    <div class="sidebar" data-color="white" data-active-color="danger">
+    <div class="sidebar"
+         *ngIf="user$ | async"
+         data-color="white"
+         data-active-color="danger">
         <sidebar-cmp></sidebar-cmp>
     </div>
-    <div class="main-panel">
-        <navbar-cmp></navbar-cmp>
+    <div class="main-panel {{ (user$ | async) ? '' : 'full'}}">
+        <navbar-cmp [user]="user$ | async"
+                    [isUserLogged]="isUserLogged"
+                    (logoutHandler)="logoutHandler()"
+                    (loginHandler)="loginHandler()"></navbar-cmp>
         <div class="content">
             <router-outlet></router-outlet>
         </div>
-        <footer-cmp></footer-cmp>
+        <footer-cmp [version]="appInfo.version"
+                    [name]="appInfo.name"></footer-cmp>
     </div>
 </div>
-<fixedplugin-cmp></fixedplugin-cmp>
