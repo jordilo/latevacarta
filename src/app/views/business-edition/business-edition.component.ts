@@ -46,7 +46,6 @@ export class BusinessEditionComponent implements OnInit {
       this.addressService.updateAddress(business.address),
     ],
     ).pipe(tap((d) => {
-      console.log(d);
       this.toast.open('Info', 'Business saved successfully');
     })).subscribe(() => this.router.navigate(['/business']));
   }

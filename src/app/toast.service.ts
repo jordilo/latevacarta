@@ -15,7 +15,7 @@ export class ToastService {
 
   public open(title: string, message: string, options?: IToastOptions) {
     let icon = '';
-    let toastClass = 'alert';
+    let toastClass = 'alert ';
     const body = `<span data-notify="message">${message}</span>`;
     const from = 'top';
     const align = 'center';
