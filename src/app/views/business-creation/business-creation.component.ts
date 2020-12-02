@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { IAddress, IBusiness } from 'src/app/api/business';
 import { ILanguage } from 'src/app/api/metadata';
 import { BusinessService } from '../../api/business.service';
+import { ToastService } from '../../toast.service';
 import { MetadataService } from './../../api/metadata.service';
 
 @Component({
@@ -20,6 +22,7 @@ export class BusinessCreationComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private businessService: BusinessService,
     private metadata: MetadataService,
+    private toast: ToastService,
   ) { }
 
   public ngOnInit(): void {
@@ -37,6 +40,7 @@ export class BusinessCreationComponent implements OnInit {
 
   public sendForm(business: IBusiness) {
     this.businessService.create(business)
+      .pipe(tap(() => this.toast.open('Info', 'Business created successfully')))
       .subscribe(({ id }) => this.router.navigate(['../', id], { relativeTo: this.activeRoute }));
   }
 

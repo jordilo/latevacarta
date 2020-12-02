@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { CatalogService } from 'src/app/api/catalog.service';
+import { ToastService } from 'src/app/toast.service';
 import { IProduct } from './../../api/catalog.d';
 
 const MAX_HIGHLIGHTED_PRODUCTS = 4;
@@ -27,7 +28,9 @@ export class ProductHighlightComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private catalogService: CatalogService) { }
+    private catalogService: CatalogService,
+    private toast: ToastService,
+  ) { }
 
   public ngOnInit(): void {
 
@@ -57,6 +60,7 @@ export class ProductHighlightComponent implements OnInit {
   public sendForm() {
     const businessId = (this.activatedRoute.params as any).value.businessId;
     this.catalogService.addHighlightProducts(this.form.value, businessId)
+      .pipe(tap(() => this.toast.open('Info', 'Configuration saved successfully')))
       .subscribe(() => this.router.navigate(['../../'], { relativeTo: this.activatedRoute }));
   }
 

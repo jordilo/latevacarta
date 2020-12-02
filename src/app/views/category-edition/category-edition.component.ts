@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, Observable, of } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap, tap } from 'rxjs/operators';
 import { BusinessService } from 'src/app/api/business.service';
 import { ICategory } from 'src/app/api/catalog';
 import { CatalogService } from 'src/app/api/catalog.service';
 import { ILanguage } from 'src/app/api/metadata';
+import { ToastService } from 'src/app/toast.service';
 import { IBusinessLanguage } from './../../api/business.d';
 import { MetadataService } from './../../api/metadata.service';
 
@@ -30,7 +31,9 @@ export class CategoryEditionComponent implements OnInit {
     private metaService: MetadataService,
     private businessService: BusinessService,
     private router: Router,
-    private activeRouter: ActivatedRoute) { }
+    private activeRouter: ActivatedRoute,
+    private toast: ToastService,
+  ) { }
 
   public ngOnInit(): void {
     this.editionData$ =
@@ -51,6 +54,7 @@ export class CategoryEditionComponent implements OnInit {
 
   public saveCategory(category: ICategory, businessId: string) {
     this.catalogService.editCategory(category, businessId)
+      .pipe(tap(() => this.toast.open('Info', 'Category saved successfully')))
       .subscribe(() => this.router.navigate(['../..'], { relativeTo: this.activeRouter }));
   }
 
