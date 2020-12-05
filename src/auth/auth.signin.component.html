@@ -1,10 +1,11 @@
 <form class="col-md-4 offset-md-4"
       [formGroup]="loginForm"
       (ngSubmit)="sendForm()">
-  <img class="rounded mx-auto d-block"
-       src="../assets/brand/latevacarta_full-color.svg"
-       width="300"
-       height="300" />
+  <app-brand-image class="rounded mx-auto d-block"
+                   width="300px"
+                   height="300px"
+                   position="center"
+                   type="full-color"></app-brand-image>
   <div class="form-group">
     <label>Username/Email</label>
     <input class="form-control"

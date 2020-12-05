@@ -3,6 +3,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { ComponentsModule } from './../app/components/components.module';
 import { AdminGuard } from './admin.guard';
 import { AuthConfig } from './auth';
 import { AuthConfigService } from './auth-config.service';
@@ -47,7 +48,7 @@ const routes: Routes = [
 @NgModule({
   providers: [AuthService, AuthGuard, NotAuthGuard, AdminGuard],
   declarations: [CallbackComponent, AuthSigninComponent, AuthSignupComponent, AuthPasswordResetComponent],
-  imports: [CommonModule, ReactiveFormsModule, CommonModule, RouterModule.forRoot(routes)],
+  imports: [CommonModule, ReactiveFormsModule, CommonModule, RouterModule.forRoot(routes), ComponentsModule],
 })
 export class AuthModule {
   static forRoot(config: AuthConfig): ModuleWithProviders<AuthModule> {

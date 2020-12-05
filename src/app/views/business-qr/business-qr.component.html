@@ -46,8 +46,8 @@
        [ngClass]="{'hide':hide}"
        [style.width.px]="size"
        #content>
-    <img src="../../../assets//brand/latevacarta_full-color.svg"
-         [height]="size / 3">
+    <app-brand-image type="full-color"
+                     [height]="size/3"></app-brand-image>
     <ngx-qrcode [elementType]="elementType"
                 [errorCorrectionLevel]="correctionLevel"
                 [value]="url"
