@@ -47,7 +47,8 @@
        [style.width.px]="size"
        #content>
     <app-brand-image type="full-color"
-                     [height]="size/3"></app-brand-image>
+                     position="center"
+                     [height]="size/3 + 'px'"></app-brand-image>
     <ngx-qrcode [elementType]="elementType"
                 [errorCorrectionLevel]="correctionLevel"
                 [value]="url"
