@@ -1,4 +1,5 @@
 import { AgmCoreModule } from '@agm/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -95,6 +96,7 @@ import { ToastrModule } from 'ngx-toastr';
     FixedPluginModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    DragDropModule,
   ],
   providers: [BackendUrlProvider],
   bootstrap: [AppComponent],

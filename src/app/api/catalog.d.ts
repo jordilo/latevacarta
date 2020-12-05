@@ -3,6 +3,7 @@ export interface ICategory {
     id: string;
     parent_category: string;
     name: string;
+    order: number;
     business_id: string;
     products: IProduct[];
     categories: ICategory[];
