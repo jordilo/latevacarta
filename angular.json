@@ -72,9 +72,9 @@
                   "with": "src/environments/environment.dev.ts"
                 }
               ],
-              "optimization": false,
+              "optimization": true,
               "outputHashing": "all",
-              "sourceMap": true,
+              "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
