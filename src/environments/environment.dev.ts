@@ -13,7 +13,7 @@ export const environment = {
   },
   version: jsonPackage.version,
   auth: {
-    clientID: 'WhSzGqyXoczFWt1GOXaTbV7kevavhfIh',
+    clientID: 'tLAe1ajZKEFJmy5UhtTS8EuCiXQSEfwp',
     domain,
     redirectUri: 'https://dev-admin.latevacarta.click/callback',
     returnTo: 'https://dev-admin.latevacarta.click',

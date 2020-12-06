@@ -12,7 +12,7 @@ export const environment = {
   appName: jsonPackage.name,
   version: 'dev.' + jsonPackage.version,
   auth: {
-    clientID: 'WhSzGqyXoczFWt1GOXaTbV7kevavhfIh',
+    clientID: 'tLAe1ajZKEFJmy5UhtTS8EuCiXQSEfwp',
     domain,
     redirectUri: 'http://localhost:4200/callback',
     returnTo: 'http://localhost:4200',
