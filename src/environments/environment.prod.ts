@@ -4,8 +4,8 @@ const domain = 'jordi-lopez.eu.auth0.com';
 export const environment = {
   production: true,
   appName: 'La teva carta ',
-  graphQlUrl: 'https://latevacarta.herokuapp.com/v1/graphql',
-  backendUrl: 'https://backend-tlc.herokuapp.com/',
+  graphQlUrl: 'https://prod-latevacarta.herokuapp.com/v1/graphql',
+  backendUrl: 'https://prod-backend-tlc.herokuapp.com/',
   googleMapsApi: 'AIzaSyBFWvZ2Aoes_dRFk36ZQz65ip0TDutUTk4',
   files: {
     product_template: 'https://latevacarta.s3.eu-central-1.amazonaws.com/assets/products.xlsx',
