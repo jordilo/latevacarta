@@ -5,7 +5,7 @@ export const environment = {
   production: true,
   appName: 'La teva carta ',
   graphQlUrl: 'https://prod-latevacarta-database.herokuapp.com/v1/graphql',
-  backendUrl: 'https://prod-backend-tlc.herokuapp.com/',
+  backendUrl: 'https://prod-backend-ltc.herokuapp.com/',
   googleMapsApi: 'AIzaSyBFWvZ2Aoes_dRFk36ZQz65ip0TDutUTk4',
   files: {
     product_template: 'https://latevacarta.s3.eu-central-1.amazonaws.com/assets/products.xlsx',
