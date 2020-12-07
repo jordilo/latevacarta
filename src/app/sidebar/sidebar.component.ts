@@ -8,6 +8,7 @@ export interface IRouteInfo {
     class: string;
     isExact: boolean;
     needsAdmin?: boolean;
+    notLogged?: boolean;
 }
 
 export const ROUTES: IRouteInfo[] = [
@@ -15,6 +16,9 @@ export const ROUTES: IRouteInfo[] = [
     { path: '/account', title: 'My Account', icon: 'nc-single-02', class: '', isExact: false },
     { path: '/account-list', title: 'All accounts', icon: 'nc-laptop', class: '', needsAdmin: true, isExact: false },
     { path: '/business', title: 'Business', icon: 'nc-shop', class: '', isExact: false },
+    { path: '/login', title: 'Login', icon: 'nc-single-02', class: '', isExact: true, notLogged: true },
+    { path: '/password-reset', title: 'Password reset', icon: 'nc-email-85', class: '', isExact: true, notLogged: true },
+    { path: '/signup', title: 'Signup', icon: 'nc-sun-fog-29', class: '', isExact: true, notLogged: true },
 
 ];
 
@@ -32,6 +36,9 @@ export class SidebarComponent implements OnInit {
     public get isAdmin(): boolean {
         return this.authService.isAdmin;
     }
+    public get isLoggedIn(): boolean {
+        return this.authService.isLoggedIn;
+    }
     ngOnInit() {
         this.authService.user$.subscribe(() => {
             this.filterItems();
@@ -41,11 +48,14 @@ export class SidebarComponent implements OnInit {
 
     private filterItems() {
         this.menuItems = ROUTES.filter((menuItem) => {
-            if (!menuItem.needsAdmin) {
+            if (this.isLoggedIn && !menuItem.notLogged && !menuItem.needsAdmin) {
                 return true;
-            } else {
+            } else if (menuItem.notLogged && !this.isLoggedIn) {
+                return true;
+            } else if (menuItem.needsAdmin) {
                 return this.isAdmin;
             }
+            return false;
         });
     }
 

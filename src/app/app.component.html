@@ -1,11 +1,10 @@
 <div class="wrapper">
     <div class="sidebar"
-         *ngIf="user$ | async"
          data-color="white"
          data-active-color="danger">
         <sidebar-cmp></sidebar-cmp>
     </div>
-    <div class="main-panel {{ (user$ | async) ? '' : 'full'}}">
+    <div class="main-panel">
         <navbar-cmp [user]="user$ | async"
                     [isUserLogged]="isUserLogged"
                     (logoutHandler)="logoutHandler()"

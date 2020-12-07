@@ -1,7 +1,9 @@
+import { Platform } from '@angular/cdk/platform';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NEVER } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AuthMobile } from './auth.mobile';
 import { AuthRoutes } from './auth.routes';
 import { AuthService } from './auth.service';
 
@@ -9,7 +11,7 @@ import { AuthService } from './auth.service';
   selector: 'app-signin',
   templateUrl: './auth.signin.component.html',
 })
-export class AuthSigninComponent implements OnInit {
+export class AuthSigninComponent extends AuthMobile implements OnInit {
 
   public loginForm: FormGroup;
   public error: string;
@@ -24,7 +26,9 @@ export class AuthSigninComponent implements OnInit {
     const emailCtrl = this.loginForm.get('password');
     return emailCtrl.errors !== null && emailCtrl.errors.required !== undefined && emailCtrl.dirty;
   }
-  constructor(private fb: FormBuilder, private auth: AuthService) { }
+  constructor(private fb: FormBuilder, private auth: AuthService, platform: Platform) {
+    super(platform, auth);
+  }
 
   public ngOnInit() {
     this.loginForm = this.fb.group({
@@ -44,9 +48,5 @@ export class AuthSigninComponent implements OnInit {
         return NEVER;
       }))
       .subscribe();
-  }
-
-  public defaultLogin() {
-    this.auth.authorize();
   }
 }
