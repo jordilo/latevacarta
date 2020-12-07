@@ -1,9 +1,10 @@
+import { PlatformModule } from '@angular/cdk/platform';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { ComponentsModule } from './../app/components/components.module';
+import { ComponentsModule } from '../app/components/components.module';
 import { AdminGuard } from './admin.guard';
 import { AuthConfig } from './auth';
 import { AuthConfigService } from './auth-config.service';
@@ -48,7 +49,7 @@ const routes: Routes = [
 @NgModule({
   providers: [AuthService, AuthGuard, NotAuthGuard, AdminGuard],
   declarations: [CallbackComponent, AuthSigninComponent, AuthSignupComponent, AuthPasswordResetComponent],
-  imports: [CommonModule, ReactiveFormsModule, CommonModule, RouterModule.forRoot(routes), ComponentsModule],
+  imports: [CommonModule, ReactiveFormsModule, ComponentsModule, RouterModule.forRoot(routes), PlatformModule],
 })
 export class AuthModule {
   static forRoot(config: AuthConfig): ModuleWithProviders<AuthModule> {

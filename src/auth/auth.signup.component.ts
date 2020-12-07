@@ -34,9 +34,9 @@ export class AuthSignupComponent implements OnInit {
 
   public ngOnInit() {
     this.signupForm = this.fb.group({
-      email: ['jordi@jordi.net', [Validators.required, Validators.email]],
-      password: ['Jordania(4', [Validators.required, Validators.pattern(pswStrength), samePassword('passwordRepeat')]],
-      passwordRepeat: ['Jordania(4', samePassword('password')],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.pattern(pswStrength), samePassword('passwordRepeat')]],
+      passwordRepeat: ['', samePassword('password')],
     });
   }
 
