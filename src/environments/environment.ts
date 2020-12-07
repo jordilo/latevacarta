@@ -3,8 +3,8 @@ const domain = 'jordi-lopez.eu.auth0.com';
 
 export const environment = {
   production: false,
-  graphQlUrl: 'https://latevacarta.herokuapp.com/v1/graphql',
-  backendUrl: 'https://backend-tlc.herokuapp.com/',
+  graphQlUrl: 'https://latevacarta-database.herokuapp.com/v1/graphql',
+  backendUrl: 'https://backend-ltc.herokuapp.com/',
   googleMapsApi: 'AIzaSyBFWvZ2Aoes_dRFk36ZQz65ip0TDutUTk4',
   files: {
     product_template: 'https://latevacarta.s3.eu-central-1.amazonaws.com/assets/products.xlsx',
@@ -12,7 +12,7 @@ export const environment = {
   appName: jsonPackage.name,
   version: 'dev.' + jsonPackage.version,
   auth: {
-    clientID: 'WhSzGqyXoczFWt1GOXaTbV7kevavhfIh',
+    clientID: 'tLAe1ajZKEFJmy5UhtTS8EuCiXQSEfwp',
     domain,
     redirectUri: 'http://localhost:4200/callback',
     returnTo: 'http://localhost:4200',

@@ -14,11 +14,12 @@ mutation UpdateCategories($categories: [category_insert_input!]!) {
 //#region Categories
 export const GET_ALL_CATEGORIES = gql`
 query GetAllCategories($businessId: uuid!) {
-  category(where: {business_id: { _eq : $businessId}}){
+  category(where: {business_id: { _eq : $businessId}}, order_by: {order: asc}){
     id
     name
     parent_category
     business_id
+    order
     name_languages{
       language
       value
@@ -33,6 +34,7 @@ query GetCategory($categoryId:uuid!) {
     name
     parent_category
     business_id
+    order
     name_languages{
       language
       value
@@ -57,6 +59,15 @@ mutation UPDATE_CATEGORY($id: uuid!,$name: String!,$parent_category: uuid, $lang
     affected_rows
   }
   insert_category_name_langs(objects: $languages){
+    affected_rows
+  }
+}`;
+export const SORT_CATEGORY = gql`
+mutation SortCategories ($categories: [category_insert_input!]!){
+  insert_category(objects: $categories , on_conflict:{
+    constraint: category_pkey,
+    update_columns: [order]
+  }){
     affected_rows
   }
 }`;

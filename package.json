@@ -1,10 +1,12 @@
 {
   "name": "@jordilo/latevacarta",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
-    "build": "ng build",
+    "start-prod": "ng serve --host 0.0.0.0 --prod=true",
+    "build": "ng build --prod=true",
+    "dev-build": "ng build --prod=false -c dev",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -13,11 +15,13 @@
   "dependencies": {
     "@agm/core": "^3.0.0-beta.0",
     "@angular/animations": "~9.1.2",
+    "@angular/cdk": "^9.2.4",
     "@angular/common": "~9.1.2",
     "@angular/compiler": "~9.1.2",
     "@angular/core": "~9.1.2",
     "@angular/forms": "~9.1.2",
     "@angular/localize": "^9.1.12",
+    "@angular/material": "^9.2.4",
     "@angular/platform-browser": "~9.1.2",
     "@angular/platform-browser-dynamic": "~9.1.2",
     "@angular/router": "~9.1.2",

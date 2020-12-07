@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -38,5 +39,16 @@ export class CategoryListComponent implements OnInit {
   }
   public insertCatalog(data: InsertFullCatalog) {
     this.catalogService.insertFullCatalog(data).subscribe();
+  }
+  drop(event: CdkDragDrop<string[]>, list: ICategory[]) {
+    const newlist = list.map((category) => Object.assign({}, category));
+    moveItemInArray(newlist, event.previousIndex, event.currentIndex);
+    newlist.forEach((category, index) => {
+      delete (category as any).__typename;
+      delete category.name_languages;
+      category.order = index;
+    });
+    this.catalogService.sortCategories(newlist, newlist[0].business_id)
+      .subscribe();
   }
 }

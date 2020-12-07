@@ -5,6 +5,8 @@
   <div class="card-body">
     <div class="table-responsive">
       <table class="table"
+             (cdkDropListDropped)="drop($event, categories)"
+             cdkDropList
              *ngIf="categories$ | async as categories; else loading">
         <tr *ngIf="categories.length">
           <th><a [routerLink]="['create']">+</a></th>
@@ -12,7 +14,8 @@
           <th>Edit</th>
           <th>Delete</th>
         </tr>
-        <tr *ngFor="let category of categories">
+        <tr cdkDrag
+            *ngFor="let category of categories">
           <td colspan="2">{{category.name}}</td>
           <td><a [routerLink]="[category.id, 'edit']">Edit</a></td>
           <td><a routerLink="."

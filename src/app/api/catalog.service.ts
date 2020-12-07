@@ -11,6 +11,7 @@ import {
   INSERT_CATEGORY,
   INSERT_FULL_CATEGORY,
   REMOVE_CATEGORY,
+  SORT_CATEGORY,
   UPDATE_CATEGORY,
 } from './catalog.queries';
 import { GET_CATALOG, INSERT_PRODUCT, INSERT_PRODUCTS_HIGHLIGHT, REMOVE_PRODUCT, UPDATE_PRODUCT } from './catalog.queries';
@@ -106,6 +107,26 @@ export class CatalogService {
     });
   }
 
+  public sortCategories(categories: ICategory[], businessId: string) {
+    return this.apollo.mutate({
+      mutation: SORT_CATEGORY,
+      variables: {
+        categories,
+      },
+      refetchQueries: [
+        {
+          query: GET_ALL_CATEGORIES,
+          variables: { businessId },
+        },
+        {
+          query: GET_CATALOG,
+          variables: {
+            businessId,
+          },
+        },
+      ],
+    }).pipe(take(1));
+  }
   public editCategory(category: ICategory, businessId: string) {
     return this.apollo.mutate({
       mutation: UPDATE_CATEGORY,
