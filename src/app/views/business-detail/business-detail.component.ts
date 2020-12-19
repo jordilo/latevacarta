@@ -45,6 +45,8 @@ export class BusinessDetailComponent implements OnInit {
   public business$: Observable<IBusiness>;
   public firstVisit$: Observable<IAnalyticsChartData>;
   public views$: Observable<IAnalyticsChartData>;
+  public modalsOpened$: Observable<IAnalyticsChartData>;
+  public searches$: Observable<IAnalyticsChartData>;
   constructor(
     private router: ActivatedRoute,
     private businessService: BusinessService,
@@ -59,8 +61,13 @@ export class BusinessDetailComponent implements OnInit {
       .pipe(switchMap(({ businessId }) => this.analyticsService.getFirstVisit(businessId)),
         map((data) => mapAnalytics(data, 28)));
     this.views$ = this.router.params
-      .pipe(
-        switchMap(({ businessId }) => this.analyticsService.getViews(businessId)),
+      .pipe(switchMap(({ businessId }) => this.analyticsService.getViews(businessId)),
+        map((data) => mapAnalytics(data, 28)));
+    this.modalsOpened$ = this.router.params
+      .pipe(switchMap(({ businessId }) => this.analyticsService.getModalsOpened(businessId)),
+        map((data) => mapAnalytics(data, 28)));
+    this.searches$ = this.router.params
+      .pipe(switchMap(({ businessId }) => this.analyticsService.getSearches(businessId)),
         map((data) => mapAnalytics(data, 28)));
   }
 
