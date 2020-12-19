@@ -13,8 +13,19 @@ export class AnalyticsService {
   constructor(private apollo: Apollo) { }
 
   public getFirstVisit(businessId): Observable<IAnalytics> {
-    // this.apo
     return this.getBusinessAnalytics(businessId, 'first_visit');
+  }
+  public getViews(businessId): Observable<IAnalytics> {
+    return this.getBusinessAnalytics(businessId, 'page_view');
+  }
+  public getModalsOpened(businessId): Observable<IAnalytics> {
+    return this.getBusinessAnalytics(businessId, 'open-modal');
+  }
+  public getChangeLanguage(businessId): Observable<IAnalytics> {
+    return this.getBusinessAnalytics(businessId, 'select-language');
+  }
+  public getSearches(businessId): Observable<IAnalytics> {
+    return this.getBusinessAnalytics(businessId, 'search-item');
   }
 
   private getBusinessAnalytics(businessId: string, eventName: AnalyticEventName) {
