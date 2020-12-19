@@ -1,9 +1,10 @@
 <div class="row">
-  <div class="col-md-8"
+  <div class="col-md-6"
        *ngIf="business$ | async as business; else loading">
     <div class="card card-user">
       <div class="image">
-        <app-brand-image width="100%" type="background"></app-brand-image>
+        <app-brand-image width="100%"
+                         type="background"></app-brand-image>
       </div>
       <div class="card-body">
         <div class="author">
@@ -22,6 +23,18 @@
           <a [routerLink]="['qr']"><button class="btn btn-secondary">See QR</button></a>
           <a [routerLink]="['catalog']"><button class="btn btn-info">Catalog</button></a>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-12"
+           *ngIf="views$ | async as views; else loading">
+        <pre>{{views | json}}</pre>
+      </div>
+      <div class="col-md-12"
+           *ngIf="firstVisit$ | async as firstVisit ; else loading">
+        <pre>{{firstVisit | json}}</pre>
       </div>
     </div>
   </div>
