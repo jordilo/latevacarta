@@ -1,9 +1,10 @@
 <div class="row">
-  <div class="col-md-8"
+  <div class="col-md-12"
        *ngIf="business$ | async as business; else loading">
     <div class="card card-user">
       <div class="image">
-        <app-brand-image width="100%" type="background"></app-brand-image>
+        <app-brand-image width="100%"
+                         type="background"></app-brand-image>
       </div>
       <div class="card-body">
         <div class="author">
@@ -22,6 +23,69 @@
           <a [routerLink]="['qr']"><button class="btn btn-secondary">See QR</button></a>
           <a [routerLink]="['catalog']"><button class="btn btn-info">Catalog</button></a>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="card-title text-primary">Total views</div>
+      </div>
+      <div class="card-body"
+           *ngIf="views$ | async as views; else loading">
+        <canvas baseChart
+                [datasets]="views.data"
+                [labels]="views.dates"
+                [legend]="false"
+                chartType="line"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="card-title text-primary">First visit</div>
+      </div>
+      <div class="card-body"
+           *ngIf="firstVisit$ | async as firstVisit ; else loading">
+        <canvas baseChart
+                [datasets]="firstVisit.data"
+                [labels]="firstVisit.dates"
+                [legend]="false"
+                chartType="line"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="card-title text-primary">Searches</div>
+      </div>
+      <div class="card-body"
+           *ngIf="searches$ | async as searches ; else loading">
+        <canvas baseChart
+                [datasets]="searches.data"
+                [labels]="searches.dates"
+                [legend]="false"
+                chartType="line"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="card-title text-primary">Modals opened</div>
+      </div>
+      <div class="card-body"
+           *ngIf="modalsOpened$ | async as modalsOpened ; else loading">
+        <canvas baseChart
+                [datasets]="modalsOpened.data"
+                [labels]="modalsOpened.dates"
+                [legend]="false"
+                chartType="line"></canvas>
       </div>
     </div>
   </div>

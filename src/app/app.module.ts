@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { ChartsModule } from 'ng2-charts';
 import { environment } from 'src/environments/environment';
 import { AuthModule } from '../auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -97,6 +98,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     DragDropModule,
+    ChartsModule,
   ],
   providers: [BackendUrlProvider],
   bootstrap: [AppComponent],
