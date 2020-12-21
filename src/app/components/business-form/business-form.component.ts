@@ -33,11 +33,17 @@ const fonts = [
   },
 ];
 const defaultLang = 'ca_ES';
+const contactItems: BusinessMetaEnum[] = ['whatsapp', 'email', 'phone'];
 const socialItems: BusinessMetaEnum[] = ['facebook', 'instagram', 'tiktok', 'web', 'youtube'];
 const optionsItems: BusinessMetaEnum[] = ['font'];
 
 interface IOptionsItems {
   font: string;
+}
+interface IContactItems {
+  whatsapp: string;
+  email: string;
+  phone: string;
 }
 interface ISocialItems {
   facebook: string;
@@ -70,6 +76,7 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
     const options = this.getMetadata<IOptionsItems>(this.business?.business_meta, optionsItems);
     const font = options?.font || 'Arial, Helvetica, sans-serif';
     const social = this.getMetadata<ISocialItems>(this.business?.business_meta, socialItems);
+    const contact = this.getMetadata<IContactItems>(this.business?.business_meta, contactItems);
     const languages = this.business?.languages?.map(({ language }) => {
       return this.languages.find((lang) => lang.code === language);
 
@@ -84,7 +91,7 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
       id: [this.business.id],
       name: [this.business.name, Validators.required],
       type: [this.business.type, Validators.required],
-      logotype: this.business?.logotype,
+      logotype: this.business?.logotype || '',
       default_lang: [this.business?.default_lang || defaultLang, Validators.required],
       languages: [this.languagesForm, Validators.minLength(1)],
       addLanguage: this.fb.group({ code: [null] }),
@@ -105,6 +112,11 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
         web: social?.web,
         youtube: social?.youtube,
       }),
+      contact: this.fb.group({
+        whatsapp: contact?.whatsapp,
+        email: contact?.email,
+        phone: contact?.phone,
+      }),
       options: this.fb.group({
         font: [font],
       }),
@@ -118,6 +130,7 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
   public sendForm() {
     const socialMeta = this.setMetadata(this.busninessForm.value, socialItems, 'social');
     const optionsMeta = this.setMetadata(this.busninessForm.value, optionsItems, 'options');
+    const contactMeta = this.setMetadata(this.busninessForm.value, contactItems, 'contact');
     const business: IBusiness = {
       id: this.busninessForm.value.id,
       name: this.busninessForm.value.name,
@@ -129,6 +142,7 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
       business_meta: [
         ...optionsMeta,
         ...socialMeta,
+        ...contactMeta,
       ],
     } as IBusiness;
 
