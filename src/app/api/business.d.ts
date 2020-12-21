@@ -16,9 +16,11 @@ export interface IBusinessLanguage {
   business_id: string;
   language: string;
 }
+
+export type BusinessMetaEnum = 'font' | 'facebook' | 'tiktok' | 'instagram' | 'web';
 export interface IBusinesMeta {
   id: string;
-  name: 'font';
+  name: BusinessMetaEnum;
   value: string;
   business_id: string;
 }

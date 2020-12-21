@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { IAddress, IBusiness } from 'src/app/api/business';
+import { BusinessMetaEnum, IAddress, IBusiness } from 'src/app/api/business';
 import { ILanguage } from 'src/app/api/metadata';
 import { UploadFileService } from 'src/app/api/upload-file.service';
 import { IBusinesMeta } from '../../api/business';
@@ -33,6 +33,18 @@ const fonts = [
   },
 ];
 const defaultLang = 'ca_ES';
+const socialItems: BusinessMetaEnum[] = ['facebook', 'instagram', 'tiktok', 'web'];
+const optionsItems: BusinessMetaEnum[] = ['font'];
+
+interface IOptionsItems {
+  font: string;
+}
+interface ISocialItems {
+  facebook: string;
+  instagram: string;
+  tiktok: string;
+  web: string;
+}
 @Component({
   selector: 'app-business-form',
   templateUrl: './business-form.component.html',
@@ -54,10 +66,9 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
     private uploadFileService: UploadFileService) { }
 
   public ngOnInit(): void {
-
-    this.currentFont = this.business?.business_meta?.find((meta) => meta.name === 'font');
-    const font = this.currentFont?.value || 'Arial, Helvetica, sans-serif';
-
+    const options = this.getMetadata<IOptionsItems>(this.business?.business_meta, optionsItems);
+    const font = options?.font || 'Arial, Helvetica, sans-serif';
+    const social = this.getMetadata<ISocialItems>(this.business?.business_meta, socialItems);
     const languages = this.business?.languages?.map(({ language }) => {
       return this.languages.find((lang) => lang.code === language);
 
@@ -86,6 +97,12 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
         postal_code: [this.business?.address.postal_code, Validators.required],
         state: [this.business?.address.state],
       }),
+      social: this.fb.group({
+        facebook: social?.facebook,
+        instagram: social?.instagram,
+        tiktok: social?.tiktok,
+        web: social?.web,
+      }),
       options: this.fb.group({
         font: [font],
       }),
@@ -97,6 +114,8 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
   }
 
   public sendForm() {
+    const socialMeta = this.setMetadata(this.busninessForm.value, socialItems, 'social');
+    const optionsMeta = this.setMetadata(this.busninessForm.value, optionsItems, 'options');
     const business: IBusiness = {
       id: this.busninessForm.value.id,
       name: this.busninessForm.value.name,
@@ -106,10 +125,8 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
       default_lang: this.busninessForm.value.default_lang,
       languages: this.busninessForm.value.languages.value.map(({ code: language }) => ({ language })),
       business_meta: [
-        {
-          name: 'font',
-          value: this.busninessForm.value.options.font,
-        },
+        ...optionsMeta,
+        ...socialMeta,
       ],
     } as IBusiness;
 
@@ -143,4 +160,23 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
   public addressChange(address: IAddress) {
     this.busninessForm.patchValue({ address }, { emitEvent: false });
   }
+  private getMetadata<T>(metaData: IBusinesMeta[], metadataKeys: string[]) {
+    return metadataKeys.reduce((acc, current) => {
+      const metaValue = metaData?.find((meta) => meta.name === current);
+      if (metaValue) {
+        acc[current] = metaValue.value;
+      }
+      return acc;
+    }, {} as T);
+  }
+
+  private setMetadata(business: IBusiness, items: any[], key: string): IBusinesMeta[] {
+    return items.reduce((acc, item) => {
+      if (business[key][item]) {
+        acc.push({ name: item, value: business[key][item] } as IBusinesMeta);
+      }
+      return acc;
+    }, [] as IBusinesMeta[]);
+  }
+
 }
