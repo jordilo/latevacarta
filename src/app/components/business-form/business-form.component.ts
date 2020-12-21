@@ -33,7 +33,7 @@ const fonts = [
   },
 ];
 const defaultLang = 'ca_ES';
-const socialItems: BusinessMetaEnum[] = ['facebook', 'instagram', 'tiktok', 'web'];
+const socialItems: BusinessMetaEnum[] = ['facebook', 'instagram', 'tiktok', 'web', 'youtube'];
 const optionsItems: BusinessMetaEnum[] = ['font'];
 
 interface IOptionsItems {
@@ -44,6 +44,7 @@ interface ISocialItems {
   instagram: string;
   tiktok: string;
   web: string;
+  youtube: string;
 }
 @Component({
   selector: 'app-business-form',
@@ -102,6 +103,7 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
         instagram: social?.instagram,
         tiktok: social?.tiktok,
         web: social?.web,
+        youtube: social?.youtube,
       }),
       options: this.fb.group({
         font: [font],
