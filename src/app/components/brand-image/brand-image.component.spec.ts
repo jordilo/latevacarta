@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BrandImageComponent } from './brand-image.component';
 
 describe('BrandImageComponent', () => {
@@ -8,9 +7,9 @@ describe('BrandImageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BrandImageComponent ]
+      declarations: [BrandImageComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -18,7 +17,9 @@ describe('BrandImageComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
+  test('hola', () => {
+    expect(2).toBe(2);
+  });
   it('should create', () => {
     expect(component).toBeTruthy();
   });
