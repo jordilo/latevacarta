@@ -20,7 +20,7 @@ export class ProductHighlightComponent implements OnInit {
   public form: FormArray;
 
   public get canAddMore(): boolean {
-    return this.form?.value.length < MAX_HIGHLIGHTED_PRODUCTS;
+    return this.form?.value?.length < MAX_HIGHLIGHTED_PRODUCTS;
   }
 
   constructor(

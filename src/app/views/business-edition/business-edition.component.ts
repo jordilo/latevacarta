@@ -28,7 +28,6 @@ export class BusinessEditionComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    // TODO fins the way to extract params from parent
     this.data$ = this.activeRouter.params
       .pipe(mergeMap(({ businessId }) => {
         return combineLatest([

@@ -1,5 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MockComponent, MockPipe } from 'ng-mocks';
+import { LoaderComponent } from '../../components/loader/loader.component';
+import { FilterUsedProductsPipe } from './filter-used-products.pipe';
 import { ProductHighlightComponent } from './product-highlight.component';
 
 describe('ProductHighlightComponent', () => {
@@ -8,9 +12,14 @@ describe('ProductHighlightComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductHighlightComponent ]
+      declarations: [
+        ProductHighlightComponent,
+        MockComponent(LoaderComponent),
+        MockPipe(FilterUsedProductsPipe),
+      ],
+      imports: [ReactiveFormsModule, RouterTestingModule],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
