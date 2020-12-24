@@ -5,9 +5,9 @@
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
     "start-prod": "ng serve --host 0.0.0.0 --prod=true",
-    "build": "ng build --prod=true",
-    "dev-build": "ng build --prod=false -c dev",
-    "test": "ng test",
+    "build": "npm run test && ng build --prod=true",
+    "dev-build": "npm run test && ng build --prod=false -c dev",
+    "test": "ng test --collectCoverage",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

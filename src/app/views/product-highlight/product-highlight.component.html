@@ -26,10 +26,10 @@
             [disabled]="!canAddMore"
             (click)="add()">Add more</button>
   </form>
-  <ng-template #noProducts>
-    Add some <a [routerLink]="['..','products']">prodcut</a> before
-  </ng-template>
-  <ng-template #loader>
-    <app-loader></app-loader>
-  </ng-template>
 </ng-container>
+<ng-template #noProducts>
+  Add some <a [routerLink]="['..','products']">prodcut</a> before
+</ng-template>
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
