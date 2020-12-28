@@ -22,12 +22,11 @@ export class ProductCreationComponent implements OnInit {
   public businessId$: Observable<string>;
   constructor(
     private catalogService: CatalogService,
-    private router: Router,
     private metaService: MetadataService,
     private businessService: BusinessService,
-    private activeRouter: ActivatedRoute,
     private toast: ToastService,
-  ) { }
+    private router: Router,
+    private activeRouter: ActivatedRoute) { }
 
   public ngOnInit(): void {
     this.businessId$ = this.activeRouter.params.pipe(map(({ businessId }) => businessId));

@@ -1,30 +1,35 @@
-<form [formGroup]="form"
-      *ngIf="(products$ | async).length; else noProducts"
-      (ngSubmit)="sendForm()"
-      class="form-group">
-        <div class="form-group text-right">
-                <button class="btn btn-primary"
-                        type="submit">Save</button>
-        </div>
-        <div class="form-group"
-             *ngFor="let highlightProduct of highlightedProducts$ | async; index as index">
-                <select class="form-control"
-                        [formControl]="highlightProduct">
-                        <option *ngFor="let product of products$ | async | filterUsedProducts : highlightProduct.value :form.value"
-                                [ngValue]="product.id">
-                                {{product.name}}
-                        </option>
-                </select>
-                <button [hidden]="form.value.length === 1"
-                        class="btn btn-secondary"
-                        type="button"
-                        (click)="remove(index)">Delete</button>
-        </div>
-        <button type="button"
-                class="btn btn-secondary"
-                [disabled]="!canAddMore"
-                (click)="add()">Add more</button>
-</form>
+<ng-container *ngIf="(products$ | async) as products; else loader">
+  <form [formGroup]="form"
+        *ngIf="products && products.length; else noProducts"
+        (ngSubmit)="sendForm()"
+        class="form-group">
+    <div class="form-group text-right">
+      <button class="btn btn-primary"
+              type="submit">Save</button>
+    </div>
+    <div class="form-group"
+         *ngFor="let highlightProduct of highlightedProducts$ | async; index as index">
+      <select class="form-control"
+              [formControl]="highlightProduct">
+        <option *ngFor="let product of products$ | async | filterUsedProducts : highlightProduct.value :form.value"
+                [ngValue]="product.id">
+          {{product.name}}
+        </option>
+      </select>
+      <button [hidden]="form?.value?.length === 1"
+              class="btn btn-secondary"
+              type="button"
+              (click)="remove(index)">Delete</button>
+    </div>
+    <button type="button"
+            class="btn btn-secondary"
+            [disabled]="!canAddMore"
+            (click)="add()">Add more</button>
+  </form>
+</ng-container>
 <ng-template #noProducts>
-        Add some <a [routerLink]="['..','products']">prodcut</a> before
+  Add some <a [routerLink]="['..','products']">prodcut</a> before
+</ng-template>
+<ng-template #loader>
+  <app-loader></app-loader>
 </ng-template>

@@ -8,7 +8,7 @@ import { BusinessService } from './../../api/business.service';
 })
 export class BusinessComponent implements OnInit {
 
-  constructor(private businessService: BusinessService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

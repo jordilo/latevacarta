@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { CategoryFormComponent } from './category-form.component';
 
@@ -8,14 +9,18 @@ describe('CategoryFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategoryFormComponent ],
+      declarations: [CategoryFormComponent],
+      imports: [ReactiveFormsModule],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CategoryFormComponent);
     component = fixture.componentInstance;
+    component.businessLanguages = [];
+    component.categories = [];
+    component.languages = [];
     fixture.detectChanges();
   });
 

@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map } from 'rxjs/operators';
-import { BusinessService } from 'src/app/api/business.service';
 import { ICategory } from '../../api/catalog';
 import { IBusinessLanguage } from './../../api/business.d';
 import { ILanguage } from './../../api/metadata.d';
@@ -24,7 +22,7 @@ export class CategoryFormComponent implements OnInit {
   public nameForm: FormArray;
 
   public availableLanguages: any[];
-  constructor(private fb: FormBuilder, private businessService: BusinessService) { }
+  constructor(private fb: FormBuilder) { }
 
   public ngOnInit(): void {
 

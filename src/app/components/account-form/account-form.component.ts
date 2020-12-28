@@ -15,19 +15,17 @@ export class AccountFormComponent implements OnInit {
   @Output() public submitForm = new EventEmitter<IAccount>();
 
   public accountForm: FormGroup;
-  constructor(
-    private fb: FormBuilder,
-    private datePipe: DatePipe) { }
+  constructor(private fb: FormBuilder) { }
 
   public ngOnInit(): void {
     this.accountForm = this.fb.group({
       id: [this.account?.id],
       name: [this.account?.name, Validators.required],
       lastname: [this.account?.lastname, Validators.required],
-  });
-}
+    });
+  }
 
   public sendForm() {
-  this.submitForm.emit(this.accountForm.value);
-}
+    this.submitForm.emit(this.accountForm.value);
+  }
 }
