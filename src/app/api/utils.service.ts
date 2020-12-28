@@ -19,6 +19,6 @@ export class UtilsService {
     const headers = new HttpHeaders({
       Accept: 'application/json',
     });
-    return this.http.post<InsertFullCatalog>(`${this.backendUrl}catalog-upload`, formData, { headers });
+    return this.http.post<InsertFullCatalog>(`${this.backendUrl}catalog/upload`, formData, { headers });
   }
 }
