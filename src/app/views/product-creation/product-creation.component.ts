@@ -1,7 +1,8 @@
+import { ToastService } from './../../toast.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest, Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { combineLatest, Observable, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { IBusinessLanguage } from 'src/app/api/business';
 import { BusinessService } from 'src/app/api/business.service';
 import { CatalogService } from 'src/app/api/catalog.service';
@@ -24,6 +25,7 @@ export class ProductCreationComponent implements OnInit {
     private metaService: MetadataService,
     private businessService: BusinessService,
     private router: Router,
+    private toast: ToastService,
     private activeRouter: ActivatedRoute) { }
 
   public ngOnInit(): void {
@@ -40,7 +42,12 @@ export class ProductCreationComponent implements OnInit {
   }
 
   public saveProduct(category: IProduct) {
-    this.catalogService.insertProduct(category)
+    this.businessId$.pipe(
+      switchMap((categoryId: string) => {
+        category.business_id = categoryId;
+        return this.catalogService.insertProduct(category);
+      }))
+      .pipe(tap(() => this.toast.open('Info', 'Product created successfully')))
       .subscribe(() => this.router.navigate(['../'], { relativeTo: this.activeRouter }));
   }
 }
