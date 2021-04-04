@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { IAddress, IBusiness } from 'src/app/api/business';
 import { ILanguage } from 'src/app/api/metadata';
 import { BusinessService } from '../../api/business.service';
+import { ITemplate } from './../../api/business.d';
 import { MetadataService } from './../../api/metadata.service';
 
 @Component({
@@ -14,6 +15,7 @@ import { MetadataService } from './../../api/metadata.service';
 export class BusinessCreationComponent implements OnInit {
 
   public languages$: Observable<ILanguage[]>;
+  public templates$: Observable<ITemplate[]>;
   public defaultBusiness: IBusiness;
   constructor(
     private router: Router,
@@ -25,6 +27,7 @@ export class BusinessCreationComponent implements OnInit {
   public ngOnInit(): void {
 
     this.languages$ = this.metadata.getLanguages();
+    this.templates$ = this.metadata.getTemplates();
     this.defaultBusiness = {
       name: '',
       type: 'BAR',

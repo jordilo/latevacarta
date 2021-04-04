@@ -10,6 +10,14 @@ export interface IBusiness {
   business_meta: IBusinesMeta[];
   default_lang: string;
   languages: IBusinessLanguage[];
+  template_id: string;
+  template: ITemplate;
+}
+
+export interface ITemplate {
+  id: string;
+  name: string;
+  reference: string;
 }
 
 export interface IBusinessLanguage {

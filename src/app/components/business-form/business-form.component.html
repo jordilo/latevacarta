@@ -115,17 +115,28 @@
       </div>
     </div>
   </div>
-  <div formGroupName="options">
+  <div>
     <h5 class="text-primary">Options</h5>
+    <ng-container formGroupName="options">
+      <div class="form-group">
+        <label>Font</label>
+        <select class="form-control"
+                formControlName="font">
+          <optgroup *ngFor="let group of fonts"
+                    [label]="group.group">
+            <option *ngFor="let font of group.fonts"
+                    [value]="font">{{font}}</option>
+          </optgroup>
+        </select>
+      </div>
+    </ng-container>
     <div class="form-group">
-      <label>Font</label>
+      <label>Template</label>
       <select class="form-control"
-              formControlName="font">
-        <optgroup *ngFor="let group of fonts"
-                  [label]="group.group">
-          <option *ngFor="let font of group.fonts"
-                  [value]="font">{{font}}</option>
-        </optgroup>
+              formControlName="template_id">
+        <option [ngValue]="null">Default</option>
+        <option *ngFor="let tmp of templates"
+                [value]="tmp.id">{{tmp.name}}</option>
       </select>
     </div>
   </div>

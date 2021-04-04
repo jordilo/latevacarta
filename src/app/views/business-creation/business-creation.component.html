@@ -7,6 +7,7 @@
       <ng-container *ngIf="languages$ | async as languages; else  loading">
         <app-business-form [business]="defaultBusiness"
                            [languages]="languages"
+                           [templates]="templates$ | async"
                            (submitForm)="sendForm($event)"></app-business-form>
       </ng-container>
     </div>

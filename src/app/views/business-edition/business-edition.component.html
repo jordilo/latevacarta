@@ -8,6 +8,7 @@
 
         <app-business-form [languages]="data[1]"
                            (submitForm)="editBusiness($event)"
+                           [templates]="templates$ | async"
                            [business]="data[0]"></app-business-form>
       </ng-container>
     </div>
