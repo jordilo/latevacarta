@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
@@ -22,7 +23,17 @@ export class AppComponent {
   }
   public user$: Observable<IAccount>;
 
-  constructor(private auth: AuthService, private accountService: AccountService) {
+  constructor(
+    private translate: TranslateService,
+    private auth: AuthService,
+    private accountService: AccountService) {
+
+    // this language will be used as a fallback when a translation isn't found in the current language
+    this.translate.setDefaultLang(localStorage.getItem('lastet_language') ?? 'en');
+
+    // the lang to use, if the lang isn't available, it will use the current loader to get them
+    this.translate.use('en');
+
     this.user$ =
       this.auth.user$.pipe(
         filter((user) => user !== null || Boolean(localStorage.getItem(ACCOUNT_ID_KEY))),
