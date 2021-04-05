@@ -25,9 +25,9 @@
     <div class="collapse navbar-collapse justify-content-end"
          id="collapseExample"
          [ngbCollapse]="isCollapsed">
-      <ul class="navbar-nav"
-          *ngIf="user">
+      <ul class="navbar-nav">
         <li class="nav-item btn-rotate"
+            *ngIf="user"
             ngbDropdown
             placement="bottom-left">
           <a class="nav-link"
@@ -41,9 +41,32 @@
                aria-labelledby="navbarDropdownMenuLink"
                class="dropdown-menu dropdown-menu-right">
             <a ngbDropdownItem
+               translate
                [routerLink]="['account','edit']">Edit</a>
             <a ngbDropdownItem
+               translate
                (click)="logout()">Logout</a>
+            <div class="separator"></div>
+          </div>
+        </li>
+        <li class="nav-item btn-rotate"
+            ngbDropdown
+            placement="bottom-left">
+          <a class="nav-link"
+             ngbDropdownToggle
+             id="navbarDropdownMenuLink">
+            <i class="nc-icon nc-world-2"></i>
+          </a>
+          <div ngbDropdownMenu
+               aria-labelledby="navbarDropdownMenuLink"
+               class="dropdown-menu dropdown-menu-right">
+            <a ngbDropdownItem
+               (click)="setLanguage('ca')">Català</a>
+            <a ngbDropdownItem
+               (click)="setLanguage('es')">Castellano</a>
+            <a ngbDropdownItem
+               (click)="setLanguage('en')">English</a>
+            <div class="separator"></div>
           </div>
         </li>
         <!-- <li class="nav-item">

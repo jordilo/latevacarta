@@ -1,7 +1,8 @@
 <div class="col-md-8">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title text-primary">Print your Qr code</h4>
+      <h4 class="card-title text-primary"
+          translate>Print your Qr code</h4>
     </div>
     <div class="card-body">
       <ng-container *ngIf="data$ | async as data; else loading">
@@ -14,7 +15,7 @@
                   formControlName="size">
             <option *ngFor="let opt of sizes"
                     [ngValue]="opt.size">
-              {{opt.name}}
+              {{opt.name | translate}}
             </option>
           </select>
         </form>
@@ -28,7 +29,8 @@
           <div class="update ml-auto mr-auto">
             <button type="submit"
                     (click)="print(data.business.id)"
-                    class="btn btn-primary btn-round">Print</button>
+                    class="btn btn-primary btn-round"
+                    translate>Print</button>
           </div>
         </div>
       </ng-container>

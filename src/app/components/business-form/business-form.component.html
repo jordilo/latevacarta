@@ -3,14 +3,14 @@
   <div class="row">
     <div class="col-md-5 pr-1">
       <div class="form-group">
-        <label>Name</label>
+        <label translate>Name</label>
         <input class="form-control"
                formControlName="name" />
       </div>
     </div>
     <div class="col-md5 pl-1">
       <div class="form-group">
-        <label>Logo</label>
+        <label translate>Logo</label>
         <div class="logo-wrap">
           <div *ngIf="business.logotype"
                class="logo-image">
@@ -26,34 +26,42 @@
 
   </div>
   <div class="form-group">
-    <label>Type</label>
+    <label translate>Type</label>
     <select class="form-control"
             formControlName="type">
-      <option value="BAR">Bar</option>
-      <option value="RES">Restaurant</option>
-      <option value="PUB">Pub</option>
+      <option value="BAR"
+              translate>Bar</option>
+      <option value="RES"
+              translate>Restaurant</option>
+      <option value="PUB"
+              translate>Pub</option>
     </select>
   </div>
   <div>
-    <h5 class="text-primary">Languages</h5>
+    <h5 class="text-primary"
+        translate>Languages</h5>
     <table class="table">
       <tr>
-        <th>Name</th>
-        <th>Delete</th>
-        <th>Default</th>
+        <th translate>Name</th>
+        <th translate>Delete</th>
+        <th translate>Default</th>
       </tr>
       <tr *ngFor="let lang of languagesForm.controls; index as i">
         <td> {{lang.value.name}} </td>
         <td><button type="button"
                   [disabled]="languagesForm.controls.length === 1"
                   class="btn btn-secondary"
-                  (click)="removeLanguage(i)">Remove</button></td>
+                  (click)="removeLanguage(i)"
+                  translate>Remove</button></td>
         <td><button type="button"
                   *ngIf="busninessForm.value.default_lang !== lang.value.code; else defaultLang"
                   class="btn btn-info"
-                  (click)="setLanguageAsDefault(lang.value.code)">SetAsDefault</button>
+                  (click)="setLanguageAsDefault(lang.value.code)"
+                  translate>SetAsDefault</button>
           <ng-template #defaultLang>
-            Is default
+            <span translate>
+              Is default
+            </span>
           </ng-template>
         </td>
       </tr>
@@ -66,11 +74,13 @@
           <button class="btn btn-secondary"
                   type="button"
                   [disabled]="busninessForm.get('addLanguage').invalid"
-                  (click)="addLanguage()">Add</button>
+                  (click)="addLanguage()"
+                  translate>Add</button>
         </div>
         <select class="form-control"
                 formControlName="code">
-          <option [ngValue]="null">Select one language…</option>
+          <option [ngValue]="null"
+                  translate>Select one language…</option>
           <option *ngFor="let lang of languages | filterLanguages : languagesForm.value"
                   [value]="lang.code">{{lang.name}}</option>
         </select>
@@ -80,27 +90,28 @@
   </div>
 
   <div formGroupName="address">
-    <h5 class="text-primary">Address</h5>
+    <h5 class="text-primary"
+        translate>Location</h5>
 
     <div class="form-group">
       <app-set-address (addressChange)="addressChange($event)"></app-set-address>
     </div>
     <div class="form-group">
-      <label>Address</label>
+      <label translate>Address</label>
       <input class="form-control"
              formControlName="address" />
     </div>
     <div class="row">
       <div class="col-md-4 pr-1">
         <div class="form-group">
-          <label>City</label>
+          <label translate>City</label>
           <input class="form-control"
                  formControlName="city" />
         </div>
       </div>
       <div class="col-md-4 px-1">
         <div class="form-group">
-          <label>Postal code</label>
+          <label translate>Postal code</label>
           <input class="form-control"
                  type="number"
                  formControlName="postal_code" />
@@ -108,7 +119,7 @@
       </div>
       <div class="col-md-4 pl-1">
         <div class="form-group">
-          <label>State/Province</label>
+          <label translate>State/Province</label>
           <input class="form-control"
                  formControlName="state" />
         </div>
@@ -116,10 +127,11 @@
     </div>
   </div>
   <div>
-    <h5 class="text-primary">Options</h5>
+    <h5 class="text-primary"
+        translate>Options</h5>
     <ng-container formGroupName="options">
       <div class="form-group">
-        <label>Font</label>
+        <label translate>Font</label>
         <select class="form-control"
                 formControlName="font">
           <optgroup *ngFor="let group of fonts"
@@ -131,57 +143,60 @@
       </div>
     </ng-container>
     <div class="form-group">
-      <label>Template</label>
+      <label translate>Template</label>
       <select class="form-control"
               formControlName="template_id">
-        <option [ngValue]="null">Default</option>
+        <option [ngValue]="null"
+                translate>Default</option>
         <option *ngFor="let tmp of templates"
                 [value]="tmp.id">{{tmp.name}}</option>
       </select>
     </div>
   </div>
   <div formGroupName="contact">
-    <h5 class="text-primary">Contact</h5>
+    <h5 class="text-primary"
+        translate>Contact</h5>
     <div class="form-group">
-      <label>Phone</label>
+      <label translate>Phone</label>
       <input class="form-control"
              formControlName="phone" />
     </div>
     <div class="form-group">
-      <label>Whatsapp</label>
+      <label translate>Whatsapp</label>
       <input class="form-control"
              formControlName="whatsapp" />
     </div>
     <div class="form-group">
-      <label>Email</label>
+      <label translate>Email</label>
       <input class="form-control"
              formControlName="email" />
     </div>
   </div>
   <div formGroupName="social">
-    <h5 class="text-primary">Social</h5>
+    <h5 class="text-primary"
+        translate>Social</h5>
     <div class="form-group">
-      <label>Facebook</label>
+      <label translate>Facebook</label>
       <input class="form-control"
              formControlName="facebook" />
     </div>
     <div class="form-group">
-      <label>Instagram</label>
+      <label translate>Instagram</label>
       <input class="form-control"
              formControlName="instagram" />
     </div>
     <div class="form-group">
-      <label>Tiktok</label>
+      <label translate>Tiktok</label>
       <input class="form-control"
              formControlName="tiktok" />
     </div>
     <div class="form-group">
-      <label>Youtube</label>
+      <label translate>Youtube</label>
       <input class="form-control"
              formControlName="youtube" />
     </div>
     <div class="form-group">
-      <label>Website</label>
+      <label translate>Website</label>
       <input class="form-control"
              formControlName="web" />
     </div>
@@ -192,7 +207,8 @@
     <div class="update ml-auto mr-auto">
       <button type="submit"
               [disabled]="busninessForm.invalid"
-              class="btn btn-primary btn-round">Save</button>
+              class="btn btn-primary btn-round"
+              translate>Save</button>
     </div>
   </div>
 </form>

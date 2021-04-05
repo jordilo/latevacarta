@@ -1,7 +1,8 @@
 <div class="col-md-8">
     <div class="card">
         <div class="card-header text-primary">
-            <h5 class="card-title">Edit Profile</h5>
+            <h5 class="card-title"
+                translate>Edit Profile</h5>
         </div>
         <div class="card-body">
             <app-account-form *ngIf="account$ | async as account ; else loading"

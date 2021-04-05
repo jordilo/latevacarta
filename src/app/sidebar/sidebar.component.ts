@@ -45,7 +45,6 @@ export class SidebarComponent implements OnInit {
         });
 
     }
-
     private filterItems() {
         this.menuItems = ROUTES.filter((menuItem) => {
             if (this.isLoggedIn && !menuItem.notLogged && !menuItem.needsAdmin) {

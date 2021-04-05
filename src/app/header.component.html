@@ -22,14 +22,16 @@
         <a class="nav-link">
           <button type="button"
                   class="btn btn-outline-light btn-sm"
-                  (click)="login()">Login</button></a>
+                  (click)="login()"
+                  translate>Login</button></a>
       </li>
       <li class="nav-item"
           *ngIf="isLoggedUserInError">
         <a class="nav-link">
           <button type="button"
                   class="btn btn-outline-light btn-sm"
-                  (click)="login()">Logout</button></a>
+                  (click)="login()"
+                  translate>Logout</button></a>
       </li>
       <li class="nav-item dropdown"
           *ngIf="isUserLogged && user">
@@ -45,13 +47,15 @@
         <div class="dropdown-menu dropdown-menu-right text-right"
              aria-labelledby="navbarDropdown">
           <a class="dropdown-item"
+             translate
              routerLink="/account"
              href="#">Account</a>
           <a class="dropdown-item">
             <button id="qsLogoutBtn"
                     type="button"
                     class="btn-margin logoutBtn btn btn-danger"
-                    (click)="logout()">Log Out</button></a>
+                    (click)="logout()"
+                    translate>Log Out</button></a>
         </div>
       </li>
     </ul>

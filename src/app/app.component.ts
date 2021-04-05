@@ -32,7 +32,7 @@ export class AppComponent {
     this.translate.setDefaultLang(localStorage.getItem('lastet_language') ?? 'en');
 
     // the lang to use, if the lang isn't available, it will use the current loader to get them
-    this.translate.use('en');
+    // this.translate.use('en');
 
     this.user$ =
       this.auth.user$.pipe(
