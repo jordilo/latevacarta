@@ -6,6 +6,7 @@ import { CatalogService } from 'src/app/api/catalog.service';
 import { CategoryFormComponent } from 'src/app/components/category-form/category-form.component';
 import { LoaderComponent } from 'src/app/components/loader/loader.component';
 import { MetadataService } from '../../api/metadata.service';
+import { ToastService } from '../../toast.service';
 import { CategoryEditionComponent } from './category-edition.component';
 
 describe('CategoryEditionComponent', () => {
@@ -16,6 +17,7 @@ describe('CategoryEditionComponent', () => {
   const metaServiceMock = MockService(MetadataService);
   const businessServiceMock = MockService(BusinessService);
   const metadataServiceMock = MockService(MetadataService);
+  const toastServiceMock = MockService(ToastService);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -29,6 +31,7 @@ describe('CategoryEditionComponent', () => {
         { provide: MetadataService, useValue: metaServiceMock },
         { provide: BusinessService, useValue: businessServiceMock },
         { provide: MetadataService, useValue: metadataServiceMock },
+        { provide: ToastService, useValue: toastServiceMock },
       ],
     })
       .compileComponents();

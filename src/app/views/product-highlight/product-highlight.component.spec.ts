@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MockComponent, MockPipe } from 'ng-mocks';
+import { MockComponent, MockPipe, MockService } from 'ng-mocks';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { ToastService } from '../../toast.service';
 import { FilterUsedProductsPipe } from './filter-used-products.pipe';
 import { ProductHighlightComponent } from './product-highlight.component';
 
@@ -18,6 +19,9 @@ describe('ProductHighlightComponent', () => {
         MockPipe(FilterUsedProductsPipe),
       ],
       imports: [ReactiveFormsModule, RouterTestingModule],
+      providers: [
+        { provide: ToastService, useValue: MockService(ToastService) },
+      ],
     })
       .compileComponents();
   }));

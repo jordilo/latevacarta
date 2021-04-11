@@ -1,15 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockComponent, MockService } from 'ng-mocks';
 import { of } from 'rxjs';
-import { AuthModule } from '../../../auth/auth.module';
 import { IAccount } from '../../api/account';
 import { AccountService } from '../../api/account.service';
 import { AccountFormComponent } from '../../components/account-form/account-form.component';
-import { ComponentsModule } from '../../components/components.module';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { ToastService } from '../../toast.service';
 import { AccountEditionComponent } from './account-edition.component';
 
 describe('AccountEditionComponent', () => {
@@ -17,6 +15,7 @@ describe('AccountEditionComponent', () => {
   let fixture: ComponentFixture<AccountEditionComponent>;
 
   const accountServiceMock = MockService(AccountService);
+  const toastServiceMock = MockService(ToastService);
 
   beforeEach(async(() => {
 
@@ -29,6 +28,7 @@ describe('AccountEditionComponent', () => {
       imports: [ReactiveFormsModule, RouterTestingModule],
       providers: [
         { provide: AccountService, useValue: accountServiceMock },
+        { provide: ToastService, useValue: toastServiceMock },
       ],
     })
       .compileComponents();
