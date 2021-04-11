@@ -6,23 +6,25 @@
     <div class="form-group text-right">
         <button class="btn btn-primary"
                 [disabled]="categoryForm.invalid || nameForm.invalid"
-                type="submit">Save</button>
+                type="submit"
+                translate>Save</button>
     </div>
-    
+
     <div formArrayName="name_languages">
         <div class="form-group"
              *ngFor="let language of langs.controls; index as i">
-            <label>Name in {{language.value.name}}</label>
+            <label translate>Name in {{language.value.name}}</label>
             <input class="form-control"
                    [formControl]="language.get('value')" />
         </div>
     </div>
     <div class="form-group"
          [hidden]="!categories || !categories.length">
-        <label>Type</label>
+        <label translate>Type</label>
         <select class="form-control"
                 formControlName="parent_category">
-            <option [ngValue]="null">No parent</option>
+            <option [ngValue]="null"
+                    translate>No parent</option>
             <option *ngFor="let cat of categories"
                     [disabled]="cat.id === categoryForm.value.id"
                     [value]="cat.id">{{cat.name}}</option>

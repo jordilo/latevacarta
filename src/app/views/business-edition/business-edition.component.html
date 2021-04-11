@@ -1,13 +1,15 @@
 <div class="col-md-8">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title text-primary">Edit business</h4>
+      <h4 class="card-title text-primary"
+          translate>Edit business</h4>
     </div>
     <div class="card-body">
       <ng-container *ngIf="data$ | async as data ;else loading">
 
         <app-business-form [languages]="data[1]"
                            (submitForm)="editBusiness($event)"
+                           [templates]="templates$ | async"
                            [business]="data[0]"></app-business-form>
       </ng-container>
     </div>

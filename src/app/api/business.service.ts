@@ -38,6 +38,7 @@ export class BusinessService {
       type: business.type,
       logotype: business.logotype,
       account_id: localStorage.getItem(ACCOUNT_ID_KEY),
+      template_id: business.template_id,
       business_meta: { data: business.business_meta },
       default_lang: business.default_lang,
       languages: {
@@ -67,6 +68,7 @@ export class BusinessService {
         id: business.id,
         name: business.name,
         type: business.type,
+        template_id: business.template_id,
         logotype: business.logotype,
         default_lang: business.default_lang,
         languages,

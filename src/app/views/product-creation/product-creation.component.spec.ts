@@ -4,6 +4,7 @@ import { MockComponent, MockService } from 'ng-mocks';
 import { BusinessService } from 'src/app/api/business.service';
 import { CatalogService } from 'src/app/api/catalog.service';
 import { MetadataService } from 'src/app/api/metadata.service';
+import { ToastService } from 'src/app/toast.service';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { ProductFormComponent } from '../../components/product-form/product-form.component';
 import { ProductCreationComponent } from './product-creation.component';
@@ -15,6 +16,7 @@ describe('ProductCreationComponent', () => {
   const catalogServiceMock = MockService(CatalogService);
   const metaServiceMock = MockService(MetadataService);
   const businessServiceMock = MockService(BusinessService);
+  const toastServiceMock = MockService(ToastService);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -28,6 +30,7 @@ describe('ProductCreationComponent', () => {
         { provide: CatalogService, useValue: catalogServiceMock },
         { provide: MetadataService, useValue: metaServiceMock },
         { provide: BusinessService, useValue: businessServiceMock },
+        { provide: ToastService, useValue: toastServiceMock },
       ],
 
     })

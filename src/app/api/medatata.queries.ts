@@ -7,3 +7,12 @@ query GetLanguages {
     name
   }
 }`;
+
+export const GET_TEMPLATES = gql`
+query GetTemplates {
+  templates {
+    id
+    name
+    reference
+  }
+}`;

@@ -12,7 +12,7 @@
         class="{{menuItem.class}}">
       <a [routerLink]="[menuItem.path]">
         <i class="nc-icon {{menuItem.icon}}"></i>
-        <p>{{menuItem.title}}</p>
+        <p>{{menuItem.title | translate}}</p>
       </a>
     </li>
   </ul>

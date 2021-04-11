@@ -5,7 +5,8 @@
         class="form-group">
     <div class="form-group text-right">
       <button class="btn btn-primary"
-              type="submit">Save</button>
+              type="submit"
+              translate>Save</button>
     </div>
     <div class="form-group"
          *ngFor="let highlightProduct of highlightedProducts$ | async; index as index">
@@ -19,16 +20,20 @@
       <button [hidden]="form?.value?.length === 1"
               class="btn btn-secondary"
               type="button"
-              (click)="remove(index)">Delete</button>
+              (click)="remove(index)"
+              translate>Delete</button>
     </div>
     <button type="button"
             class="btn btn-secondary"
             [disabled]="!canAddMore"
-            (click)="add()">Add more</button>
+            (click)="add()"
+            translate>Add more</button>
   </form>
 </ng-container>
 <ng-template #noProducts>
-  Add some <a [routerLink]="['..','products']">prodcut</a> before
+  <span translate>
+    Add some <a [routerLink]="['..','products']">prodcut</a> before
+  </span>
 </ng-template>
 <ng-template #loader>
   <app-loader></app-loader>
