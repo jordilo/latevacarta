@@ -31,7 +31,7 @@ export class ProductListComponent implements OnInit {
   }
 
   public removeProduct(productId: string, businessId: string) {
-    const areYourSure = confirm('Are you sure');
+    const areYourSure = confirm('Are you sure' + businessId);
     if (areYourSure) {
       this.catalogService.removeProduct(productId, businessId).subscribe();
     }

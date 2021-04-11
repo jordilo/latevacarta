@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
-import { ChangeDetectorRef, EventEmitter, Input, Output } from '@angular/core';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { IAccount } from 'src/app/api/account';
 import { EXPIRES_AT_KEY, TOKEN_ID, TOKEN_KEY, USER_ID } from 'src/auth/auth.service';
 import { ROUTES } from '../../sidebar/sidebar.component';
@@ -42,9 +42,10 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private location: Location,
-    private renderer: Renderer2,
     private element: ElementRef,
     private cdr: ChangeDetectorRef,
+    private readonly translae: TranslateService,
+
     private router: Router) {
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
@@ -68,6 +69,11 @@ export class NavbarComponent implements OnInit {
       this.sidebarClose();
     });
   }
+
+  setLanguage(language: string) {
+    this.translae.use(language);
+    localStorage.setItem('lastet_language', language);
+  }
   getTitle() {
     // let titlee = this.location.prepareExternalUrl(this.location.path());
     // if (titlee.charAt(0) === '/') {
@@ -80,7 +86,7 @@ export class NavbarComponent implements OnInit {
     //     return this.listTitles[item].title;
     //   }
     // }
-    return 'Dashboard';
+    return this.translae.instant('Dashboard');
   }
   sidebarToggle() {
     if (this.sidebarVisible === false) {

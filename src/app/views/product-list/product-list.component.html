@@ -1,6 +1,7 @@
 <div class="card">
   <div class="card-header">
-    <h4 class="card-title">Products</h4>
+    <h4 class="card-title"
+        translate>Products</h4>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -8,20 +9,22 @@
              *ngIf="products$ | async as products; else loading">
         <tr *ngIf="products.length">
           <th><a [routerLink]="['create']">+</a></th>
-          <th>Name</th>
-          <th>Category</th>
-          <th>Edit</th>
-          <th>Delete</th>
+          <th translate>Name</th>
+          <th translate>Category</th>
+          <th translate>Edit</th>
+          <th translate>Delete</th>
         </tr>
         <tr *ngFor="let product of products">
           <td colspan="2">{{product.name}}</td>
           <td>{{product.category.name}}</td>
-          <td><a [routerLink]="[product.id, 'edit']">Edit</a></td>
+          <td><a [routerLink]="[product.id, 'edit']"
+               translate>Edit</a></td>
           <td><a routerLink="."
-               (click)="removeProduct(product.id, product.business_id)">Delete</a></td>
+               (click)="removeProduct(product.id, product.business_id)"
+               translate>Delete {{product.business_id}}</a></td>
         </tr>
         <tr *ngIf="!products.length">
-          <td>There are any product <a [routerLink]="['create']">create your first one</a></td>
+          <td translate>There are any product <a [routerLink]="['create']">create your first one</a></td>
         </tr>
         <tr *ngIf="!products.length">
           <td>

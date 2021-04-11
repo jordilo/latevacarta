@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { map, take } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { ICategory, IProduct, IProductHighlight } from './catalog';
 import {
   GET_ALL_CATEGORIES,
@@ -183,7 +183,7 @@ export class CatalogService {
       variables: {
         businessId,
       },
-    }).valueChanges.pipe(map(({ data }) => data.product));
+    }).valueChanges.pipe(map(({ data }) => data.product), tap(console.log));
   }
   public getProductById(productId: string) {
     return this.apollo.watchQuery<{ product_by_pk: IProduct }>({
@@ -212,6 +212,7 @@ export class CatalogService {
           description_languages: { data: product.description_languages },
         },
       },
+      awaitRefetchQueries: true,
       refetchQueries: [{
         query: GET_ALL_PRODUCTS,
         variables: {
@@ -268,6 +269,7 @@ export class CatalogService {
       variables: {
         id: productId,
       },
+      awaitRefetchQueries: true,
       refetchQueries: [
         {
           query: GET_ALL_PRODUCTS,

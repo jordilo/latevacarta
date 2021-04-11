@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import html2canvas from 'html2canvas';
 import jspdf from 'jspdf';
@@ -24,21 +25,27 @@ export class BusinessQrComponent implements OnInit {
 
   public hostname = window.location.hostname.replace('admin.', '');
   public form: FormGroup;
-  public sizes = [{
-    name: 'small',
-    size: 250,
-  },
-  {
-    name: 'medium',
-    size: 500,
-  },
-  {
+  public readonly sizes;
 
-    name: 'large',
-    size: 1000,
-  }];
+  constructor(
+    private readonly translate: TranslateService,
+    private readonly business: BusinessService,
+    private readonly activatedRouter: ActivatedRoute,
+    private readonly fb: FormBuilder) {
+    this.sizes = [{
+      name: this.translate.instant('small'),
+      size: 250,
+    },
+    {
+      name: this.translate.instant('medium'),
+      size: 500,
+    },
+    {
 
-  constructor(private business: BusinessService, private activatedRouter: ActivatedRoute, private fb: FormBuilder) { }
+      name: this.translate.instant('large'),
+      size: 1000,
+    }];
+  }
 
   public ngOnInit(): void {
 

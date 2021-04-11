@@ -7,8 +7,8 @@ import { BusinessService } from 'src/app/api/business.service';
 import { CatalogService } from 'src/app/api/catalog.service';
 import { ILanguage } from 'src/app/api/metadata';
 import { MetadataService } from 'src/app/api/metadata.service';
-import { ToastService } from 'src/app/toast.service';
 import { ICategory, IProduct } from '../../api/catalog';
+import { ToastService } from './../../toast.service';
 
 @Component({
   selector: 'app-product-creation',
@@ -42,7 +42,11 @@ export class ProductCreationComponent implements OnInit {
   }
 
   public saveProduct(category: IProduct) {
-    this.catalogService.insertProduct(category)
+    this.businessId$.pipe(
+      switchMap((categoryId: string) => {
+        category.business_id = categoryId;
+        return this.catalogService.insertProduct(category);
+      }))
       .pipe(tap(() => this.toast.open('Info', 'Product created successfully')))
       .subscribe(() => this.router.navigate(['../'], { relativeTo: this.activeRouter }));
   }

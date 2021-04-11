@@ -1,13 +1,16 @@
 import { AgmCoreModule } from '@agm/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { ChartsModule } from 'ng2-charts';
+import { ToastrModule } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { AuthModule } from '../auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -45,8 +48,10 @@ import { FilterUsedProductsPipe } from './views/product-highlight/filter-used-pr
 import { ProductHighlightComponent } from './views/product-highlight/product-highlight.component';
 import { ProductListComponent } from './views/product-list/product-list.component';
 import { ProfileComponent } from './views/profile/profile.component';
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
-import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,6 +104,13 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot(),
     DragDropModule,
     ChartsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [BackendUrlProvider],
   bootstrap: [AppComponent],

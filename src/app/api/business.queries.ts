@@ -6,6 +6,7 @@ query GetFullBusiness {
     id
     default_lang
     logotype
+    template_id
     languages {
       language
     }
@@ -34,6 +35,7 @@ query GetBusinessById ($id: uuid!) {
       __typename
       language
     }
+    template_id
     address {
       address
       city
@@ -71,11 +73,13 @@ mutation UpdateBusiness(
   $id: uuid!,
   $name: String!,
   $type: String!,
+  $template_id: uuid,
   $logotype: String!,
   $default_lang: language_enum!,
   $languages: [business_languages_insert_input!]!
   ) {
-  update_business_by_pk(pk_columns: {id: $id}, _set: {name: $name , logotype: $logotype, type: $type, default_lang: $default_lang}) {
+  update_business_by_pk(pk_columns: {id: $id}, _set:
+    {name: $name , logotype: $logotype, type: $type, template_id: $template_id, default_lang: $default_lang}) {
     id
   }
   delete_business_languages(where: {business_id: {_eq: $id}}) {

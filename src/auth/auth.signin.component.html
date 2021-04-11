@@ -7,32 +7,40 @@
                    position="center"
                    type="full-color"></app-brand-image>
   <div class="form-group">
-    <label>Username/Email</label>
+    <label translate>Username/Email</label>
     <input class="form-control"
            formControlName="username" />
     <small *ngIf="isEmailEmpty"
-           class="text-danger">Username/Email cannot be empty</small>
+           class="text-danger"
+           translate>Username/Email cannot be empty</small>
   </div>
   <div class="form-group">
-    <label>Password</label>
+    <label translate>Password</label>
     <input class="form-control"
            type="password"
            formControlName="password" />
     <small *ngIf="isEmailEmpty"
+           translate
            class="text-danger">Password cannot be empty</small>
   </div>
   <div class="form-group">
 
-    <small class="text-danger">{{error}}</small>
+    <small class="text-danger"
+           translate>{{error}}</small>
   </div>
   <div class="form-group">
-    <small>Forgot password <a [routerLink]="[passwordResetPath]">click here</a></small>
+    <small translate>Forgot password
+      <a [routerLink]="[passwordResetPath]"
+         translate>click here</a>
+    </small>
   </div>
   <div class="form-group">
-    <a [routerLink]="[signupPath]">Signup</a>
+    <a [routerLink]="[signupPath]"
+       translate>Signup</a>
   </div>
 
   <button class="btn btn-primary btn-lg"
           id="login-button"
-          [disabled]="loginForm.invalid || loginForm.disabled">ok</button>
+          [disabled]="loginForm.invalid || loginForm.disabled"
+          translate>Ok</button>
 </form>

@@ -5,6 +5,7 @@ import { BusinessMetaEnum, IAddress, IBusiness } from 'src/app/api/business';
 import { ILanguage } from 'src/app/api/metadata';
 import { UploadFileService } from 'src/app/api/upload-file.service';
 import { IBusinesMeta } from '../../api/business';
+import { ITemplate } from './../../api/business.d';
 
 const fonts = [
   {
@@ -61,6 +62,7 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
 
   @Input() public business: IBusiness;
   @Input() public languages: ILanguage[];
+  @Input() public templates: ITemplate[];
   @Output() public submitForm = new EventEmitter<IBusiness>();
   public busninessForm: FormGroup;
   public languagesForm: FormArray;
@@ -95,6 +97,7 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
       default_lang: [this.business?.default_lang || defaultLang, Validators.required],
       languages: [this.languagesForm, Validators.minLength(1)],
       addLanguage: this.fb.group({ code: [null] }),
+      template_id: this.business.template_id,
       address: this.fb.group({
         id: [this.business?.address.id],
         address: [this.business?.address.address, Validators.required],
@@ -138,6 +141,7 @@ export class BusinessFormComponent implements OnInit, OnDestroy {
       logotype: this.busninessForm.value.logotype,
       address: this.busninessForm.value.address,
       default_lang: this.busninessForm.value.default_lang,
+      template_id: this.busninessForm.value.template_id,
       languages: this.busninessForm.value.languages.value.map(({ code: language }) => ({ language })),
       business_meta: [
         ...optionsMeta,
